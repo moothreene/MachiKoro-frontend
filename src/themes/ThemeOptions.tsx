@@ -4,16 +4,13 @@ export const themeOptions: ThemeOptions = {
   palette: {
     mode: 'light',
     primary: {
-      main: '#b7ffff',
+      main: '#006077',
     },
     secondary: {
       main: '#1c1c1c',
     },
     background: {
-      default: '#85faff',
-    },
-    text: {
-      primary: 'rgba(255,255,239,0.87)',
+      default: '#00afdc',
     },
   },
   typography: {

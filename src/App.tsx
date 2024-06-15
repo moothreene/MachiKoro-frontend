@@ -8,9 +8,10 @@ import { Buy, Cards, Player, Roll } from './components/Types/GameTypes';
 import Menu from './components/Menu';
 import { ThemeProvider } from '@emotion/react';
 import { themeOptions } from './themes/ThemeOptions';
-import { createTheme } from '@mui/material';
+import { createTheme, responsiveFontSizes } from '@mui/material';
+import ConfettiExplosion from 'react-confetti-explosion';
 
-const default_theme = createTheme(themeOptions);
+const default_theme = responsiveFontSizes(createTheme(themeOptions));
 
 function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -33,6 +34,7 @@ function App() {
       }
     }
   }
+
   useEffect(() => {
     winnerCheck();
   }, [gameState.players]);
@@ -130,6 +132,7 @@ function App() {
     socket.on('nextTurn', nextTurn);
     socket.on('startGame', onStartGame);
     socket.on('confirmRoll', onConfirmRoll);
+    socket.on('roomDoesNotExist', () => {});
 
     return () => {
       socket.off('connect');
@@ -140,6 +143,7 @@ function App() {
       socket.off('buy', onBuy);
       socket.off('nextTurn', nextTurn);
       socket.off('startGame', onStartGame);
+      socket.off('confirmRoll', onConfirmRoll);
     };
   }, [gameState]);
 
@@ -153,6 +157,8 @@ function App() {
     const players = Object.keys(gameState.players).map(Number) as Player[];
     for (const player of players) {
       const playerProperties = gameState.players[player].properties;
+      const enemyPlayer = player === 1 ? 2 : 1;
+      const enemyProperties = gameState.players[enemyPlayer].properties;
       for (const [name, amount] of Object.entries(playerProperties) as [
         keyof Cards,
         number
@@ -196,6 +202,37 @@ function App() {
           money_to_earn[player] +=
             parseInt(income[0]) * multiplier * playerProperties[name];
         }
+        //#Check purple cards
+        if (Properties[name].color === 'purple') {
+          if (currentPlayer !== player) continue;
+          if (name === 'tv_station') {
+            money_to_earn[player] += 5;
+            money_to_earn[enemyPlayer] -= 5;
+          }
+          if (name === 'publisher') {
+            let multiplier = 0;
+            multiplier += enemyProperties['bakery'];
+            multiplier += enemyProperties['cafe'];
+            multiplier += enemyProperties['convenience_store'];
+            multiplier += enemyProperties['family_restaraunt'];
+            money_to_earn[player] += multiplier;
+            money_to_earn[enemyPlayer] -= multiplier;
+          }
+        }
+      }
+    }
+    console.log(money_to_earn)
+    //#Check tax office
+    if (
+      gameState.players[currentPlayer].properties['tax_office'] > 0 &&
+      Properties['tax_office'].dice.includes(dice)
+    ) {
+      let enemy: Player = currentPlayer === 1 ? 2 : 1;
+      let tax = Math.floor((gameState.players[enemy].money + money_to_earn[enemy]) / 2);
+      console.log(tax)
+      if (tax >= 5) {
+        money_to_earn[currentPlayer] += tax;
+        money_to_earn[enemy] -= tax;
       }
     }
     return money_to_earn;
@@ -205,6 +242,14 @@ function App() {
       <div className="App">
         <h1>Player {winner} wins!</h1>
         <h2>You {winner === player ? 'won' : 'lost'}</h2>
+        {winner === player && (
+          <ConfettiExplosion
+            force={2}
+            duration={5000}
+            particleCount={350}
+            width={2000}
+          />
+        )}
       </div>
     );
   }

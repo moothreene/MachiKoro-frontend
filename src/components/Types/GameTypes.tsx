@@ -11,9 +11,9 @@ export type Cards = {
   fruit_and_vegetable_market: number
   cafe: number
   family_restaraunt: number
-  stadium: number
   tv_station: number
-  business_center: number
+  tax_office: number
+  publisher: number
   train_station: number
   shopping_mall: number
   amusement_park: number

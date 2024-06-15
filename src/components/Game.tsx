@@ -75,15 +75,16 @@ function Game({ player, gameState, lastRoll }: { player: Player; gameState: Game
   return (
     <Container maxWidth={false} sx={{ margin: 0, padding:1, height: '100vh', maxHeight:'100vh' }}>
       <PlayerState
+        key={'player_enemy'}
         properties={gameState.players[(player % 2) + 1].properties}
         money={gameState.players[(player % 2) + 1].money}
         money_to_earn={gameState.players[(player % 2) + 1].money_to_earn}
       />
-      <Grid container columns={20}>
-        <Grid item xs={3} sx={{justifyItems:'center'}}>
+      <Grid container columns={21}>
+        <Grid item xs={2} sx={{justifyItems:'center'}}>
             <Dice dice={lastRoll} rolling={rolling} />
         </Grid>
-        <Grid item xs={14}>
+        <Grid item xs={17}>
           <Store
             gameState={gameState}
             player={player}
@@ -91,7 +92,7 @@ function Game({ player, gameState, lastRoll }: { player: Player; gameState: Game
             handleBuy={buy}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <SideButtons
             stage={stage}
             currentMove={gameState.currentMove}
@@ -106,6 +107,7 @@ function Game({ player, gameState, lastRoll }: { player: Player; gameState: Game
         </Grid>
       </Grid>
       <PlayerState
+        key={'player_you'}
         properties={gameState.players[player].properties}
         money={gameState.players[player].money}
         money_to_earn={gameState.players[player].money_to_earn}

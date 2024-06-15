@@ -17,6 +17,8 @@ import train_station from '../images/train_station.jpg'
 import shopping_mall from '../images/shopping_mall.jpg'
 import amusement_park from '../images/amusement_park.jpg'
 import radio_tower from '../images/radio_tower.jpg'
+import publisher from '../images/publisher.jpg'
+import tax_office from '../images/tax_office.jpg'
 
 let images: {
   [key: string]: string
@@ -41,7 +43,9 @@ let images: {
     train_station,
     shopping_mall,
     amusement_park,
-    radio_tower
+    radio_tower,
+    publisher,
+    tax_office
 }
 
 export default images;

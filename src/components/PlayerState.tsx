@@ -25,7 +25,7 @@ function PlayerState({
     >
       <legend>
         <Stack alignItems="center" alignContent={'center'} direction={'row'}>
-          <Typography fontSize={15} sx={{ display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+          <Typography fontFamily={'Preahvihear'} fontSize={15} sx={{ display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
             <FaCoins size={20} color="gold" /> {' '+money}
             {money_to_earn !== 0 &&
               ' ' + (money_to_earn > 0 ? '+' : '') + money_to_earn}
@@ -34,7 +34,7 @@ function PlayerState({
       </legend>
       <Grid
         container
-        columns={20}
+        columns={16}
         spacing={1}
         sx={{ width: '90%', margin: 'auto' }}
       >
@@ -42,7 +42,7 @@ function PlayerState({
           if (value === 0) return <></>;
           return (
             <PropertyButton
-              key={key}
+              key={`player_prop${key}`}
               amount={value}
               name={key}
               isDisabled={false}

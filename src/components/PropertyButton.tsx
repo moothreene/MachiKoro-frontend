@@ -17,26 +17,34 @@ function PropertyButton({
   onClick: () => void;
 }) {
   const [shiftPressed, setShiftPressed] = useState(false);
+
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Shift') {
+      setShiftPressed(true);
+    }
+  }
+
+  function handleKeyUp(e: KeyboardEvent) {
+    if (e.key === 'Shift') {
+      setShiftPressed(false);
+    }
+  }
+
   useEffect(() => {
     document.addEventListener(
       'keydown',
-      (e) => {
-        console.log(e.key);
-        if (e.key === 'Shift') {
-          setShiftPressed(true);
-        }
-      },
+      handleKeyDown,
       true
     );
     document.addEventListener(
       'keyup',
-      (e) => {
-        if (e.key === 'Shift') {
-          setShiftPressed(false);
-        }
-      },
+      handleKeyUp,
       true
     );
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
+    };
   }, []);
   const rolls = Properties[name].dice.join(',');
   const color = Properties[name].color || 'black';
@@ -49,12 +57,12 @@ function PropertyButton({
       className={'property-button' + (shiftPressed ? ' alt' : '')}
     >
       <Button
+        variant='contained'
         onClick={onClick}
         disabled={amount === 0 || isDisabled}
         sx={{
-          padding: 1,
+          padding: .5,
           backgroundColor: color,
-          color: 'wheat',
           display: 'flex',
           flexDirection: 'column',
           width: '100%',
@@ -65,7 +73,7 @@ function PropertyButton({
           justifyContent: 'space-between',
         }}
       >
-        <Typography fontSize={12} sx={{ padding: 0, margin: 0 }}>
+        <Typography variant='body2' fontFamily={'Preahvihear'} sx={{ padding: 0, margin: 0 }}>
           {nameUpdated}
         </Typography>
         <Grid
@@ -75,19 +83,19 @@ function PropertyButton({
           sx={{ width: '100%' }}
         >
           <Grid item xs={4}>
-            <Typography fontSize={12} sx={{ padding: 0, margin: 0 }}>
+            <Typography fontFamily={'Preahvihear'} fontSize={12} sx={{ padding: 0, margin: 0 }}>
               <FaCoins size={8} color="gold" />
               {' '}
               {cost}
             </Typography>{' '}
           </Grid>
           <Grid item xs={4}>
-            <Typography fontSize={12} sx={{ padding: 0, margin: 0 }}>
+            <Typography fontFamily={'Preahvihear'} fontSize={12} sx={{ padding: 0, margin: 0 }}>
               x{amount}
             </Typography>{' '}
           </Grid>
           <Grid item xs={4}>
-            <Typography fontSize={12} sx={{ padding: 0, margin: 0 }}>
+            <Typography fontFamily={'Preahvihear'} fontSize={12} sx={{ padding: 0, margin: 0 }}>
               {rolls != '0' ? '🎲' + rolls : '-'}
             </Typography>{' '}
           </Grid>
