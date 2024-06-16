@@ -17,7 +17,7 @@ function Game({
   player: Player;
   gameState: GameData;
   lastRoll: number[];
-}) {  
+}) {
   const [stage, setStage] = useState(0);
   const [rerolled, setRerolled] = useState(false);
   const [rolling, setRolling] = useState(false);
@@ -38,14 +38,14 @@ function Game({
 
   useEffect(() => {
     if (windowSize > 1500) {
-      setFontSize(16);
-    } else if (windowSize > 1000) {
       setFontSize(12);
+    } else if (windowSize > 1000) {
+      setFontSize(10);
     } else {
       setFontSize(8);
     }
   }, [windowSize]);
-  
+
   useEffect(() => {
     setStage(0);
   }, [gameState.currentMove]);
@@ -108,9 +108,9 @@ function Game({
   return (
     <Container
       maxWidth={false}
-      sx={{ margin: 0, padding: 1, fontSize:`${fontSize}px`,}}
+      sx={{ margin: 0, padding: 1, fontSize: `${fontSize}px` }}
     >
-      <Grid container direction={'column'} m={0} sx={{height:'100vh'}}>
+      <Grid container direction={'column'} m={0} p={0} height={'95vh'}>
         <Grid item xs={3}>
           <PlayerState
             key={'player_enemy'}
@@ -120,7 +120,7 @@ function Game({
           />
         </Grid>
         <Grid item xs={6}>
-          <Grid container columns={21}>
+          <Grid container columns={21} sx={{justifyContent:'space-between', height:'100%'}}>
             <Grid item xs={21} md={2} sx={{ justifyItems: 'center' }}>
               <Dice dice={lastRoll} rolling={rolling} />
             </Grid>
@@ -149,12 +149,12 @@ function Game({
           </Grid>
         </Grid>
         <Grid item xs={3}>
-        <PlayerState
-          key={'player_you'}
-          properties={gameState.players[player].properties}
-          money={gameState.players[player].money}
-          money_to_earn={gameState.players[player].money_to_earn}
-        />
+          <PlayerState
+            key={'player_you'}
+            properties={gameState.players[player].properties}
+            money={gameState.players[player].money}
+            money_to_earn={gameState.players[player].money_to_earn}
+          />
         </Grid>
       </Grid>
     </Container>

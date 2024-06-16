@@ -16,7 +16,6 @@ function PlayerState({
   return (
     <Box
       sx={{
-        height: '25vh',
         overflow: 'hidden',
         width: '100%',
         margin: 0,
