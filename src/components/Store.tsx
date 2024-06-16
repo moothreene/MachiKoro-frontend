@@ -5,7 +5,7 @@ import { Cards, GameData } from "./Types/GameTypes";
 
 function Store({gameState,stage,player,handleBuy}:{gameState:GameData,stage:number, player:number,handleBuy:(key:keyof Cards)=>void}) {
   return (
-    <Grid container spacing={.5} columns={12} sx={{ margin: 0, width:'100%', height:'40vh', padding:1}}>
+    <Grid container spacing={.5} columns={12} sx={{ width:'100%', padding:1}}>
         {Object.entries(gameState.store).map(([key, value]: any[]) => {
           return (
             <PropertyButton

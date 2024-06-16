@@ -9,13 +9,46 @@ import Store from './Store';
 import SideButtons from './SideButtons';
 import Dice from './Dice';
 
-function Game({ player, gameState, lastRoll }: { player: Player; gameState: GameData, lastRoll: number[]}) {
-  useEffect(() => {
-    setStage(0);
-  }, [gameState.currentMove]);
+function Game({
+  player,
+  gameState,
+  lastRoll,
+}: {
+  player: Player;
+  gameState: GameData;
+  lastRoll: number[];
+}) {  
   const [stage, setStage] = useState(0);
   const [rerolled, setRerolled] = useState(false);
   const [rolling, setRolling] = useState(false);
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [fontSize, setFontSize] = useState(16);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (windowSize > 1500) {
+      setFontSize(16);
+    } else if (windowSize > 1000) {
+      setFontSize(12);
+    } else {
+      setFontSize(8);
+    }
+  }, [windowSize]);
+  
+  useEffect(() => {
+    setStage(0);
+  }, [gameState.currentMove]);
 
   function roll(dice_count: number) {
     if (2 - (gameState.currentMove % 2) !== player)
@@ -26,7 +59,7 @@ function Game({ player, gameState, lastRoll }: { player: Player; gameState: Game
       roll.push(Math.floor(Math.random() * 6 + 1));
     }
     setRolling(true);
-    setTimeout(()=>setRolling(false), 1000)
+    setTimeout(() => setRolling(false), 1000);
     socket.emit('roll', {
       player: player,
       dice: roll,
@@ -73,45 +106,57 @@ function Game({ player, gameState, lastRoll }: { player: Player; gameState: Game
   }
 
   return (
-    <Container maxWidth={false} sx={{ margin: 0, padding:1, height: '100vh', maxHeight:'100vh' }}>
-      <PlayerState
-        key={'player_enemy'}
-        properties={gameState.players[(player % 2) + 1].properties}
-        money={gameState.players[(player % 2) + 1].money}
-        money_to_earn={gameState.players[(player % 2) + 1].money_to_earn}
-      />
-      <Grid container columns={21}>
-        <Grid item xs={2} sx={{justifyItems:'center'}}>
-            <Dice dice={lastRoll} rolling={rolling} />
-        </Grid>
-        <Grid item xs={17}>
-          <Store
-            gameState={gameState}
-            player={player}
-            stage={stage}
-            handleBuy={buy}
+    <Container
+      maxWidth={false}
+      sx={{ margin: 0, padding: 1, fontSize:`${fontSize}px`,}}
+    >
+      <Grid container direction={'column'} m={0} sx={{height:'100vh'}}>
+        <Grid item xs={3}>
+          <PlayerState
+            key={'player_enemy'}
+            properties={gameState.players[(player % 2) + 1].properties}
+            money={gameState.players[(player % 2) + 1].money}
+            money_to_earn={gameState.players[(player % 2) + 1].money_to_earn}
           />
         </Grid>
-        <Grid item xs={2}>
-          <SideButtons
-            stage={stage}
-            currentMove={gameState.currentMove}
-            player={player}
-            playerProperties={gameState.players[player].properties}
-            rerolled={rerolled}
-            handleRoll={roll}
-            handleConfirmRoll={confirmRoll}
-            handleReroll={reroll}
-            handleNextTurn={nextTurn}
-          ></SideButtons>
+        <Grid item xs={6}>
+          <Grid container columns={21}>
+            <Grid item xs={21} md={2} sx={{ justifyItems: 'center' }}>
+              <Dice dice={lastRoll} rolling={rolling} />
+            </Grid>
+            <Grid item xs={21} md={17}>
+              <Store
+                gameState={gameState}
+                player={player}
+                stage={stage}
+                handleBuy={buy}
+              />
+            </Grid>
+            <Grid item xs={21} md={2}>
+              <SideButtons
+                stage={stage}
+                currentMove={gameState.currentMove}
+                player={player}
+                playerProperties={gameState.players[player].properties}
+                rerolled={rerolled}
+                windowSize={windowSize}
+                handleRoll={roll}
+                handleConfirmRoll={confirmRoll}
+                handleReroll={reroll}
+                handleNextTurn={nextTurn}
+              ></SideButtons>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={3}>
+        <PlayerState
+          key={'player_you'}
+          properties={gameState.players[player].properties}
+          money={gameState.players[player].money}
+          money_to_earn={gameState.players[player].money_to_earn}
+        />
         </Grid>
       </Grid>
-      <PlayerState
-        key={'player_you'}
-        properties={gameState.players[player].properties}
-        money={gameState.players[player].money}
-        money_to_earn={gameState.players[player].money_to_earn}
-      />
     </Container>
   );
 }

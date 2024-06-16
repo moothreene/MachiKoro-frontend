@@ -11,6 +11,7 @@ function SideButtons({
   player,
   playerProperties,
   rerolled,
+  windowSize,
   handleRoll,
   handleConfirmRoll,
   handleReroll,
@@ -21,6 +22,7 @@ function SideButtons({
   player: number;
   playerProperties: Cards;
   rerolled: boolean;
+  windowSize: number;
   handleRoll: (num: number) => void;
   handleConfirmRoll: () => void;
   handleReroll: () => void;
@@ -30,7 +32,7 @@ function SideButtons({
     <Grid
       container
       columns={10}
-      direction="column"
+      direction={windowSize > 900 ? 'column' : 'row'}
       justifyContent={'center'}
       alignItems={'center'}
     >
