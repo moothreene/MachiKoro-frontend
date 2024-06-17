@@ -221,7 +221,6 @@ function App() {
         }
       }
     }
-    console.log(money_to_earn)
     //#Check tax office
     if (
       gameState.players[currentPlayer].properties['tax_office'] > 0 &&
@@ -229,7 +228,6 @@ function App() {
     ) {
       let enemy: Player = currentPlayer === 1 ? 2 : 1;
       let tax = Math.floor((gameState.players[enemy].money + money_to_earn[enemy]) / 2);
-      console.log(tax)
       if (tax >= 5) {
         money_to_earn[currentPlayer] += tax;
         money_to_earn[enemy] -= tax;
