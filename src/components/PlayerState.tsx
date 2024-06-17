@@ -2,8 +2,8 @@ import { Box, Grid, Stack, Typography } from '@mui/material';
 import { Cards } from './Types/GameTypes';
 import PropertyButton from './PropertyButton';
 import images from './Images';
-import { FaCoins } from 'react-icons/fa6';
 import Money from './Money';
+import { Properties } from '../data/Properties';
 
 function PlayerState({
   position,
@@ -16,6 +16,16 @@ function PlayerState({
   money: number;
   money_to_earn: number;
 }) {
+
+  function compareDices(a: [keyof Cards, number], b: [keyof Cards, number]) {
+    if (Properties[a[0]].dice[0] - Properties[b[0]].dice[0] === 0){
+      return Properties[a[0]].dice.length - Properties[b[0]].dice.length;
+    }
+    return Properties[a[0]].dice[0] - Properties[b[0]].dice[0];
+  }
+
+  const propertiesEntries = Object.entries(properties) as [keyof Cards, number][];
+  const propertiesSorted = propertiesEntries.sort(compareDices)
   return (
     <Box
       sx={{
@@ -27,11 +37,6 @@ function PlayerState({
     >
       <legend>
         <Stack alignItems="center" alignContent={'center'} direction={'row'}>
-          <Typography fontFamily={'Preahvihear'} fontSize={15} sx={{ display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-            <FaCoins size={20} color="gold" /> {' '+money}
-            {money_to_earn !== 0 &&
-              ' ' + (money_to_earn > 0 ? '+' : '') + money_to_earn}
-          </Typography>
           <Money size={15} amount={money} />
           {money_to_earn !== 0 && (
             <>
@@ -41,13 +46,8 @@ function PlayerState({
           )}
         </Stack>
       </legend>
-      <Grid
-        container
-        columns={16}
-        spacing={1}
-        sx={{margin: 'auto' }}
-      >
-        {Object.entries(properties).map(([key, value]) => {
+      <Grid container columns={16} spacing={1} sx={{ margin: 'auto' }}>
+        {propertiesSorted.map(([key, value]) => {
           if (value === 0) return <></>;
           return (
             <PropertyButton
@@ -58,7 +58,6 @@ function PlayerState({
               isDisabled={false}
               image={images[key]}
               onClick={() => {
-                console.log('clicked');
               }}
             />
           );
