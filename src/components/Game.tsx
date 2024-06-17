@@ -113,6 +113,7 @@ function Game({
       <Grid container direction={'column'} m={0} p={0} height={'95vh'}>
         <Grid item xs={3}>
           <PlayerState
+            position={'top'}
             key={'player_enemy'}
             properties={gameState.players[(player % 2) + 1].properties}
             money={gameState.players[(player % 2) + 1].money}
@@ -150,6 +151,7 @@ function Game({
         </Grid>
         <Grid item xs={3}>
           <PlayerState
+            position={'bottom'}
             key={'player_you'}
             properties={gameState.players[player].properties}
             money={gameState.players[player].money}

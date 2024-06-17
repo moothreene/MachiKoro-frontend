@@ -1,51 +1,27 @@
 import { useEffect, useState } from 'react';
 import { Properties, PropertiesLocalized } from '../data/Properties';
-import { Button, Grid, Stack, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { FaCoins } from 'react-icons/fa6';
+import PropertyPopup from './PropertyPopup';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 function PropertyButton({
+  placement,
   amount,
   name,
   image,
   isDisabled,
   onClick,
 }: {
+  placement: string;
   amount: number;
   name: string;
   image: string;
   isDisabled: boolean;
   onClick: () => void;
 }) {
-  const [shiftPressed, setShiftPressed] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  function handleKeyDown(e: KeyboardEvent) {
-    if (e.key === 'Shift') {
-      setShiftPressed(true);
-    }
-  }
-
-  function handleKeyUp(e: KeyboardEvent) {
-    if (e.key === 'Shift') {
-      setShiftPressed(false);
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener(
-      'keydown',
-      handleKeyDown,
-      true
-    );
-    document.addEventListener(
-      'keyup',
-      handleKeyUp,
-      true
-    );
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('keyup', handleKeyUp);
-    };
-  }, []);
   const rolls = Properties[name].dice.join(',');
   const color = Properties[name].color || 'black';
   const cost = Properties[name].cost || 0;
@@ -55,12 +31,12 @@ function PropertyButton({
       item
       xs={3}
       md={2}
-      className={'property-button' + (shiftPressed ? ' alt' : '')}
+      className={`property-button-${placement}`}
     >
       <Button
         variant='contained'
-        onClick={onClick}
-        disabled={amount === 0 || isDisabled}
+        onClick={()=>{setOpen(true)}}
+        disabled={amount === 0}
         sx={{
           padding: .5,
           backgroundColor: color,
@@ -103,7 +79,9 @@ function PropertyButton({
           </Grid>
         </Grid>
       </Button>
-      <img src={image} />
+      <OutsideClickHandler onOutsideClick={() => setOpen(false)}>
+        <PropertyPopup img={image} handleBuy={onClick} open={open} disabled = {isDisabled} placement = {placement}/>
+      </OutsideClickHandler>
     </Grid>
   );
 }

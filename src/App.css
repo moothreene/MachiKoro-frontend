@@ -42,19 +42,6 @@
   }
 }
 
-.property-button img{
-  display: none;
-}
-
-.property-button.alt:hover img{
-  display: flex;
-  position: absolute;
-  top: inherit;
-  left: inherit;
-  width: 180px;
-  z-index: 1000;
-  transform: translate(0, -125%);
-}
 
 .Die-shaking { 
   animation-name: wobble; 

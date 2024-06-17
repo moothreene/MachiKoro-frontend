@@ -5,10 +5,12 @@ import images from './Images';
 import { FaCoins } from 'react-icons/fa6';
 
 function PlayerState({
+  position,
   properties,
   money,
   money_to_earn,
 }: {
+  position: string;
   properties: Cards;
   money: number;
   money_to_earn: number;
@@ -18,6 +20,7 @@ function PlayerState({
       sx={{
         overflow: 'hidden',
         width: '100%',
+        height: '100%',
         margin: 0,
         padding: 0,
       }}
@@ -41,6 +44,7 @@ function PlayerState({
           if (value === 0) return <></>;
           return (
             <PropertyButton
+              placement={`player_${position}`}
               key={`player_prop${key}`}
               amount={value}
               name={key}

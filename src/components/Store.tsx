@@ -9,6 +9,7 @@ function Store({gameState,stage,player,handleBuy}:{gameState:GameData,stage:numb
         {Object.entries(gameState.store).map(([key, value]: any[]) => {
           return (
             <PropertyButton
+              placement="store"
               key={key}
               amount={value}
               name={key}
