@@ -3,6 +3,7 @@ import { Cards } from './Types/GameTypes';
 import PropertyButton from './PropertyButton';
 import images from './Images';
 import { FaCoins } from 'react-icons/fa6';
+import Money from './Money';
 
 function PlayerState({
   position,
@@ -31,6 +32,13 @@ function PlayerState({
             {money_to_earn !== 0 &&
               ' ' + (money_to_earn > 0 ? '+' : '') + money_to_earn}
           </Typography>
+          <Money size={15} amount={money} />
+          {money_to_earn !== 0 && (
+            <>
+              <Typography variant='h6' color='white' fontFamily={'Preahvihear'} sx={{marginLeft:1, marginRight:1}}>+</Typography>
+              <Money size={15} amount={money_to_earn} />
+            </>
+          )}
         </Stack>
       </legend>
       <Grid
