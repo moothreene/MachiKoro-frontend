@@ -132,7 +132,7 @@ function Game({
             <Grid item xs={21} md={2} sx={{ justifyItems: 'center' }}>
               <Dice dice={lastRoll} rolling={rolling} />
             </Grid>
-            <Grid item xs={21} md={17}>
+            <Grid item xs={21} md={17} sx={{ display:'flex',justifyContent:'center', alignItems:'center'}}>
               <Store
                 gameState={gameState}
                 player={player}
@@ -140,7 +140,7 @@ function Game({
                 handleBuy={buy}
               />
             </Grid>
-            <Grid item xs={21} md={2}>
+            <Grid item xs={21} md={2} sx={{ display:'flex',justifyContent:'center', alignItems:'center'}}>
               <SideButtons
                 stage={stage}
                 currentMove={gameState.currentMove}
