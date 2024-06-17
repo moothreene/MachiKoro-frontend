@@ -26,7 +26,7 @@ function PropertyPopup({
       }}
     >
       <CardMedia component={'img'} image={img} />
-      {(!disabled && placement === 'store') && <Button onClick={handleBuy}>Buy</Button>}
+      {(!disabled && placement === 'store') && <Button fullWidth onClick={handleBuy}>Buy</Button>}
     </Card>
   );
 }
