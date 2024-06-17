@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react';
+
 function Money({ size, amount }: { size: number; amount: number }) {
+  const [sizeAdjusted, setSizeAdjusted] = useState(Math.floor(size * 1.3));
   const COLOR_OUTER_SMALL = 'chocolate';
   const COLOR_MIDDLE_SMALL = 'darksalmon';
   const COLOR_OUTER_MEDIUM = 'silver';
@@ -8,13 +11,18 @@ function Money({ size, amount }: { size: number; amount: number }) {
   const COLOR_OUTER_XLARGE = 'darkorchid';
   const COLOR_MIDDLE_XLARGE = 'plum';
 
+  useEffect(() => {
+    setSizeAdjusted(size * 1.3);
+  }, [size]);
   return (
     <div
       className="circle outer"
       style={{
+        margin: 0,
+        padding: 0,
         display: 'flex',
-        width: size * 2.5,
-        height: size * 2.5,
+        width: sizeAdjusted * 2.5,
+        height: sizeAdjusted * 2.5,
         borderRadius: '50%',
         backgroundColor:
           amount >= 100
@@ -31,9 +39,11 @@ function Money({ size, amount }: { size: number; amount: number }) {
       <div
         className="circle middle"
         style={{
+          margin: 0,
+          padding: 0,
           display: 'flex',
-          width: Math.floor(size * 2.1),
-          height: Math.floor(size * 2.1),
+          width: sizeAdjusted * 2.1,
+          height: sizeAdjusted * 2.1,
           borderRadius: '50%',
           backgroundColor:
             amount >= 100
@@ -50,9 +60,11 @@ function Money({ size, amount }: { size: number; amount: number }) {
         <div
           className="circle inner"
           style={{
+            margin: 0,
+            padding: 0,
             display: 'flex',
-            width: Math.floor(size * 1.8),
-            height: Math.floor(size * 1.8),
+            width: sizeAdjusted * 1.8,
+            height: sizeAdjusted * 1.8,
             borderRadius: '50%',
             backgroundColor:
               amount >= 100
@@ -68,7 +80,7 @@ function Money({ size, amount }: { size: number; amount: number }) {
         >
           <p
             style={{
-              fontSize: size,
+              fontSize: sizeAdjusted,
               color: 'white',
               fontFamily: 'Preahvihear',
             }}
