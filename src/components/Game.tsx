@@ -37,7 +37,9 @@ function Game({
   }, []);
 
   useEffect(() => {
-    if (windowSize > 1500) {
+    if (windowSize > 1600) {
+      setFontSize(14);
+    } else if (windowSize > 1300) {
       setFontSize(12);
     } else if (windowSize > 1000) {
       setFontSize(10);
@@ -121,7 +123,11 @@ function Game({
           />
         </Grid>
         <Grid item xs={6}>
-          <Grid container columns={21} sx={{justifyContent:'space-between', height:'100%'}}>
+          <Grid
+            container
+            columns={21}
+            sx={{ justifyContent: 'space-between', height: '100%' }}
+          >
             <Grid item xs={21} md={2} sx={{ justifyItems: 'center' }}>
               <Dice dice={lastRoll} rolling={rolling} />
             </Grid>
