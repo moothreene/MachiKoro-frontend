@@ -117,6 +117,7 @@ function Game({
           <PlayerState
             position={'top'}
             key={'player_enemy'}
+            fontSize={fontSize}
             properties={gameState.players[(player % 2) + 1].properties}
             money={gameState.players[(player % 2) + 1].money}
             money_to_earn={gameState.players[(player % 2) + 1].money_to_earn}
@@ -159,6 +160,7 @@ function Game({
           <PlayerState
             position={'bottom'}
             key={'player_you'}
+            fontSize={fontSize}
             properties={gameState.players[player].properties}
             money={gameState.players[player].money}
             money_to_earn={gameState.players[player].money_to_earn}

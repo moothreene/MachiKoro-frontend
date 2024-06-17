@@ -8,11 +8,13 @@ import { Properties } from '../data/Properties';
 function PlayerState({
   position,
   properties,
+  fontSize,
   money,
   money_to_earn,
 }: {
   position: string;
   properties: Cards;
+  fontSize: number;
   money: number;
   money_to_earn: number;
 }) {
@@ -37,11 +39,11 @@ function PlayerState({
     >
       <legend>
         <Stack alignItems="center" alignContent={'center'} direction={'row'}>
-          <Money size={15} amount={money} />
+          <Money size={fontSize} amount={money} />
           {money_to_earn !== 0 && (
             <>
               <Typography variant='h6' color='white' fontFamily={'Preahvihear'} sx={{marginLeft:1, marginRight:1}}>+</Typography>
-              <Money size={15} amount={money_to_earn} />
+              <Money size={fontSize} amount={money_to_earn} />
             </>
           )}
         </Stack>
