@@ -18,7 +18,6 @@ function PlayerState({
   return (
     <Box
       sx={{
-        overflow: 'hidden',
         width: '100%',
         height: '100%',
         margin: 0,
@@ -38,7 +37,7 @@ function PlayerState({
         container
         columns={16}
         spacing={1}
-        sx={{ width: '90%', margin: 'auto' }}
+        sx={{margin: 'auto' }}
       >
         {Object.entries(properties).map(([key, value]) => {
           if (value === 0) return <></>;

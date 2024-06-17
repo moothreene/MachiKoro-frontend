@@ -4,6 +4,7 @@ import { FaDiceOne, FaDiceTwo, FaDiceThree, FaDiceFour, FaDiceFive, FaDiceSix, F
 function Dice({ dice, rolling=false }: { dice: number[]; rolling?: boolean}) {
   return (
     <Box sx={{display:'flex', alignItems:'center', justifyContent:'center', height:'80%'}}>
+    {dice.length === 0 && <FaSquare size = {30} className={`Die${rolling?'-shaking':''}`}/>}
     {dice.map((side:number) => {
         switch (side) {
           case 1:

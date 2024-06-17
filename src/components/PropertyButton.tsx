@@ -3,7 +3,6 @@ import { Properties, PropertiesLocalized } from '../data/Properties';
 import { Button, Grid, Typography } from '@mui/material';
 import { FaCoins } from 'react-icons/fa6';
 import PropertyPopup from './PropertyPopup';
-import OutsideClickHandler from 'react-outside-click-handler';
 
 function PropertyButton({
   placement,
@@ -21,21 +20,34 @@ function PropertyButton({
   onClick: () => void;
 }) {
   const [open, setOpen] = useState(false);
-
   const rolls = Properties[name].dice.join(',');
   const color = Properties[name].color || 'black';
   const cost = Properties[name].cost || 0;
   const nameUpdated = PropertiesLocalized[name] || name;
+
+  useEffect(() => {
+    window.addEventListener('click', handleClose);
+    return () => {
+      window.removeEventListener('click', handleClose);
+    };
+  },[]);
+
+  function handleClose() {
+    setOpen(false);
+  }
+
   return (
     <Grid
       item
       xs={3}
       md={2}
-      className={`property-button-${placement}`}
+      className={`property-button ${placement}`}
+      position={'relative'}
+      overflow={'visible'}
     >
       <Button
         variant='contained'
-        onClick={()=>{setOpen(true)}}
+        onClick={()=>{setTimeout(()=>setOpen(true))}}
         disabled={amount === 0}
         sx={{
           padding: .5,
@@ -79,9 +91,7 @@ function PropertyButton({
           </Grid>
         </Grid>
       </Button>
-      <OutsideClickHandler onOutsideClick={() => setOpen(false)}>
         <PropertyPopup img={image} handleBuy={onClick} open={open} disabled = {isDisabled} placement = {placement}/>
-      </OutsideClickHandler>
     </Grid>
   );
 }
