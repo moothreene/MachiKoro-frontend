@@ -46,7 +46,7 @@ export const gameDataInitial:GameData = {
         amusement_park: 0,
         radio_tower: 0
       },
-      money: 100,
+      money: 4,
       money_to_earn: 0
     },
     2: {
@@ -71,7 +71,7 @@ export const gameDataInitial:GameData = {
         amusement_park: 0,
         radio_tower: 0
       },
-      money: 100,
+      money: 4,
       money_to_earn: 0
     }
   }
