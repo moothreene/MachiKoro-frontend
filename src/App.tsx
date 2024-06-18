@@ -9,12 +9,13 @@ import Menu from './components/Menu';
 import { ThemeProvider } from '@emotion/react';
 import { themeOptions } from './themes/ThemeOptions';
 import { createTheme, responsiveFontSizes } from '@mui/material';
-import ConfettiExplosion from 'react-confetti-explosion';
+import WinLooseScreen from './components/WinLooseScreen';
+
 
 const default_theme = responsiveFontSizes(createTheme(themeOptions));
 
 function App() {
-  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [isConnected, setIsConnected] = useState(false);
   const [player, setPlayer] = useState<Player>(1);
   const [roomId, setRoomId] = useState('');
   const [gameState, setGameState] = useState(gameDataInitial);
@@ -33,6 +34,16 @@ function App() {
         setWinner(i as Player);
       }
     }
+  }
+
+  function resetGame() {
+    setIsConnected(false);
+    setGameState(gameDataInitial);
+    setWinner(null);
+    setLastRoll([]);
+    setReady(false);
+    setPlayer(1);
+    setRoomId('');
   }
 
   useEffect(() => {
@@ -238,18 +249,9 @@ function App() {
   }
   if (winner) {
     return (
-      <div className="App">
-        <h1>Player {winner} wins!</h1>
-        <h2>You {winner === player ? 'won' : 'lost'}</h2>
-        {winner === player && (
-          <ConfettiExplosion
-            force={2}
-            duration={5000}
-            particleCount={350}
-            width={2000}
-          />
-        )}
-      </div>
+      <ThemeProvider theme={default_theme}>
+        <WinLooseScreen win = {winner === player} reset = {resetGame} />
+      </ThemeProvider>
     );
   }
   return (
