@@ -31,8 +31,8 @@ function Menu({ roomId }: { roomId: string }) {
   }
 
   function host() {
-    setHostInProcess(true);
     disconnect();
+    setHostInProcess(true);
     connect();
     socket.emit('host');
   }
