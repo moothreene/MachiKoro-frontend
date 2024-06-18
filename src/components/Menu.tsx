@@ -1,22 +1,20 @@
 import { useEffect, useState } from 'react';
 import { socket } from '../socket';
-import {
-  Box,
-  Button,
-  Grid,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 
 function Menu({ roomId }: { roomId: string }) {
   const [id, setId] = useState<string>('');
   const [open, setOpen] = useState(false);
   const [roomDoesNotExist, setRoomDoesNotExist] = useState(false);
+  const [hostInProcess, setHostInProcess] = useState(false);
 
   useEffect(() => {
-
     function onRoomDoesNotExist() {
       setRoomDoesNotExist(true);
+    }
+
+    function onHostError() {
+      setHostInProcess(false);
     }
 
     socket.on('invalidRoom', onRoomDoesNotExist);
@@ -31,6 +29,7 @@ function Menu({ roomId }: { roomId: string }) {
   }
 
   function host() {
+    setHostInProcess(true);
     disconnect();
     connect();
     socket.emit('host');
@@ -47,7 +46,12 @@ function Menu({ roomId }: { roomId: string }) {
   }
 
   return (
-    <Box width={'fit-content'} m={'150px auto'} sx={{ userSelect: 'none' }} className='game-menu'>
+    <Box
+      width={'fit-content'}
+      m={'150px auto'}
+      sx={{ userSelect: 'none' }}
+      className="game-menu"
+    >
       <Typography variant="h1" color={'white'} align="center" marginBottom={3}>
         Machi Koro
       </Typography>
@@ -58,9 +62,10 @@ function Menu({ roomId }: { roomId: string }) {
               <Button
                 variant="contained"
                 fullWidth
+                disabled={hostInProcess}
                 onClick={host}
               >
-                <Typography variant='h6' fontFamily={'Preahvihear'}>
+                <Typography variant="h6" fontFamily={'Preahvihear'}>
                   Host
                 </Typography>
               </Button>
@@ -76,46 +81,51 @@ function Menu({ roomId }: { roomId: string }) {
                 }
                 sx={{ fontFamily: 'Preahvihear' }}
               >
-                <Typography variant='h6' fontFamily={'Preahvihear'}>
+                <Typography variant="h6" fontFamily={'Preahvihear'}>
                   Join
                 </Typography>
               </Button>
               {open && (
                 <>
-                <TextField
-                  error={roomDoesNotExist}
-                  size="small"
-                  fullWidth
-                  type="text"
-                  margin="dense"
-                  inputProps={{
-                    style: { textAlign: 'center', fontFamily: 'Preahvihear' },
-                  }}
-                  sx={{ boxSizing: 'border-box' }}
-                  focused
-                  value={id}
-                  onChange={(e) => setId(e.target.value)}
-                />
-                <Button
-                variant="contained"
-                fullWidth
-                onClick={
-                  join
-                }
-                sx={{ fontFamily: 'Preahvihear' }}
-              >
-                <Typography variant='h6' fontFamily={'Preahvihear'}>
-                  Confirm
-                </Typography>
-              </Button>
-              </>
+                  <TextField
+                    error={roomDoesNotExist}
+                    size="small"
+                    fullWidth
+                    type="text"
+                    margin="dense"
+                    inputProps={{
+                      style: { textAlign: 'center', fontFamily: 'Preahvihear' },
+                    }}
+                    sx={{ boxSizing: 'border-box' }}
+                    focused
+                    value={id}
+                    onChange={(e) => setId(e.target.value)}
+                  />
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    disabled={hostInProcess}
+                    onClick={join}
+                    sx={{ fontFamily: 'Preahvihear' }}
+                  >
+                    <Typography variant="h6" fontFamily={'Preahvihear'}>
+                      Confirm
+                    </Typography>
+                  </Button>
+                </>
               )}
             </Grid>
           </>
         )}
         {roomId && (
           <>
-            <Grid item xs={12} m={1} marginBottom={3.55} sx={{textAlign:'center'}}>
+            <Grid
+              item
+              xs={12}
+              m={1}
+              marginBottom={3.55}
+              sx={{ textAlign: 'center' }}
+            >
               <Typography
                 display={'inline'}
                 variant="h5"
