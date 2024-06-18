@@ -126,7 +126,8 @@ function Game({
         m={0}
         p={0}
         height={'100%'}
-        sx={{ justifyItems: 'space-between' }}
+        minHeight={'95vh'}
+        sx={{ justifyContent: 'space-between' }}
       >
         <Grid item xs={3}>
           <PlayerState
