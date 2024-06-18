@@ -99,9 +99,9 @@ function App() {
         };
       });
     }
-    function nextTurn() {
+    function nextTurn(amount:number) {
       setGameState((prev) => {
-        return { ...prev, currentMove: prev.currentMove + 1 };
+        return { ...prev, currentMove: prev.currentMove + amount };
       });
     }
     function onConfirmRoll() {
