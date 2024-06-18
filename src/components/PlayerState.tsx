@@ -45,7 +45,7 @@ function PlayerState({
           {money_to_earn !== 0 && (
             <>
               <Typography
-                variant="h6"
+                variant="body1"
                 color="white"
                 fontFamily={'Preahvihear'}
                 sx={{ marginLeft: 1, marginRight: 1 }}
