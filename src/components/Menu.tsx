@@ -73,6 +73,7 @@ function Menu({ roomId }: { roomId: string }) {
             <Grid item xs={12} m={1}>
               <Button
                 variant="contained"
+                disabled={hostInProcess}
                 fullWidth
                 onClick={
                   () => {
