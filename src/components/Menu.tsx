@@ -42,6 +42,7 @@ function Menu({ roomId }: { roomId: string }) {
   }
 
   function disconnect() {
+    setHostInProcess(false);
     socket.disconnect();
   }
 
