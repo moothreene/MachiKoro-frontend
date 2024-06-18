@@ -39,7 +39,7 @@ function PropertyPopup({
       />
 
       {!disabled && placement === 'store' && (
-        <Button fullWidth onClick={handleBuy}>
+        <Button fullWidth onClick={handleBuy} sx={{fontFamily:'Preahvihear', fontWeight:600}}>
           Buy
         </Button>
       )}
