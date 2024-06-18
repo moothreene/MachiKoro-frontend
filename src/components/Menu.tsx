@@ -78,46 +78,50 @@ function Menu({ roomId }: { roomId: string }) {
                 variant="contained"
                 disabled={hostInProcess}
                 fullWidth
-                onClick={
-                  () => {
-                    setOpen(!open);
-                  } /*join*/
-                }
+                onClick={() => {
+                  setOpen(!open);
+                }}
                 sx={{ fontFamily: 'Preahvihear' }}
               >
                 <Typography variant="h6" fontFamily={'Preahvihear'}>
                   Join
                 </Typography>
               </Button>
-              {open && (
-                <>
-                  <TextField
-                    error={roomDoesNotExist}
-                    size="small"
-                    fullWidth
-                    type="text"
-                    margin="dense"
-                    inputProps={{
-                      style: { textAlign: 'center', fontFamily: 'Preahvihear' },
-                    }}
-                    sx={{ boxSizing: 'border-box' }}
-                    focused
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                  />
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    disabled={hostInProcess}
-                    onClick={join}
-                    sx={{ fontFamily: 'Preahvihear' }}
-                  >
-                    <Typography variant="h6" fontFamily={'Preahvihear'}>
-                      Confirm
-                    </Typography>
-                  </Button>
-                </>
-              )}
+              <TextField
+                error={roomDoesNotExist}
+                size="small"
+                fullWidth
+                type="text"
+                margin="dense"
+                inputProps={{
+                  style: { textAlign: 'center', fontFamily: 'Preahvihear' },
+                }}
+                sx={{
+                  boxSizing: 'border-box',
+                  visibility: open ? 'visible' : 'hidden',
+                  opacity: open ? 1 : 0,
+                  transition: 'all .5s ease',
+                }}
+                focused
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+              />
+              <Button
+                variant="contained"
+                fullWidth
+                disabled={hostInProcess || !open}
+                onClick={join}
+                sx={{
+                  fontFamily: 'Preahvihear',
+                  visibility: open ? 'visible' : 'hidden',
+                  opacity: open ? 1 : 0,
+                  transition: 'all .5s ease',
+                }}
+              >
+                <Typography variant="h6" fontFamily={'Preahvihear'}>
+                  Confirm
+                </Typography>
+              </Button>
             </Grid>
           </>
         )}
@@ -157,9 +161,10 @@ function Menu({ roomId }: { roomId: string }) {
                 variant="contained"
                 fullWidth
                 onClick={disconnect}
-                sx={{ fontFamily: 'Preahvihear' }}
               >
-                Disconnect
+                <Typography variant="h6" fontFamily={'Preahvihear'}>
+                  Disconnect
+                </Typography>
               </Button>
             </Grid>
           </>
