@@ -18,9 +18,11 @@ function Menu({ roomId }: { roomId: string }) {
     }
 
     socket.on('invalidRoom', onRoomDoesNotExist);
+    socket.on('host_error', onHostError);
 
     return () => {
       socket.off('invalidRoom', onRoomDoesNotExist);
+      socket.off('host_error', onHostError);
     };
   });
 
