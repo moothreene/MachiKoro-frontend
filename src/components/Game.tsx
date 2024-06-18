@@ -113,9 +113,21 @@ function Game({
   return (
     <Container
       maxWidth={false}
-      sx={{ margin: 0, padding: 1, fontSize: `${fontSize}px`, minHeight:'95vh' }}
+      sx={{
+        margin: 0,
+        padding: 1,
+        fontSize: `${fontSize}px`,
+        minHeight: '95vh',
+      }}
     >
-      <Grid container direction={'column'} m={0} p={0} height={'100%'} sx={{justifyItems:'space-between'}}>
+      <Grid
+        container
+        direction={'column'}
+        m={0}
+        p={0}
+        height={'100%'}
+        sx={{ justifyItems: 'space-between' }}
+      >
         <Grid item xs={3}>
           <PlayerState
             position={'top'}
@@ -126,16 +138,34 @@ function Game({
             money_to_earn={gameState.players[(player % 2) + 1].money_to_earn}
           />
         </Grid>
-        <Grid item xs={6} sx={{margin:'10px 0'}}>
+        <Grid item xs={6} sx={{ margin: '10px 0' }}>
           <Grid
             container
             columns={21}
             sx={{ justifyContent: 'space-between', height: '100%' }}
           >
-            <Grid item xs={21} md={2} sx={{ display:'flex',justifyContent:'center', alignItems:'center'}}>
+            <Grid
+              item
+              xs={21}
+              md={2}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
               <Dice dice={lastRoll} rolling={rolling} />
             </Grid>
-            <Grid item xs={21} md={17} sx={{ display:'flex',justifyContent:'center', alignItems:'center'}}>
+            <Grid
+              item
+              xs={21}
+              md={17}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
               <Store
                 gameState={gameState}
                 player={player}
@@ -143,7 +173,16 @@ function Game({
                 handleBuy={buy}
               />
             </Grid>
-            <Grid item xs={21} md={2} sx={{ display:'flex',justifyContent:'center', alignItems:'center'}}>
+            <Grid
+              item
+              xs={21}
+              md={2}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
               <SideButtons
                 stage={stage}
                 currentMove={gameState.currentMove}

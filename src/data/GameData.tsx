@@ -1,6 +1,6 @@
-import { GameData } from "../components/Types/GameTypes";
+import { GameData } from '../components/Types/GameTypes';
 
-export const gameDataInitial:GameData = {
+export const gameDataInitial: GameData = {
   currentMove: 1,
   store: {
     wheat_field: 6,
@@ -21,7 +21,7 @@ export const gameDataInitial:GameData = {
     train_station: 2,
     shopping_mall: 2,
     amusement_park: 2,
-    radio_tower: 2
+    radio_tower: 2,
   },
   players: {
     1: {
@@ -44,10 +44,10 @@ export const gameDataInitial:GameData = {
         train_station: 0,
         shopping_mall: 0,
         amusement_park: 0,
-        radio_tower: 0
+        radio_tower: 0,
       },
       money: 4,
-      money_to_earn: 0
+      money_to_earn: 0,
     },
     2: {
       properties: {
@@ -69,10 +69,10 @@ export const gameDataInitial:GameData = {
         train_station: 0,
         shopping_mall: 0,
         amusement_park: 0,
-        radio_tower: 0
+        radio_tower: 0,
       },
       money: 4,
-      money_to_earn: 0
-    }
-  }
-}
+      money_to_earn: 0,
+    },
+  },
+};

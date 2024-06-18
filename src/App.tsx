@@ -132,7 +132,6 @@ function App() {
     socket.on('nextTurn', nextTurn);
     socket.on('startGame', onStartGame);
     socket.on('confirmRoll', onConfirmRoll);
-    socket.on('roomDoesNotExist', () => {});
 
     return () => {
       socket.off('connect');
@@ -227,7 +226,9 @@ function App() {
       Properties['tax_office'].dice.includes(dice)
     ) {
       let enemy: Player = currentPlayer === 1 ? 2 : 1;
-      let tax = Math.floor((gameState.players[enemy].money + money_to_earn[enemy]) / 2);
+      let tax = Math.floor(
+        (gameState.players[enemy].money + money_to_earn[enemy]) / 2
+      );
       if (tax >= 5) {
         money_to_earn[currentPlayer] += tax;
         money_to_earn[enemy] -= tax;
