@@ -157,11 +157,7 @@ function Menu({ roomId }: { roomId: string }) {
               </Typography>
             </Grid>
             <Grid item xs={12} m={1}>
-              <Button
-                variant="contained"
-                fullWidth
-                onClick={disconnect}
-              >
+              <Button variant="contained" fullWidth onClick={disconnect}>
                 <Typography variant="h6" fontFamily={'Preahvihear'}>
                   Disconnect
                 </Typography>

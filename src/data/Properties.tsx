@@ -61,7 +61,7 @@ export const Properties: { [key: string]: PropertyData } = {
     color: 'purple',
     cost: 4,
     income: 'HALF>10 per PLAYER ONCE',
-    dice: [8,9],
+    dice: [8, 9],
     type: 'TOWER',
   },
   publisher: {
@@ -70,7 +70,6 @@ export const Properties: { [key: string]: PropertyData } = {
     income: '1 per PLAYER per CUP and BREAD',
     dice: [7],
     type: 'TOWER',
-  
   },
   business_center: {
     color: 'purple',

@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
+import { Cards, GameData } from './Types/GameTypes';
 import PropertyButton from './PropertyButton';
 import images from './Images';
-import { Cards, GameData } from './Types/GameTypes';
 
 function Store({
   gameState,

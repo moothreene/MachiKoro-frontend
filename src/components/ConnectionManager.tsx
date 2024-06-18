@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { socket } from '../socket';
 
-
 export function ConnectionManager() {
   const [id, setId] = useState<string>('');
 
@@ -11,10 +10,10 @@ export function ConnectionManager() {
 
   function host() {
     connect();
-    socket.emit('host'); 
+    socket.emit('host');
   }
 
-  function join(){
+  function join() {
     connect();
     socket.emit('join', id);
   }
@@ -25,10 +24,10 @@ export function ConnectionManager() {
 
   return (
     <>
-      <button onClick={ host }>Host</button>
-      <button onClick={ join }>Join</button>
+      <button onClick={host}>Host</button>
+      <button onClick={join}>Join</button>
       <input type="text" value={id} onChange={(e) => setId(e.target.value)} />
-      <button onClick={ disconnect }>Disconnect</button>
+      <button onClick={disconnect}>Disconnect</button>
     </>
   );
 }

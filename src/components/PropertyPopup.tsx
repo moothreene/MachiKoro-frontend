@@ -13,7 +13,6 @@ function PropertyPopup({
   placement: string;
   handleBuy: () => void;
 }) {
-  
   return (
     <Card
       sx={{
@@ -39,7 +38,11 @@ function PropertyPopup({
       />
 
       {!disabled && placement === 'store' && (
-        <Button fullWidth onClick={handleBuy} sx={{fontFamily:'Preahvihear', fontWeight:600}}>
+        <Button
+          fullWidth
+          onClick={handleBuy}
+          sx={{ fontFamily: 'Preahvihear', fontWeight: 600 }}
+        >
           Buy
         </Button>
       )}

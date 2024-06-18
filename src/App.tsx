@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
-import './App.css';
 import { socket } from './socket';
-import Game from './components/Game';
 import { gameDataInitial } from './data/GameData';
 import { Properties } from './data/Properties';
-import { Buy, Cards, Player, Roll } from './components/Types/GameTypes';
-import Menu from './components/Menu';
 import { ThemeProvider } from '@emotion/react';
 import { themeOptions } from './themes/ThemeOptions';
 import { createTheme, responsiveFontSizes } from '@mui/material';
 import WinLooseScreen from './components/WinLooseScreen';
-
+import { Buy, Cards, Player, Roll } from './components/Types/GameTypes';
+import Menu from './components/Menu';
+import Game from './components/Game';
+import './App.css';
 
 const default_theme = responsiveFontSizes(createTheme(themeOptions));
 
@@ -110,7 +109,7 @@ function App() {
         };
       });
     }
-    function nextTurn(amount:number) {
+    function nextTurn(amount: number) {
       setGameState((prev) => {
         return { ...prev, currentMove: prev.currentMove + amount };
       });
@@ -250,7 +249,7 @@ function App() {
   if (winner) {
     return (
       <ThemeProvider theme={default_theme}>
-        <WinLooseScreen win = {winner === player} reset = {resetGame} />
+        <WinLooseScreen win={winner === player} reset={resetGame} />
       </ThemeProvider>
     );
   }

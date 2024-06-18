@@ -1,30 +1,88 @@
-import { Box } from "@mui/material";
-import { FaDiceOne, FaDiceTwo, FaDiceThree, FaDiceFour, FaDiceFive, FaDiceSix, FaSquare } from "react-icons/fa6";
+import { Box } from '@mui/material';
+import {
+  FaDiceOne,
+  FaDiceTwo,
+  FaDiceThree,
+  FaDiceFour,
+  FaDiceFive,
+  FaDiceSix,
+  FaSquare,
+} from 'react-icons/fa6';
 
-function Dice({ dice, rolling=false }: { dice: number[]; rolling?: boolean}) {
+function Dice({
+  dice,
+  rolling = false,
+}: {
+  dice: number[];
+  rolling?: boolean;
+}) {
   return (
-    <Box sx={{display:'flex', alignItems:'center', justifyContent:'center', height:'80%'}}>
-    {dice.length === 0 && <FaSquare size = {30} className={`Die${rolling?'-shaking':''}`}/>}
-    {dice.map((side:number) => {
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '80%',
+      }}
+    >
+      {dice.length === 0 && (
+        <FaSquare size={30} className={`Die${rolling ? '-shaking' : ''}`} />
+      )}
+      {dice.map((side: number) => {
         switch (side) {
           case 1:
-            return <FaDiceOne size = {30} className={`Die${rolling?'-shaking':''}`}/>;
+            return (
+              <FaDiceOne
+                size={30}
+                className={`Die${rolling ? '-shaking' : ''}`}
+              />
+            );
           case 2:
-            return <FaDiceTwo size = {30} className={`Die${rolling?'-shaking':''}`}/>;
+            return (
+              <FaDiceTwo
+                size={30}
+                className={`Die${rolling ? '-shaking' : ''}`}
+              />
+            );
           case 3:
-            return <FaDiceThree size = {30} className={`Die${rolling?'-shaking':''}`}/>;
+            return (
+              <FaDiceThree
+                size={30}
+                className={`Die${rolling ? '-shaking' : ''}`}
+              />
+            );
           case 4:
-            return <FaDiceFour size = {30} className={`Die${rolling?'-shaking':''}`}/>;
+            return (
+              <FaDiceFour
+                size={30}
+                className={`Die${rolling ? '-shaking' : ''}`}
+              />
+            );
           case 5:
-            return <FaDiceFive size = {30} className={`Die${rolling?'-shaking':''}`}/>;
+            return (
+              <FaDiceFive
+                size={30}
+                className={`Die${rolling ? '-shaking' : ''}`}
+              />
+            );
           case 6:
-            return <FaDiceSix size = {30} className={`Die${rolling?'-shaking':''}`}/>;
+            return (
+              <FaDiceSix
+                size={30}
+                className={`Die${rolling ? '-shaking' : ''}`}
+              />
+            );
           default:
-            return <FaSquare size = {50} className={`Die${rolling?'-shaking':''}`}/>;
+            return (
+              <FaSquare
+                size={50}
+                className={`Die${rolling ? '-shaking' : ''}`}
+              />
+            );
         }
-    })}
+      })}
     </Box>
-  )
+  );
 }
 
-export default Dice
+export default Dice;

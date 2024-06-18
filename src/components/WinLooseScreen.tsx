@@ -1,10 +1,17 @@
 import { Button, Container, Typography } from '@mui/material';
 import ConfettiExplosion from 'react-confetti-explosion';
-import { socket } from '../socket';
 
-function WinLooseScreen({ win, reset }: { win: boolean, reset:()=>void }) {
+function WinLooseScreen({ win, reset }: { win: boolean; reset: () => void }) {
   return (
-    <Container sx={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', height:'60vh'}}>
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '60vh',
+      }}
+    >
       <Typography fontFamily="Preahvihear" variant="h2" color={'white'}>
         You {win ? 'Won!' : 'Lost'}
       </Typography>
@@ -16,7 +23,9 @@ function WinLooseScreen({ win, reset }: { win: boolean, reset:()=>void }) {
           width={2000}
         />
       )}
-      <Button variant='contained' sx={{marginTop:10}} onClick={reset}>Go to Menu</Button>
+      <Button variant="contained" sx={{ marginTop: 10 }} onClick={reset}>
+        Go to Menu
+      </Button>
     </Container>
   );
 }
