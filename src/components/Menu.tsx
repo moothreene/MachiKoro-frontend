@@ -1,12 +1,29 @@
 import { useEffect, useState } from 'react';
 import { socket } from '../socket';
-import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  ClickAwayListener,
+  Grid,
+  TextField,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 
 function Menu({ roomId }: { roomId: string }) {
   const [id, setId] = useState<string>('');
   const [open, setOpen] = useState(false);
   const [roomDoesNotExist, setRoomDoesNotExist] = useState(false);
   const [hostInProcess, setHostInProcess] = useState(false);
+  const [tooltip, setTooltip] = useState(false);
+
+  const handleTooltipClose = () => {
+    setTooltip(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setTooltip(true);
+  };
 
   useEffect(() => {
     function onRoomDoesNotExist() {
@@ -145,16 +162,35 @@ function Menu({ roomId }: { roomId: string }) {
               >
                 Room ID:
               </Typography>
-              <Typography
-                variant="h5"
-                display={'inline'}
-                sx={{ userSelect: 'all' }}
-                fontFamily={'Preahvihear'}
-                fontWeight={600}
-                color={'white'}
-              >
-                {roomId}
-              </Typography>
+              <ClickAwayListener onClickAway={handleTooltipClose}>
+                <Tooltip
+                  placement="right"
+                  PopperProps={{
+                    disablePortal: true,
+                  }}
+                  onClose={handleTooltipClose}
+                  open={tooltip}
+                  disableFocusListener
+                  disableHoverListener
+                  disableTouchListener
+                  title="Copied!"
+                >
+                  <Typography
+                    variant="h5"
+                    display={'inline'}
+                    fontFamily={'Preahvihear'}
+                    fontWeight={600}
+                    color={'white'}
+                    onClick={() => {
+                      handleTooltipOpen();
+                      navigator.clipboard.writeText(roomId);
+                      setTimeout(handleTooltipClose, 1000);
+                    }}
+                  >
+                    {roomId}
+                  </Typography>
+                </Tooltip>
+              </ClickAwayListener>
             </Grid>
             <Grid item xs={12} m={1}>
               <Button variant="contained" fullWidth onClick={disconnect}>
