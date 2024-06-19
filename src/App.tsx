@@ -21,6 +21,33 @@ function App() {
   const [lastRoll, setLastRoll] = useState<number[]>([]);
   const [ready, setReady] = useState(false);
   const [winner, setWinner] = useState<Player | null>(null);
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [fontSize, setFontSize] = useState(16);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  
+  useEffect(() => {
+    if (windowSize > 1600) {
+      setFontSize(13);
+    } else if (windowSize > 1300) {
+      setFontSize(11);
+    } else if (windowSize > 1000) {
+      setFontSize(9);
+    } else {
+      setFontSize(7);
+    }
+  }, [windowSize]);
+
 
   function winnerCheck() {
     for (let i = 1; i < Object.keys(gameState.players).length + 1; i++) {
@@ -58,14 +85,17 @@ function App() {
       setRoomId(msg);
       setPlayer(1);
     }
+
     function onJoined(msg: string) {
       setRoomId(msg);
       setPlayer(2);
     }
+
     function onDisconnect() {
       setIsConnected(false);
       setRoomId('');
     }
+
     function onRoll(msg: Roll) {
       setLastRoll(msg.dice);
       const money_to_earn = calculateRoll(msg);
@@ -109,11 +139,13 @@ function App() {
         };
       });
     }
+
     function nextTurn(amount: number) {
       setGameState((prev) => {
         return { ...prev, currentMove: prev.currentMove + amount };
       });
     }
+
     function onConfirmRoll() {
       setGameState((prev) => {
         return {
@@ -133,6 +165,7 @@ function App() {
         };
       });
     }
+
     socket.on('connect', () => setIsConnected(true));
     socket.on('disconnect', onDisconnect);
     socket.on('hosted', onHosted);
@@ -246,6 +279,7 @@ function App() {
     }
     return money_to_earn;
   }
+
   if (winner) {
     return (
       <ThemeProvider theme={default_theme}>
@@ -253,11 +287,12 @@ function App() {
       </ThemeProvider>
     );
   }
+
   return (
     <ThemeProvider theme={default_theme}>
       {!ready && <Menu roomId={roomId} />}
       {isConnected && ready && (
-        <Game player={player} gameState={gameState} lastRoll={lastRoll} />
+        <Game windowSize={windowSize} fontSize={fontSize} player={player} gameState={gameState} lastRoll={lastRoll} />
       )}
     </ThemeProvider>
   );

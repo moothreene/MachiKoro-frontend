@@ -10,10 +10,14 @@ import SideButtons from './SideButtons';
 import Dice from './Dice';
 
 function Game({
+  windowSize,
+  fontSize,
   player,
   gameState,
   lastRoll,
 }: {
+  windowSize: number;
+  fontSize: number;
   player: Player;
   gameState: GameData;
   lastRoll: number[];
@@ -21,32 +25,8 @@ function Game({
   const [stage, setStage] = useState(0);
   const [rerolled, setRerolled] = useState(false);
   const [rolling, setRolling] = useState(false);
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
-  const [fontSize, setFontSize] = useState(16);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowSize(window.innerWidth);
-    };
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (windowSize > 1600) {
-      setFontSize(13);
-    } else if (windowSize > 1300) {
-      setFontSize(11);
-    } else if (windowSize > 1000) {
-      setFontSize(9);
-    } else {
-      setFontSize(7);
-    }
-  }, [windowSize]);
 
   useEffect(() => {
     setStage(0);
