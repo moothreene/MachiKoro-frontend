@@ -91,7 +91,7 @@ function Game({
 
   return (
     <>
-      <Tutorial fontSize={fontSize} windowSize={windowSize}/>
+      <Tutorial fontSize={fontSize} windowSize={windowSize} />
       <Container
         maxWidth={false}
         sx={{
@@ -110,7 +110,10 @@ function Game({
           minHeight={'95vh'}
           sx={{ justifyContent: 'space-between' }}
         >
-          <Grid item xs={3}>
+          <Grid
+            item
+            xs={3}
+          >
             <PlayerState
               position={'top'}
               key={'player_enemy'}

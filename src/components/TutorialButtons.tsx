@@ -1,11 +1,11 @@
-import { Button, Grid, Tooltip } from '@mui/material';
+import { Button, Grid, Tooltip, Typography } from '@mui/material';
 import CasinoIcon from '@mui/icons-material/Casino';
 import { Cards } from './Types/GameTypes';
 import { MdNavigateNext } from 'react-icons/md';
 import { ImRedo } from 'react-icons/im';
 import { GiConfirmed } from 'react-icons/gi';
 
-function TutorialButtons({ windowSize, open }: { windowSize: number, open: boolean}) {
+function TutorialButtons({ windowSize, open, fontSize}: { windowSize: number, open: boolean, fontSize: number}) {
   return (
     <Grid
       container
@@ -18,7 +18,7 @@ function TutorialButtons({ windowSize, open }: { windowSize: number, open: boole
         <Tooltip
           open = {open}
           placement={windowSize > 900?"left":"top"}
-          title={'Roll the dice!'}
+          title={<Typography sx={{ fontSize: {fontSize}, fontFamily: 'Preahvihear' }}>Roll the Dice</Typography>}
           arrow
           disableFocusListener
           disableHoverListener
@@ -29,28 +29,32 @@ function TutorialButtons({ windowSize, open }: { windowSize: number, open: boole
           <Button
             sx={{
               color: 'red',
+              padding: 0,
+              paddingBottom: '8px'
             }}
             onClick={()=>{}}
           >
-            <CasinoIcon fontSize="large" />
+            <CasinoIcon fontSize='large'/>
           </Button>
         </Tooltip>
       </Grid>
       <Grid item xs={2}>
       <Tooltip
           open = {open}
-          placement={windowSize > 900?"left":"bottom"}
-          title={'Roll two dices!'}
+          placement={windowSize > 900?"left":"top"}
+          title={<Typography sx={{ fontSize: {fontSize}, fontFamily: 'Preahvihear' }}>Roll two Dices</Typography>}
           arrow
           disableFocusListener
           disableHoverListener
           disableInteractive
           disableTouchListener
-          sx={{ zIndex: '100' }}
+          sx={{ zIndex: '100'}}
         >
         <Button
           sx={{
             color: 'red',
+            padding: 0,
+            paddingBottom: '8px'
           }}
           onClick={() => {}}
         >
@@ -63,7 +67,7 @@ function TutorialButtons({ windowSize, open }: { windowSize: number, open: boole
       <Tooltip
           open = {open}
           placement={windowSize > 900?"left":"top"}
-          title={'Confirm roll result'}
+          title={<Typography sx={{ fontSize: {fontSize}, fontFamily: 'Preahvihear' }}>Comfirm Roll</Typography>}
           arrow
           disableFocusListener
           disableHoverListener
@@ -73,7 +77,7 @@ function TutorialButtons({ windowSize, open }: { windowSize: number, open: boole
         >
         <Button
           onClick={()=>{}}
-          sx={{ color: 'white' }}
+          sx={{ color: 'white', padding:0, paddingBottom: '8px'}}
         >
           <GiConfirmed size={25} />
         </Button>
@@ -82,8 +86,8 @@ function TutorialButtons({ windowSize, open }: { windowSize: number, open: boole
       <Grid item xs={2}>
       <Tooltip
           open = {open}
-          placement={windowSize > 900?"left":"bottom"}
-          title={'Reroll dices'}
+          placement={windowSize > 900?"left":"top"}
+          title={<Typography sx={{ fontSize: {fontSize}, fontFamily: 'Preahvihear' }}>Reroll</Typography>}
           arrow
           disableFocusListener
           disableHoverListener
@@ -93,7 +97,7 @@ function TutorialButtons({ windowSize, open }: { windowSize: number, open: boole
         >
         <Button
           onClick={()=>{}}
-          sx={{ color: 'white' }}
+          sx={{ color: 'white', padding:0, paddingBottom: '8px' }}
         >
           <ImRedo size={25} />
         </Button>
@@ -103,17 +107,17 @@ function TutorialButtons({ windowSize, open }: { windowSize: number, open: boole
       <Tooltip
           open = {open}
           placement={windowSize > 900?"left":"top"}
-          title={'End turn'}
+          title={<Typography sx={{ fontSize: {fontSize}, fontFamily: 'Preahvihear' }}>Next Turn</Typography>}
           arrow
           disableFocusListener
           disableHoverListener
           disableInteractive
           disableTouchListener
-          sx={{ zIndex: '100' }}
+          sx={{ zIndex: '100',}}
         >
         <Button
           onClick={()=>{}}
-          sx={{ color: 'white' }}
+          sx={{ color: 'white', padding:0, paddingBottom: '8px'}}
         >
           <MdNavigateNext size={30} />
         </Button>

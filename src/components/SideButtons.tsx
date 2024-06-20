@@ -76,7 +76,7 @@ function SideButtons({
         <Button
           onClick={handleConfirmRoll}
           disabled={stage !== 1}
-          sx={{ color: 'wheat' }}
+          sx={{ color: 'white' }}
         >
           <GiConfirmed size={25} />
         </Button>
@@ -90,7 +90,7 @@ function SideButtons({
             2 - (currentMove % 2) !== player ||
             playerProperties['radio_tower'] === 0
           }
-          sx={{ color: 'wheat' }}
+          sx={{ color: 'white' }}
         >
           <ImRedo size={25} />
         </Button>
@@ -99,7 +99,7 @@ function SideButtons({
         <Button
           disabled={!(2 - (currentMove % 2) === player) || stage < 2}
           onClick={handleNextTurn}
-          sx={{ color: 'wheat' }}
+          sx={{ color: 'white' }}
         >
           <MdNavigateNext size={30} />
         </Button>

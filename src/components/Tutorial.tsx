@@ -1,6 +1,7 @@
 import { Backdrop, Button, Container, Grid, Typography } from '@mui/material';
 import { useState } from 'react';
 import TutorialButtons from './TutorialButtons';
+import TutorialStore from './TutorialStore';
 
 function Tutorial({
   fontSize,
@@ -25,14 +26,17 @@ function Tutorial({
         onClick={handleOpen}
         sx={{ position: 'absolute', top: 0, right: 0 }}
       >
-        How to Play?
+        <Typography fontFamily={'Preahvihear'}>How to Play?</Typography>
       </Button>
       <Backdrop
         open={open}
         sx={{
           color: '#fff',
-          zIndex: '1000',
+          zIndex: '100',
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          position: 'fixed',
+          maxHeight:'none',
+          height:'100%',
         }}
         onClick={handleClose}
       >
@@ -56,9 +60,9 @@ function Tutorial({
           >
             <Grid item xs={3}>
               {/*PlayerState*/}
-              <Typography fontFamily={'Preahvihear'} fontSize={fontSize + 2}>
-                That's your opponent's side: information about his properties
-                and money is here
+              <Typography fontFamily={'Preahvihear'} fontSize={fontSize}>
+                At the top is your opponent's side: information about his properties
+                and money can be found here
               </Typography>
             </Grid>
             <Grid item xs={6} sx={{ margin: '10px 0' }}>
@@ -78,8 +82,11 @@ function Tutorial({
                   }}
                 >
                   {/*Dice*/}
-                  <Typography fontFamily={'Preahvihear'} fontSize={fontSize + 2}>
-                    Here's the result of a last dice roll
+                  <Typography
+                    fontFamily={'Preahvihear'}
+                    fontSize={fontSize}
+                  >
+                    Near the store you can see the last roll of the dice
                   </Typography>
                 </Grid>
                 <Grid
@@ -91,16 +98,10 @@ function Tutorial({
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '20vh',
                   }}
                 >
                   {/*Store*/}
-                  <Typography fontFamily={'Preahvihear'} fontSize={fontSize + 2}>
-                    Here's the store: you can buy new properties here
-                  </Typography>
-                  <Typography fontFamily={'Preahvihear'} fontSize={fontSize}>
-                    Click on a property to see more details
-                  </Typography>
+                  <TutorialStore />
                 </Grid>
                 <Grid
                   item
@@ -113,15 +114,14 @@ function Tutorial({
                   }}
                 >
                   {/*SideButtons*/}
-                  <TutorialButtons windowSize={windowSize} open={open} />
+                  <TutorialButtons windowSize={windowSize} open={open} fontSize={fontSize}/>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={3}>
               {/*PlayerState*/}
-              <Typography fontFamily={'Preahvihear'} fontSize={fontSize + 2}>
-                That's your side: information about your properties and money is
-                here
+              <Typography fontFamily={'Preahvihear'} fontSize={fontSize}>
+                On the bottom is your side of the board: your properties and your money can be seen here
               </Typography>
             </Grid>
           </Grid>
