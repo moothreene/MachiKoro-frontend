@@ -1,4 +1,4 @@
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Tooltip } from '@mui/material';
 import CasinoIcon from '@mui/icons-material/Casino';
 import { Cards } from './Types/GameTypes';
 import { MdNavigateNext } from 'react-icons/md';
@@ -37,20 +37,20 @@ function SideButtons({
       alignItems={'center'}
     >
       <Grid item xs={2}>
-        <Button
-          disabled={!(stage === 0 && 2 - (currentMove % 2) === player)}
-          sx={{
-            '&.Mui-disabled': {
-              color: 'rgb(130,130,190)',
-            },
-            color: 'red',
-          }}
-          onClick={() => {
-            handleRoll(1);
-          }}
-        >
-          <CasinoIcon fontSize="large" />
-        </Button>
+          <Button
+            disabled={!(stage === 0 && 2 - (currentMove % 2) === player)}
+            sx={{
+              '&.Mui-disabled': {
+                color: 'rgb(130,130,190)',
+              },
+              color: 'red',
+            }}
+            onClick={() => {
+              handleRoll(1);
+            }}
+          >
+            <CasinoIcon fontSize="large" />
+          </Button>
       </Grid>
       <Grid item xs={2}>
         <Button
