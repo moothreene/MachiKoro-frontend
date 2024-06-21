@@ -25,11 +25,11 @@ function TutorialProperty({
           variant="contained"
           onClick={() => {}}
           sx={{
-            padding: 0.5,
+            padding: 0.2,
             backgroundColor: 'blue',
             display: 'flex',
             flexDirection: 'column',
-            width: '200px',
+            width: '160px',
             height: '50px',
             '&:hover': {
               backgroundColor: 'blue',
@@ -82,7 +82,7 @@ function TutorialProperty({
                   Property cost
                 </Typography>
               }
-              maxWidth="none"
+              maxWidth="80px"
               zIndex={200}
               placement="left"
             >
@@ -90,7 +90,8 @@ function TutorialProperty({
                 <Typography
                   fontFamily={'Preahvihear'}
                   fontSize={'inherit'}
-                  sx={{ padding: 0, margin: 0 }}
+                  align='left'
+                  sx={{ padding: 0, margin: 0, marginLeft:1}}
                 >
                   <FaCoins size={8} color="gold" /> {1}
                 </Typography>{' '}
@@ -134,7 +135,7 @@ function TutorialProperty({
                   Dice that activates the property
                 </Typography>
               }
-              maxWidth="none"
+              maxWidth="80px"
               zIndex={200}
               placement="right"
             >
@@ -142,7 +143,8 @@ function TutorialProperty({
               <Typography
                 fontFamily={'Preahvihear'}
                 fontSize={'inherit'}
-                sx={{ padding: 0, margin: 0 }}
+                align='right'
+                sx={{ padding: 0, margin: 0, marginRight:1}}
               >
                 {'🎲' + 2}
               </Typography>{' '}

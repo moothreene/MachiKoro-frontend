@@ -59,6 +59,7 @@ function PropertyButton({
       <TutorialProperty open={nestedTutorial} setClose={()=>setNestedTutorial(false)}/>
     )}
       <Tooltip
+        arrow
         open={tutorial && placement === 'store' && name === 'ranch'}
         title={
           <Typography
