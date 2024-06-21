@@ -9,6 +9,7 @@ import Store from './Store';
 import SideButtons from './SideButtons';
 import Dice from './Dice';
 import Tutorial from './Tutorial';
+import { on } from 'events';
 
 export const TutorialContext = createContext(false as boolean);
 
@@ -34,6 +35,13 @@ function Game({
     setStage(0);
   }, [gameState.currentMove]);
 
+  useEffect(() => {
+    socket.on('roll', onRoll);
+    return () => {
+      socket.off('roll', onRoll);
+    };
+  },[]);
+
   const handleTutorialClose = () => {
     setTutorial(false);
   };
@@ -42,7 +50,10 @@ function Game({
     setTutorial(true);
   };
 
-
+  function onRoll(){
+    setRolling(true);
+    setTimeout(() => setRolling(false), 1000);
+  }
 
 
   function roll(dice_count: number) {
