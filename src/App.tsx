@@ -43,8 +43,10 @@ function App() {
       setFontSize(11);
     } else if (windowSize > 1000) {
       setFontSize(9);
-    } else {
+    } else if (windowSize > 600){
       setFontSize(7);
+    } else {
+      setFontSize(5);
     }
   }, [windowSize]);
 
