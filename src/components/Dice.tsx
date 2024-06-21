@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import {
   FaDiceOne,
   FaDiceTwo,
@@ -8,15 +8,35 @@ import {
   FaDiceSix,
   FaSquare,
 } from 'react-icons/fa6';
+import { TutorialContext } from './Game';
+import { useContext } from 'react';
+import CustomTooltip from './CustomTooltip';
 
 function Dice({
   dice,
   rolling = false,
+  fontSize,
 }: {
   dice: number[];
   rolling?: boolean;
+  fontSize: number;
 }) {
+
+  const tutorial = useContext(TutorialContext);
+
   return (
+    <CustomTooltip
+          open={tutorial}
+          maxWidth="none"
+          title={
+            <Typography
+              sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+            >
+              Previous dice roll result
+            </Typography>
+          }
+          placement={'right'}
+        >
     <Box
       sx={{
         display: 'flex',
@@ -82,6 +102,7 @@ function Dice({
         }
       })}
     </Box>
+    </CustomTooltip>
   );
 }
 

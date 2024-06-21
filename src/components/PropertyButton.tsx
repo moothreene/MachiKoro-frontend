@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Properties, PropertiesLocalized } from '../data/Properties';
-import { Button, Grid, Typography } from '@mui/material';
+import {
+  Button,
+  Grid,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { FaCoins } from 'react-icons/fa6';
 import PropertyPopup from './PropertyPopup';
+import { TutorialContext } from './Game';
+import { useContext } from 'react';
+import TutorialProperty from './TutorialProperty';
 
 function PropertyButton({
   placement,
@@ -24,6 +32,8 @@ function PropertyButton({
   const color = Properties[name].color || 'black';
   const cost = Properties[name].cost || 0;
   const nameUpdated = PropertiesLocalized[name] || name;
+  const tutorial = useContext(TutorialContext);
+  const [nestedTutorial, setNestedTutorial] = useState(false);
 
   useEffect(() => {
     window.addEventListener('click', handleClose);
@@ -45,69 +55,88 @@ function PropertyButton({
       position={'relative'}
       overflow={'visible'}
     >
-      <Button
-        variant="contained"
-        onClick={() => {
-          setTimeout(() => setOpen(true));
-        }}
-        disabled={amount === 0}
-        sx={{
-          padding: 0.5,
-          backgroundColor: color,
-          display: 'flex',
-          flexDirection: 'column',
-          width: '100%',
-          height: '100%',
-          '&:hover': {
-            backgroundColor: color,
-          },
-          justifyContent: 'space-between',
-          fontSize: 'inherit',
-        }}
+    {(tutorial && placement === 'store' && name === 'ranch') && (
+      <TutorialProperty open={nestedTutorial} setClose={()=>setNestedTutorial(false)}/>
+    )}
+      <Tooltip
+        open={tutorial && placement === 'store' && name === 'ranch'}
+        title={
+          <Typography
+            onClick={() => {
+              setNestedTutorial(true);
+            }}
+            sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+          >
+            <Typography display={'inline'} fontWeight={'600'} fontFamily={'inherit'} fontSize={'inherit'}>Click</Typography> to see property info
+          </Typography>
+        }
+        placement={'right'}
+        PopperProps={{style:{zIndex:100}}}
       >
-        <Typography
-          variant="body2"
-          fontFamily={'Preahvihear'}
-          fontSize={'inherit'}
-          sx={{ padding: 0, margin: 0 }}
+        <Button
+          variant="contained"
+          onClick={() => {
+            setTimeout(() => setOpen(true));
+          }}
+          disabled={amount === 0}
+          sx={{
+            padding: 0.5,
+            backgroundColor: color,
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            height: '100%',
+            '&:hover': {
+              backgroundColor: color,
+            },
+            justifyContent: 'space-between',
+            fontSize: 'inherit',
+          }}
         >
-          {nameUpdated}
-        </Typography>
-        <Grid
-          container
-          direction={'row'}
-          alignItems={'center'}
-          sx={{ width: '100%' }}
-        >
-          <Grid item xs={4}>
-            <Typography
-              fontFamily={'Preahvihear'}
-              fontSize={'inherit'}
-              sx={{ padding: 0, margin: 0 }}
-            >
-              <FaCoins size={8} color="gold" /> {cost}
-            </Typography>{' '}
+          <Typography
+            variant="body2"
+            fontFamily={'Preahvihear'}
+            fontSize={'inherit'}
+            sx={{ padding: 0, margin: 0 }}
+          >
+            {nameUpdated}
+          </Typography>
+          <Grid
+            container
+            direction={'row'}
+            alignItems={'center'}
+            sx={{ width: '100%' }}
+          >
+            <Grid item xs={4}>
+              <Typography
+                fontFamily={'Preahvihear'}
+                fontSize={'inherit'}
+                sx={{ padding: 0, margin: 0 }}
+              >
+                <FaCoins size={8} color="gold" /> {cost}
+              </Typography>{' '}
+            </Grid>
+            <Grid item xs={4}>
+              <Typography
+                fontFamily={'Preahvihear'}
+                fontSize={'inherit'}
+                sx={{ padding: 0, margin: 0 }}
+              >
+                x{amount}
+              </Typography>{' '}
+            </Grid>
+            <Grid item xs={4}>
+              <Typography
+                fontFamily={'Preahvihear'}
+                fontSize={'inherit'}
+                sx={{ padding: 0, margin: 0 }}
+              >
+                {rolls != '0' ? '🎲' + rolls : '-'}
+              </Typography>{' '}
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <Typography
-              fontFamily={'Preahvihear'}
-              fontSize={'inherit'}
-              sx={{ padding: 0, margin: 0 }}
-            >
-              x{amount}
-            </Typography>{' '}
-          </Grid>
-          <Grid item xs={4}>
-            <Typography
-              fontFamily={'Preahvihear'}
-              fontSize={'inherit'}
-              sx={{ padding: 0, margin: 0 }}
-            >
-              {rolls != '0' ? '🎲' + rolls : '-'}
-            </Typography>{' '}
-          </Grid>
-        </Grid>
-      </Button>
+        </Button>
+      </Tooltip>
       <PropertyPopup
         img={image}
         handleBuy={onClick}

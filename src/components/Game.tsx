@@ -164,7 +164,7 @@ function Game({
                   alignItems: 'center',
                 }}
               >
-                <Dice dice={lastRoll} rolling={rolling} />
+                <Dice dice={lastRoll} rolling={rolling} fontSize={fontSize} />
               </Grid>
               <Grid
                 item

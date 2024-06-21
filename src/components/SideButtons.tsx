@@ -1,12 +1,4 @@
-import {
-  Button,
-  Grid,
-  Tooltip,
-  TooltipProps,
-  Typography,
-  styled,
-  tooltipClasses,
-} from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import CasinoIcon from '@mui/icons-material/Casino';
 import { Cards } from './Types/GameTypes';
 import { MdNavigateNext } from 'react-icons/md';
@@ -14,6 +6,7 @@ import { ImRedo } from 'react-icons/im';
 import { GiConfirmed } from 'react-icons/gi';
 import { TutorialContext } from './Game';
 import { useContext } from 'react';
+import CustomTooltip from './CustomTooltip';
 
 function SideButtons({
   stage,
@@ -40,24 +33,6 @@ function SideButtons({
   handleReroll: () => void;
   handleNextTurn: () => void;
 }) {
-  const CustomWidthTooltip = styled(({ className, ...props }: TooltipProps) => (
-    <Tooltip
-      {...props}
-      classes={{ popper: className }}
-      placement={windowSize > 900 ? 'left' : 'top'}
-      open={tutorial}
-      arrow
-      disableFocusListener
-      disableHoverListener
-      disableTouchListener
-      disableInteractive
-    />
-  ))({
-    [`& .${tooltipClasses.tooltip}`]: {
-      maxWidth: windowSize > 900 ? 'none' : windowSize > 600 ? '70px' : '50px',
-    },
-  });
-
   const tutorial = useContext(TutorialContext);
 
   return (
@@ -69,14 +44,19 @@ function SideButtons({
       alignItems={'center'}
     >
       <Grid item xs={2}>
-        <CustomWidthTooltip
+        <CustomTooltip
+          open={tutorial}
+          maxWidth={
+            windowSize > 900 ? 'none' : windowSize > 600 ? '80px' : windowSize > 400? '65px' : '50px'
+          }
           title={
             <Typography
-              sx={{ fontFamily: 'Preahvihear', fontSize: fontSize + 2 }}
+              sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
             >
-              First,on your turn you roll a dice
+              On your turn you roll a dice
             </Typography>
           }
+          placement={windowSize > 900 ? 'left' : 'top'}
         >
           <Button
             disabled={
@@ -99,15 +79,22 @@ function SideButtons({
           >
             <CasinoIcon fontSize="large" />
           </Button>
-        </CustomWidthTooltip>
+        </CustomTooltip>
       </Grid>
       <Grid item xs={2}>
-        <CustomWidthTooltip
+        <CustomTooltip
+          open={tutorial}
+          maxWidth={
+            windowSize > 900 ? 'none' : windowSize > 600 ? '80px' : windowSize > 400? '65px' : '50px'
+          }
           title={
-            <Typography sx={{ fontFamily: 'Preahvihear', fontSize: fontSize + 2}}>
+            <Typography
+              sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+            >
               Or later even two dices, if you have a train station
             </Typography>
           }
+          placement={windowSize > 900 ? 'left' : 'top'}
         >
           <Button
             disabled={
@@ -133,15 +120,22 @@ function SideButtons({
             <CasinoIcon />
             <CasinoIcon />
           </Button>
-        </CustomWidthTooltip>
+        </CustomTooltip>
       </Grid>
       <Grid item xs={2}>
-        <CustomWidthTooltip
+        <CustomTooltip
+          open={tutorial}
+          maxWidth={
+            windowSize > 900 ? 'none' : windowSize > 600 ? '80px' : windowSize > 400? '65px' : '50px'
+          }
           title={
-            <Typography sx={{ fontFamily: 'Preahvihear', fontSize: fontSize + 2 }}>
-              Then - you confirm your roll and get/loose money
+            <Typography
+              sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+            >
+              Then - confirm your roll
             </Typography>
           }
+          placement={windowSize > 900 ? 'left' : 'top'}
         >
           <Button
             onClick={tutorial ? () => {} : handleConfirmRoll}
@@ -150,15 +144,22 @@ function SideButtons({
           >
             <GiConfirmed size={25} />
           </Button>
-        </CustomWidthTooltip>
+        </CustomTooltip>
       </Grid>
       <Grid item xs={2}>
-        <CustomWidthTooltip
+        <CustomTooltip
+          open={tutorial}
+          maxWidth={
+            windowSize > 900 ? 'none' : windowSize > 600 ? '80px' : windowSize > 400? '65px' : '50px'
+          }
           title={
-            <Typography sx={{ fontFamily: 'Preahvihear', fontSize: fontSize + 2 }}>
-              Later in the game you will be able to reroll your dices
+            <Typography
+              sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+            >
+              Later in the game you'd be able to reroll
             </Typography>
           }
+          placement={windowSize > 900 ? 'left' : 'top'}
         >
           <Button
             onClick={tutorial ? () => {} : handleReroll}
@@ -173,15 +174,22 @@ function SideButtons({
           >
             <ImRedo size={25} />
           </Button>
-        </CustomWidthTooltip>
+        </CustomTooltip>
       </Grid>
       <Grid item xs={2}>
-        <CustomWidthTooltip
+        <CustomTooltip
+          open={tutorial}
+          maxWidth={
+            windowSize > 900 ? 'none' : windowSize > 600 ? '80px' : windowSize > 400? '65px' : '50px'
+          }
           title={
-            <Typography sx={{ fontFamily: 'Preahvihear', fontSize: fontSize + 2}}>
+            <Typography
+              sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+            >
               End turn
             </Typography>
           }
+          placement={windowSize > 900 ? 'left' : 'top'}
         >
           <Button
             disabled={
@@ -192,7 +200,7 @@ function SideButtons({
           >
             <MdNavigateNext size={30} />
           </Button>
-        </CustomWidthTooltip>
+        </CustomTooltip>
       </Grid>
     </Grid>
   );

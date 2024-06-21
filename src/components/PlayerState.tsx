@@ -4,6 +4,9 @@ import PropertyButton from './PropertyButton';
 import images from './Images';
 import Money from './Money';
 import { Properties } from '../data/Properties';
+import { TutorialContext } from './Game';
+import { useContext } from 'react';
+import CustomTooltip from './CustomTooltip';
 
 function PlayerState({
   position,
@@ -18,6 +21,8 @@ function PlayerState({
   money: number;
   money_to_earn: number;
 }) {
+  const tutorial = useContext(TutorialContext);
+
   function compareDices(a: [keyof Cards, number], b: [keyof Cards, number]) {
     if (Properties[a[0]].dice[0] - Properties[b[0]].dice[0] === 0) {
       return Properties[a[0]].dice.length - Properties[b[0]].dice.length;
@@ -29,7 +34,9 @@ function PlayerState({
     keyof Cards,
     number
   ][];
+
   const propertiesSorted = propertiesEntries.sort(compareDices);
+
   return (
     <Box
       sx={{
@@ -40,22 +47,35 @@ function PlayerState({
       }}
     >
       <legend>
-        <Stack alignItems="center" alignContent={'center'} direction={'row'}>
-          <Money size={fontSize} amount={money} />
-          {money_to_earn !== 0 && (
-            <>
-              <Typography
-                variant="body1"
-                color="white"
-                fontFamily={'Preahvihear'}
-                sx={{ marginLeft: 1, marginRight: 1 }}
-              >
-                +
-              </Typography>
-              <Money size={fontSize} amount={money_to_earn} />
-            </>
-          )}
-        </Stack>
+        <CustomTooltip
+          open={tutorial}
+          maxWidth="100px"
+          title={
+            <Typography
+              sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+            >
+              {position === 'bottom' ? 'Your' : 'Enemy'} money
+            </Typography>
+          }
+          placement={'right'}
+        >
+          <Stack alignItems="center" alignContent={'center'} direction={'row'} width={'fit-content'}>
+            <Money size={fontSize} amount={money} />
+            {money_to_earn !== 0 && (
+              <>
+                <Typography
+                  variant="body1"
+                  color="white"
+                  fontFamily={'Preahvihear'}
+                  sx={{ marginLeft: 1, marginRight: 1 }}
+                >
+                  +
+                </Typography>
+                <Money size={fontSize} amount={money_to_earn} />
+              </>
+            )}
+          </Stack>
+        </CustomTooltip>
       </legend>
       <Grid container columns={16} spacing={1} sx={{ margin: 'auto' }}>
         {propertiesSorted.map(([key, value]) => {

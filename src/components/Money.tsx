@@ -18,6 +18,7 @@ function Money({ size, amount }: { size: number; amount: number }) {
     <div
       className="circle outer"
       style={{
+        zIndex:100,
         margin: 0,
         padding: 0,
         display: 'flex',
