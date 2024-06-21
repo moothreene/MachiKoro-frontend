@@ -41,7 +41,7 @@ function Menu({ roomId }: { roomId: string }) {
       socket.off('invalidRoom', onRoomDoesNotExist);
       socket.off('host_error', onHostError);
     };
-  });
+  },[]);
 
   function connect() {
     socket.connect();
