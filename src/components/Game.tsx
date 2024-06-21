@@ -116,7 +116,7 @@ function Game({
 
   return (
     <TutorialContext.Provider value={tutorial}>
-      <Tutorial setOpen={handleTutorialOpen} setClose={handleTutorialClose}/>
+      <Tutorial setOpen={handleTutorialOpen} setClose={handleTutorialClose} fontSize={fontSize}/>
       <Container
         maxWidth={false}
         sx={{

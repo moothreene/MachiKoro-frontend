@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Properties, PropertiesLocalized } from '../data/Properties';
-import {
-  Button,
-  Grid,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { Button, Grid, Tooltip, Typography } from '@mui/material';
 import { FaCoins } from 'react-icons/fa6';
 import PropertyPopup from './PropertyPopup';
 import { TutorialContext } from './Game';
 import { useContext } from 'react';
 import TutorialProperty from './TutorialProperty';
+import CustomTooltip from './CustomTooltip';
 
 function PropertyButton({
   placement,
@@ -55,24 +51,40 @@ function PropertyButton({
       position={'relative'}
       overflow={'visible'}
     >
-    {(tutorial && placement === 'store' && name === 'ranch') && (
-      <TutorialProperty open={nestedTutorial} setClose={()=>setNestedTutorial(false)}/>
-    )}
-      <Tooltip
-        arrow
+      {tutorial && placement === 'store' && name === 'ranch' && (
+        <TutorialProperty
+          open={nestedTutorial}
+          setClose={() => setNestedTutorial(false)}
+        />
+      )}
+      <CustomTooltip
+        zIndex={100}
+        maxWidth='none'
+        interactive
         open={tutorial && placement === 'store' && name === 'ranch'}
         title={
           <Typography
             onClick={() => {
               setNestedTutorial(true);
             }}
-            sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+            sx={{
+              fontFamily: 'Preahvihear',
+              fontSize: 'inherit',
+              cursor: 'pointer',
+            }}
           >
-            <Typography display={'inline'} fontWeight={'600'} fontFamily={'inherit'} fontSize={'inherit'}>Click</Typography> to see property info
+            <Typography
+              display={'inline'}
+              fontWeight={'600'}
+              fontFamily={'inherit'}
+              fontSize={'inherit'}
+            >
+              Click
+            </Typography>{' '}
+            to see property info
           </Typography>
         }
         placement={'right'}
-        PopperProps={{style:{zIndex:100}}}
       >
         <Button
           variant="contained"
@@ -137,7 +149,7 @@ function PropertyButton({
             </Grid>
           </Grid>
         </Button>
-      </Tooltip>
+      </CustomTooltip>
       <PropertyPopup
         img={image}
         handleBuy={onClick}

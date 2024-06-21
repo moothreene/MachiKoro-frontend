@@ -8,6 +8,8 @@ function CustomTooltip({
   placement,
   children,
   zIndex,
+  interactive,
+  arrow,
 }: {
   open: boolean;
   maxWidth: string;
@@ -27,6 +29,8 @@ function CustomTooltip({
     | 'top';
   children: ReactElement;
   zIndex?: number;
+  interactive?: boolean;
+  arrow?: boolean;
 }) {
   const CustomWidthTooltip = styled(({ className, ...props }: TooltipProps) => (
     <Tooltip
@@ -35,11 +39,11 @@ function CustomTooltip({
       classes={{ popper: className }}
       placement={placement}
       open={open}
-      arrow
+      arrow = {arrow !== undefined ? arrow : true}
       disableFocusListener
       disableHoverListener
       disableTouchListener
-      disableInteractive
+      disableInteractive={!interactive}
       PopperProps={{style:{zIndex:zIndex || 100}}}
     />
   ))({
