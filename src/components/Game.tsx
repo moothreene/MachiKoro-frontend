@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Cards, GameData, Player } from './Types/GameTypes';
 import { socket } from '../socket';
 import { Container, Grid } from '@mui/material';
@@ -9,6 +9,8 @@ import Store from './Store';
 import SideButtons from './SideButtons';
 import Dice from './Dice';
 import Tutorial from './Tutorial';
+
+export const TutorialContext = createContext(false as boolean);
 
 function Game({
   windowSize,
@@ -26,10 +28,22 @@ function Game({
   const [stage, setStage] = useState(0);
   const [rerolled, setRerolled] = useState(false);
   const [rolling, setRolling] = useState(false);
+  const [tutorial, setTutorial] = useState(false);
 
   useEffect(() => {
     setStage(0);
   }, [gameState.currentMove]);
+
+  const handleTutorialClose = () => {
+    setTutorial(false);
+  };
+
+  const handleTutorialOpen = () => {
+    setTutorial(true);
+  };
+
+
+
 
   function roll(dice_count: number) {
     if (2 - (gameState.currentMove % 2) !== player)
@@ -90,8 +104,8 @@ function Game({
   }
 
   return (
-    <>
-      <Tutorial fontSize={fontSize} windowSize={windowSize} />
+    <TutorialContext.Provider value={tutorial}>
+      <Tutorial setOpen={handleTutorialOpen} setClose={handleTutorialClose}/>
       <Container
         maxWidth={false}
         sx={{
@@ -175,6 +189,7 @@ function Game({
                   playerProperties={gameState.players[player].properties}
                   rerolled={rerolled}
                   windowSize={windowSize}
+                  fontSize={fontSize}
                   handleRoll={roll}
                   handleConfirmRoll={confirmRoll}
                   handleReroll={reroll}
@@ -195,7 +210,7 @@ function Game({
           </Grid>
         </Grid>
       </Container>
-    </>
+    </TutorialContext.Provider>
   );
 }
 
