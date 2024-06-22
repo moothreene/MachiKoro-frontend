@@ -9,7 +9,6 @@ function Money({
   amount: number;
   zIndex: string | number;
 }) {
-  const [sizeAdjusted, setSizeAdjusted] = useState(Math.floor(size * 1.3));
   const COLOR_OUTER_SMALL = 'chocolate';
   const COLOR_MIDDLE_SMALL = 'darksalmon';
   const COLOR_OUTER_MEDIUM = 'silver';
@@ -27,8 +26,8 @@ function Money({
         margin: 0,
         padding: 0,
         display: 'flex',
-        width: sizeAdjusted * 3.25,
-        height: sizeAdjusted * 3.25,
+        width: size * 3.25,
+        height: size * 3.25,
         borderRadius: '50%',
         backgroundColor:
           amount >= 100
@@ -48,8 +47,8 @@ function Money({
           margin: 0,
           padding: 0,
           display: 'flex',
-          width: sizeAdjusted * 2.75,
-          height: sizeAdjusted * 2.75,
+          width: size * 2.75,
+          height: size * 2.75,
           borderRadius: '50%',
           backgroundColor:
             amount >= 100
@@ -69,8 +68,8 @@ function Money({
             margin: 0,
             padding: 0,
             display: 'flex',
-            width: sizeAdjusted * 2.35,
-            height: sizeAdjusted * 2.35,
+            width: size * 2.35,
+            height: size * 2.35,
             borderRadius: '50%',
             backgroundColor:
               amount >= 100
@@ -86,7 +85,7 @@ function Money({
         >
           <p
             style={{
-              fontSize: sizeAdjusted,
+              fontSize: size * 1.3,
               color: 'white',
               fontFamily: 'Preahvihear',
             }}

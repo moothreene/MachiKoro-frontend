@@ -87,6 +87,7 @@ function PlayerState({
                     color="white"
                     fontFamily={'Preahvihear'}
                     sx={{ marginLeft: 1, marginRight: 1 }}
+                    fontSize={fontSize * 1.3}
                   >
                     +
                   </Typography>
