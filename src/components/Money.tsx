@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 
-function Money({ size, amount, zIndex }: { size: number; amount: number, zIndex: string | number}) {
+function Money({
+  size,
+  amount,
+  zIndex,
+}: {
+  size: number;
+  amount: number;
+  zIndex: string | number;
+}) {
   const [sizeAdjusted, setSizeAdjusted] = useState(Math.floor(size * 1.3));
   const COLOR_OUTER_SMALL = 'chocolate';
   const COLOR_MIDDLE_SMALL = 'darksalmon';
@@ -11,19 +19,16 @@ function Money({ size, amount, zIndex }: { size: number; amount: number, zIndex:
   const COLOR_OUTER_XLARGE = 'darkorchid';
   const COLOR_MIDDLE_XLARGE = 'plum';
 
-  useEffect(() => {
-    setSizeAdjusted(size * 1.3);
-  }, [size]);
   return (
     <div
       className="circle outer"
       style={{
-        zIndex:zIndex,
+        zIndex: zIndex,
         margin: 0,
         padding: 0,
         display: 'flex',
-        width: sizeAdjusted * 2.5,
-        height: sizeAdjusted * 2.5,
+        width: sizeAdjusted * 3.25,
+        height: sizeAdjusted * 3.25,
         borderRadius: '50%',
         backgroundColor:
           amount >= 100
@@ -43,8 +48,8 @@ function Money({ size, amount, zIndex }: { size: number; amount: number, zIndex:
           margin: 0,
           padding: 0,
           display: 'flex',
-          width: sizeAdjusted * 2.1,
-          height: sizeAdjusted * 2.1,
+          width: sizeAdjusted * 2.75,
+          height: sizeAdjusted * 2.75,
           borderRadius: '50%',
           backgroundColor:
             amount >= 100
@@ -64,8 +69,8 @@ function Money({ size, amount, zIndex }: { size: number; amount: number, zIndex:
             margin: 0,
             padding: 0,
             display: 'flex',
-            width: sizeAdjusted * 1.8,
-            height: sizeAdjusted * 1.8,
+            width: sizeAdjusted * 2.35,
+            height: sizeAdjusted * 2.35,
             borderRadius: '50%',
             backgroundColor:
               amount >= 100
