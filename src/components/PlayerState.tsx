@@ -39,11 +39,11 @@ function PlayerState({
 
   return (
     <CustomTooltip
-      title={<Typography
-        sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
-      >
-        {position === 'top' ? "Enemy's side" : 'Your side'}
-      </Typography>}
+      title={
+        <Typography sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}>
+          {position === 'top' ? "Enemy's side" : 'Your side'}
+        </Typography>
+      }
       open={tutorialStage === 3}
       placement={position === 'top' ? 'bottom' : 'top'}
       maxWidth="none"

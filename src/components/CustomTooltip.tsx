@@ -39,12 +39,12 @@ function CustomTooltip({
       classes={{ popper: className }}
       placement={placement}
       open={open}
-      arrow = {arrow !== undefined ? arrow : true}
+      arrow={arrow !== undefined ? arrow : true}
       disableFocusListener
       disableHoverListener
       disableTouchListener
       disableInteractive={!interactive}
-      PopperProps={{style:{zIndex:zIndex || 100}}}
+      PopperProps={{ style: { zIndex: zIndex || 100 } }}
     />
   ))({
     [`& .${tooltipClasses.tooltip}`]: {

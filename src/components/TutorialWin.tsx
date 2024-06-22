@@ -1,4 +1,4 @@
-import { Box, List, ListItem, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 function TutorialWin() {
   return (
@@ -48,9 +48,7 @@ function TutorialWin() {
         </Typography>{' '}
         Properties to Win!
       </Typography>
-      <Typography fontFamily={'Preahvihear'}>
-        Good Luck!
-      </Typography>
+      <Typography fontFamily={'Preahvihear'}>Good Luck!</Typography>
     </Box>
   );
 }

@@ -39,7 +39,7 @@ function Game({
     return () => {
       socket.off('roll', onRoll);
     };
-  },[]);
+  }, []);
 
   const handleTutorialClose = () => {
     setTutorial(0);
@@ -55,7 +55,7 @@ function Game({
     } else {
       setTutorial(0);
     }
-  }
+  };
 
   const handleTutorialPrev = () => {
     if (tutorial > 0) {
@@ -63,13 +63,12 @@ function Game({
     } else {
       setTutorial(0);
     }
-  }
+  };
 
-  function onRoll(){
+  function onRoll() {
     setRolling(true);
     setTimeout(() => setRolling(false), 1000);
   }
-
 
   function roll(dice_count: number) {
     if (2 - (gameState.currentMove % 2) !== player)
@@ -131,7 +130,12 @@ function Game({
 
   return (
     <TutorialContext.Provider value={tutorial}>
-      <Tutorial setOpen={handleTutorialOpen} setClose={handleTutorialClose} setNext={handleTutorialNext} setPrev={handleTutorialPrev} fontSize={fontSize}/>
+      <Tutorial
+        setOpen={handleTutorialOpen}
+        setClose={handleTutorialClose}
+        setNext={handleTutorialNext}
+        setPrev={handleTutorialPrev}
+      />
       <Container
         maxWidth={false}
         sx={{
@@ -150,10 +154,7 @@ function Game({
           minHeight={'95vh'}
           sx={{ justifyContent: 'space-between' }}
         >
-          <Grid
-            item
-            xs={3}
-          >
+          <Grid item xs={3}>
             <PlayerState
               position={'top'}
               key={'player_enemy'}
@@ -179,7 +180,7 @@ function Game({
                   alignItems: 'center',
                 }}
               >
-                <Dice dice={lastRoll} rolling={rolling} fontSize={fontSize} />
+                <Dice dice={lastRoll} rolling={rolling} />
               </Grid>
               <Grid
                 item
@@ -215,7 +216,6 @@ function Game({
                   playerProperties={gameState.players[player].properties}
                   rerolled={rerolled}
                   windowSize={windowSize}
-                  fontSize={fontSize}
                   handleRoll={roll}
                   handleConfirmRoll={confirmRoll}
                   handleReroll={reroll}

@@ -1,21 +1,18 @@
-import { Backdrop, Box, Button, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import { Backdrop, Button, Typography } from '@mui/material';
+import { useContext } from 'react';
 import { TutorialContext } from './Game';
 import TutorialColors from './TutorialColors';
-import CustomTooltip from './CustomTooltip';
 import TutorialProperty from './TutorialProperty';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import TutorialWin from './TutorialWin';
 
 function Tutorial({
-  fontSize,
   setOpen,
   setClose,
   setNext,
   setPrev,
 }: {
-  fontSize: number;
   setOpen: () => void;
   setClose: () => void;
   setNext: () => void;
@@ -50,10 +47,13 @@ function Tutorial({
         <Button
           sx={{
             position: 'absolute',
-            left: 0,
+            left: '5px',
             top: '40%',
             color: 'white',
             zIndex: 200,
+            width: '30px',
+            minWidth: '30px',
+            height: '70px',
           }}
           onClick={(e) => {
             e.stopPropagation();
@@ -65,10 +65,13 @@ function Tutorial({
         <Button
           sx={{
             position: 'absolute',
-            right: 0,
+            right: '5px',
             top: '40%',
             color: 'white',
             zIndex: 200,
+            width: '30px',
+            minWidth: '30px',
+            height: '70px',
           }}
           onClick={(e) => {
             e.stopPropagation();

@@ -15,7 +15,6 @@ function SideButtons({
   playerProperties,
   rerolled,
   windowSize,
-  fontSize,
   handleRoll,
   handleConfirmRoll,
   handleReroll,
@@ -27,7 +26,6 @@ function SideButtons({
   playerProperties: Cards;
   rerolled: boolean;
   windowSize: number;
-  fontSize: number;
   handleRoll: (num: number) => void;
   handleConfirmRoll: () => void;
   handleReroll: () => void;
@@ -80,7 +78,12 @@ function SideButtons({
                   color: 'rgb(130,130,190)',
                 },
                 color: 'red',
-                zIndex: tutorialStage === 4 ? 100 : tutorialStage === 3? 100 : 'auto',
+                zIndex:
+                  tutorialStage === 4
+                    ? 100
+                    : tutorialStage === 3
+                    ? 100
+                    : 'auto',
               }}
               onClick={
                 tutorialStage > 0
@@ -126,7 +129,12 @@ function SideButtons({
                   color: 'rgb(130,130,190)',
                 },
                 color: 'red',
-                zIndex: tutorialStage === 4 ? 100 : tutorialStage === 3? 100 : 'auto',
+                zIndex:
+                  tutorialStage === 4
+                    ? 100
+                    : tutorialStage === 3
+                    ? 100
+                    : 'auto',
               }}
               onClick={
                 tutorialStage > 0
@@ -167,7 +175,12 @@ function SideButtons({
               disabled={!(tutorialStage > 0) && stage !== 1}
               sx={{
                 color: 'white',
-                zIndex: tutorialStage === 4 ? 100 : tutorialStage === 3? 100 : 'auto',
+                zIndex:
+                  tutorialStage === 4
+                    ? 100
+                    : tutorialStage === 3
+                    ? 100
+                    : 'auto',
               }}
             >
               <GiConfirmed size={25} />
@@ -206,7 +219,12 @@ function SideButtons({
               }
               sx={{
                 color: 'white',
-                zIndex: tutorialStage === 4 ? 100 : tutorialStage === 3? 100 : 'auto',
+                zIndex:
+                  tutorialStage === 4
+                    ? 100
+                    : tutorialStage === 3
+                    ? 100
+                    : 'auto',
               }}
             >
               <ImRedo size={25} />
@@ -242,7 +260,12 @@ function SideButtons({
               onClick={tutorialStage > 0 ? () => {} : handleNextTurn}
               sx={{
                 color: 'white',
-                zIndex: tutorialStage === 4 ? 100 : tutorialStage === 3? 100 : 'auto',
+                zIndex:
+                  tutorialStage === 4
+                    ? 100
+                    : tutorialStage === 3
+                    ? 100
+                    : 'auto',
               }}
             >
               <MdNavigateNext size={30} />
