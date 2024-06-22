@@ -2,25 +2,8 @@ import { Button, Dialog, DialogContent, Grid, Typography } from '@mui/material';
 import { FaCoins } from 'react-icons/fa6';
 import CustomTooltip from './CustomTooltip';
 
-function TutorialProperty({
-  open,
-  setClose,
-}: {
-  open: boolean;
-  setClose: () => void;
-}) {
+function TutorialProperty({}: {}) {
   return (
-    <Dialog
-      onClick={setClose}
-      open={open}
-      sx={{ zIndex: 200, backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
-    >
-      <DialogContent
-        sx={{
-          overflow: 'clip',
-          padding: 0,
-        }}
-      >
         <Button
           variant="contained"
           onClick={() => {}}
@@ -40,7 +23,7 @@ function TutorialProperty({
           }}
         >
           <CustomTooltip
-            open={open}
+            open
             title={
               <Typography
                 variant="body2"
@@ -52,7 +35,7 @@ function TutorialProperty({
               </Typography>
             }
             maxWidth="none"
-            zIndex={200}
+            zIndex={100}
             placement="top"
           >
             <Typography
@@ -71,7 +54,7 @@ function TutorialProperty({
             sx={{ width: '100%' }}
           >
             <CustomTooltip
-              open={open}
+              open
               title={
                 <Typography
                   variant="body2"
@@ -83,7 +66,7 @@ function TutorialProperty({
                 </Typography>
               }
               maxWidth="80px"
-              zIndex={200}
+              zIndex={100}
               placement="left"
             >
               <Grid item xs={4}>
@@ -98,7 +81,7 @@ function TutorialProperty({
               </Grid>
             </CustomTooltip>
             <CustomTooltip
-              open={open}
+              open
               title={
                 <Typography
                   variant="body2"
@@ -110,7 +93,7 @@ function TutorialProperty({
                 </Typography>
               }
               maxWidth="none"
-              zIndex={200}
+              zIndex={100}
               placement="bottom"
             >
               <Grid item xs={4}>
@@ -124,7 +107,7 @@ function TutorialProperty({
               </Grid>
             </CustomTooltip>
             <CustomTooltip
-              open={open}
+              open
               title={
                 <Typography
                   variant="body2"
@@ -136,7 +119,7 @@ function TutorialProperty({
                 </Typography>
               }
               maxWidth="80px"
-              zIndex={200}
+              zIndex={100}
               placement="right"
             >
             <Grid item xs={4}>
@@ -152,8 +135,6 @@ function TutorialProperty({
             </CustomTooltip>
           </Grid>
         </Button>
-      </DialogContent>
-    </Dialog>
   );
 }
 

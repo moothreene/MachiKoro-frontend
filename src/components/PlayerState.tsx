@@ -21,7 +21,7 @@ function PlayerState({
   money: number;
   money_to_earn: number;
 }) {
-  const tutorial = useContext(TutorialContext);
+  const tutorialStage = useContext(TutorialContext);
 
   function compareDices(a: [keyof Cards, number], b: [keyof Cards, number]) {
     if (Properties[a[0]].dice[0] - Properties[b[0]].dice[0] === 0) {
@@ -38,62 +38,86 @@ function PlayerState({
   const propertiesSorted = propertiesEntries.sort(compareDices);
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        height: '100%',
-        margin: 0,
-        padding: 0,
-      }}
+    <CustomTooltip
+      title={<Typography
+        sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+      >
+        {position === 'top' ? "Enemy's side" : 'Your side'}
+      </Typography>}
+      open={tutorialStage === 3}
+      placement={position === 'top' ? 'bottom' : 'top'}
+      maxWidth="none"
     >
-      <legend>
-        <CustomTooltip
-          open={tutorial}
-          maxWidth="100px"
-          title={
-            <Typography
-              sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+      <Box
+        sx={{
+          width: '100%',
+          height: '100%',
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        <legend>
+          <CustomTooltip
+            open={tutorialStage === 3}
+            maxWidth="100px"
+            title={
+              <Typography
+                sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
+              >
+                {position === 'bottom' ? 'Your' : 'Enemy'} money
+              </Typography>
+            }
+            placement={'right'}
+          >
+            <Stack
+              alignItems="center"
+              alignContent={'center'}
+              direction={'row'}
+              width={'fit-content'}
             >
-              {position === 'bottom' ? 'Your' : 'Enemy'} money
-            </Typography>
-          }
-          placement={'right'}
-        >
-          <Stack alignItems="center" alignContent={'center'} direction={'row'} width={'fit-content'}>
-            <Money size={fontSize} amount={money} />
-            {money_to_earn !== 0 && (
-              <>
-                <Typography
-                  variant="body1"
-                  color="white"
-                  fontFamily={'Preahvihear'}
-                  sx={{ marginLeft: 1, marginRight: 1 }}
-                >
-                  +
-                </Typography>
-                <Money size={fontSize} amount={money_to_earn} />
-              </>
-            )}
-          </Stack>
-        </CustomTooltip>
-      </legend>
-      <Grid container columns={16} spacing={1} sx={{ margin: 'auto' }}>
-        {propertiesSorted.map(([key, value]) => {
-          if (value === 0) return <></>;
-          return (
-            <PropertyButton
-              placement={`player_${position}`}
-              key={`player_prop${key}`}
-              amount={value}
-              name={key}
-              isDisabled={false}
-              image={images[key]}
-              onClick={() => {}}
-            />
-          );
-        })}
-      </Grid>
-    </Box>
+              <Money
+                size={fontSize}
+                amount={money}
+                zIndex={tutorialStage === 3 ? 100 : 'auto'}
+              />
+              {money_to_earn !== 0 && (
+                <>
+                  <Typography
+                    variant="body1"
+                    color="white"
+                    fontFamily={'Preahvihear'}
+                    sx={{ marginLeft: 1, marginRight: 1 }}
+                  >
+                    +
+                  </Typography>
+                  <Money
+                    size={fontSize}
+                    amount={money_to_earn}
+                    zIndex={'auto'}
+                  />
+                </>
+              )}
+            </Stack>
+          </CustomTooltip>
+        </legend>
+        <Grid container columns={16} spacing={1} sx={{ margin: 'auto' }}>
+          {propertiesSorted.map(([key, value]) => {
+            if (value === 0) return <></>;
+            return (
+              <PropertyButton
+                placement={`player_${position}`}
+                key={`player_prop${key}`}
+                amount={value}
+                name={key}
+                isDisabled={false}
+                image={images[key]}
+                onClick={() => {}}
+              />
+            );
+          })}
+        </Grid>
+      </Box>
+    </CustomTooltip>
   );
 }
 

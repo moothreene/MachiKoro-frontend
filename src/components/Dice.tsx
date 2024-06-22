@@ -22,11 +22,11 @@ function Dice({
   fontSize: number;
 }) {
 
-  const tutorial = useContext(TutorialContext);
+  const tutorialStage = useContext(TutorialContext);
 
   return (
     <CustomTooltip
-          open={tutorial}
+          open={tutorialStage === 4}
           maxWidth="none"
           title={
             <Typography

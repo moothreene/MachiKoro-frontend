@@ -3,10 +3,6 @@ import { Properties, PropertiesLocalized } from '../data/Properties';
 import { Button, Grid, Tooltip, Typography } from '@mui/material';
 import { FaCoins } from 'react-icons/fa6';
 import PropertyPopup from './PropertyPopup';
-import { TutorialContext } from './Game';
-import { useContext } from 'react';
-import TutorialProperty from './TutorialProperty';
-import CustomTooltip from './CustomTooltip';
 
 function PropertyButton({
   placement,
@@ -28,8 +24,6 @@ function PropertyButton({
   const color = Properties[name].color || 'black';
   const cost = Properties[name].cost || 0;
   const nameUpdated = PropertiesLocalized[name] || name;
-  const tutorial = useContext(TutorialContext);
-  const [nestedTutorial, setNestedTutorial] = useState(false);
 
   useEffect(() => {
     window.addEventListener('click', handleClose);
@@ -51,41 +45,6 @@ function PropertyButton({
       position={'relative'}
       overflow={'visible'}
     >
-      {tutorial && placement === 'store' && name === 'ranch' && (
-        <TutorialProperty
-          open={nestedTutorial}
-          setClose={() => setNestedTutorial(false)}
-        />
-      )}
-      <CustomTooltip
-        zIndex={100}
-        maxWidth='none'
-        interactive
-        open={tutorial && placement === 'store' && name === 'ranch'}
-        title={
-          <Typography
-            onClick={() => {
-              setNestedTutorial(true);
-            }}
-            sx={{
-              fontFamily: 'Preahvihear',
-              fontSize: 'inherit',
-              cursor: 'pointer',
-            }}
-          >
-            <Typography
-              display={'inline'}
-              fontWeight={'600'}
-              fontFamily={'inherit'}
-              fontSize={'inherit'}
-            >
-              Click
-            </Typography>{' '}
-            to see property info
-          </Typography>
-        }
-        placement={'right'}
-      >
         <Button
           variant="contained"
           onClick={() => {
@@ -149,7 +108,6 @@ function PropertyButton({
             </Grid>
           </Grid>
         </Button>
-      </CustomTooltip>
       <PropertyPopup
         img={image}
         handleBuy={onClick}

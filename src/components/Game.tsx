@@ -9,9 +9,8 @@ import Store from './Store';
 import SideButtons from './SideButtons';
 import Dice from './Dice';
 import Tutorial from './Tutorial';
-import { on } from 'events';
 
-export const TutorialContext = createContext(false as boolean);
+export const TutorialContext = createContext(0);
 
 function Game({
   windowSize,
@@ -29,7 +28,7 @@ function Game({
   const [stage, setStage] = useState(0);
   const [rerolled, setRerolled] = useState(false);
   const [rolling, setRolling] = useState(false);
-  const [tutorial, setTutorial] = useState(false);
+  const [tutorial, setTutorial] = useState(0);
 
   useEffect(() => {
     setStage(0);
@@ -43,12 +42,28 @@ function Game({
   },[]);
 
   const handleTutorialClose = () => {
-    setTutorial(false);
+    setTutorial(0);
   };
 
   const handleTutorialOpen = () => {
-    setTutorial(true);
+    setTutorial(1);
   };
+
+  const handleTutorialNext = () => {
+    if (tutorial < 7) {
+      setTutorial(tutorial + 1);
+    } else {
+      setTutorial(0);
+    }
+  }
+
+  const handleTutorialPrev = () => {
+    if (tutorial > 0) {
+      setTutorial(tutorial - 1);
+    } else {
+      setTutorial(0);
+    }
+  }
 
   function onRoll(){
     setRolling(true);
@@ -116,7 +131,7 @@ function Game({
 
   return (
     <TutorialContext.Provider value={tutorial}>
-      <Tutorial setOpen={handleTutorialOpen} setClose={handleTutorialClose} fontSize={fontSize}/>
+      <Tutorial setOpen={handleTutorialOpen} setClose={handleTutorialClose} setNext={handleTutorialNext} setPrev={handleTutorialPrev} fontSize={fontSize}/>
       <Container
         maxWidth={false}
         sx={{

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function Money({ size, amount }: { size: number; amount: number }) {
+function Money({ size, amount, zIndex }: { size: number; amount: number, zIndex: string | number}) {
   const [sizeAdjusted, setSizeAdjusted] = useState(Math.floor(size * 1.3));
   const COLOR_OUTER_SMALL = 'chocolate';
   const COLOR_MIDDLE_SMALL = 'darksalmon';
@@ -18,7 +18,7 @@ function Money({ size, amount }: { size: number; amount: number }) {
     <div
       className="circle outer"
       style={{
-        zIndex:100,
+        zIndex:zIndex,
         margin: 0,
         padding: 0,
         display: 'flex',
