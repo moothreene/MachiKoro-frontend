@@ -146,22 +146,18 @@ function Game({
           margin: 0,
           padding: 1,
           fontSize: `${fontSize}px`,
-          minHeight: '95vh',
-          maxHeight: '95vh',
-          height: '100%',
-          width: '100%',
         }}
       >
         <Box
           className="background-gradient enemy"
           sx={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
+            position: 'fixed',
+            width: '100vw',
+            height: '50vh',
             top: 0,
             left: 0,
             background:
-              'linear-gradient(0deg, rgba(0,0,0,0) 80%, rgba(253,187,45,1) 100%)',
+              'linear-gradient(0deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
             opacity: 2 - (gameState.currentMove % 2) !== player ? 1 : 0,
             transition: 'opacity .5s linear',
             zIndex: -1,
@@ -170,13 +166,13 @@ function Game({
         <Box
           className="background-gradient player"
           sx={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            top: 0,
+            position: 'fixed',
+            width: '100vw',
+            height: '50vh',
+            bottom: 0,
             left: 0,
             background:
-              'linear-gradient(180deg, rgba(0,0,0,0) 80%, rgba(253,187,45,1) 100%)',
+              'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
             opacity: 2 - (gameState.currentMove % 2) !== player ? 0 : 1,
             transition: 'opacity .5s linear',
             zIndex: -1,
@@ -188,7 +184,7 @@ function Game({
           m={0}
           p={0}
           height={'100%'}
-          minHeight={'100%'}
+          minHeight={'90vh'}
           sx={{ justifyContent: 'space-between' }}
         >
           <Grid item xs={3}>
