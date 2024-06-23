@@ -54,3 +54,8 @@ export type Roll = {
   player: Player;
   dice: number[];
 };
+
+export type PlayerProp = [
+  keyof Cards,
+  number
+]
