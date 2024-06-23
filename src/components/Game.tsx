@@ -142,7 +142,8 @@ function Game({
           margin: 0,
           padding: 1,
           fontSize: `${fontSize}px`,
-          minHeight: '100vh',
+          minHeight: '95vh',
+          maxHeight: '95vh',
           height: '100%',
           width: '100%',
         }}
