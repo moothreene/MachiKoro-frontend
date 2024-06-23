@@ -142,7 +142,9 @@ function Game({
           margin: 0,
           padding: 1,
           fontSize: `${fontSize}px`,
-          minHeight: '95vh',
+          minHeight: '100vh',
+          width: '100%',
+          background: (2 - (gameState.currentMove % 2) !== player)?'linear-gradient(0deg, rgba(0,0,0,0) 70%, rgba(253,187,45,1) 100%)':'linear-gradient(180deg, rgba(0,0,0,0) 70%, rgba(253,187,45,1) 100%)'
         }}
       >
         <Grid
