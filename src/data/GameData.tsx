@@ -44,7 +44,7 @@ export const gameDataInitial: GameData = {
         train_station: 1,
         shopping_mall: 1,
         amusement_park: 1,
-        radio_tower: 1,
+        radio_tower: 0,
       },
       money: 4,
       money_to_earn: 0,
