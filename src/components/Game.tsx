@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { Cards, GameData, Player } from './Types/GameTypes';
 import { socket } from '../socket';
-import { Container, Grid } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 
 import { Properties } from '../data/Properties';
 import PlayerState from './PlayerState';
@@ -144,9 +144,38 @@ function Game({
           fontSize: `${fontSize}px`,
           minHeight: '100vh',
           width: '100%',
-          background: (2 - (gameState.currentMove % 2) !== player)?'linear-gradient(0deg, rgba(0,0,0,0) 70%, rgba(253,187,45,1) 100%)':'linear-gradient(180deg, rgba(0,0,0,0) 70%, rgba(253,187,45,1) 100%)'
         }}
       >
+        <Box
+          className="background-gradient enemy"
+          sx={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            top: 0,
+            left: 0,
+            background:
+              'linear-gradient(0deg, rgba(0,0,0,0) 80%, rgba(253,187,45,1) 100%)',
+            opacity: 2 - (gameState.currentMove % 2) !== player ? 1 : 0,
+            transition: 'opacity .5s linear',
+            zIndex: -1,
+          }}
+        />
+        <Box
+          className="background-gradient player"
+          sx={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            top: 0,
+            left: 0,
+            background:
+              'linear-gradient(180deg, rgba(0,0,0,0) 80%, rgba(253,187,45,1) 100%)',
+            opacity: 2 - (gameState.currentMove % 2) !== player ? 0 : 1,
+            transition: 'opacity .5s linear',
+            zIndex: -1,
+          }}
+        />
         <Grid
           container
           direction={'column'}
@@ -170,6 +199,7 @@ function Game({
             <Grid
               container
               columns={21}
+              spacing={windowSize > 900 ? 0 : 2}
               sx={{ justifyContent: 'space-between', height: '100%' }}
             >
               <Grid
