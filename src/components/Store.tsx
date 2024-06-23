@@ -24,6 +24,7 @@ function Store({
       container
       spacing={0.5}
       columns={12}
+      borderRadius={5}
       sx={{ width: '100%', padding: 1 }}
     >
       <CustomTooltip
