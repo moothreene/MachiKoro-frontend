@@ -169,7 +169,7 @@ function Game({
             position: 'absolute',
             width: '100vw',
             height: '100vh',
-            bottom: 0,
+            top: 0,
             left: 0,
             background:
               'linear-gradient(180deg, rgba(0,0,0,0) 80%, rgba(253,187,45,1) 100%)',
