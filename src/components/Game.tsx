@@ -152,8 +152,8 @@ function Game({
           className="background-gradient enemy"
           sx={{
             position: 'absolute',
-            width: '100vw',
-            height: '100vh',
+            width: '100%',
+            height: '100%',
             top: 0,
             left: 0,
             background:
@@ -167,8 +167,8 @@ function Game({
           className="background-gradient player"
           sx={{
             position: 'absolute',
-            width: '100vw',
-            height: '100vh',
+            width: '100%',
+            height: '100%',
             top: 0,
             left: 0,
             background:
@@ -184,7 +184,7 @@ function Game({
           m={0}
           p={0}
           height={'100%'}
-          minHeight={'95vh'}
+          minHeight={'100%'}
           sx={{ justifyContent: 'space-between' }}
         >
           <Grid item xs={3}>
