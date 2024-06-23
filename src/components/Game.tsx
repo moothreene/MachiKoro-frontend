@@ -143,6 +143,8 @@ function Game({
           padding: 1,
           fontSize: `${fontSize}px`,
           minHeight: '100vh',
+          maxHeight: '100vh',
+          height: '100%',
           width: '100%',
         }}
       >
