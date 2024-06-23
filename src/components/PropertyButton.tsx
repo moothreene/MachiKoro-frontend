@@ -63,6 +63,8 @@ function PropertyButton({
           },
           justifyContent: 'space-between',
           fontSize: 'inherit',
+          opacity: isDisabled ? 0.6 : 1,
+          transition: 'opacity 0.2s linear',
         }}
       >
         <Typography
