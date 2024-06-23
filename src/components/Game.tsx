@@ -122,7 +122,7 @@ function Game({
     if (2 - (gameState.currentMove % 2) !== player)
       return alert('Not your turn!');
     if (stage < 2) return alert('You have to roll the dice first!');
-    if (lastRoll.length > 1 && lastRoll[0] === lastRoll[1]) {
+    if (lastRoll.length > 1 && lastRoll[0] === lastRoll[1] && gameState.players[player].properties['amusement_park'] > 0) {
       return socket.emit('nextTurn', 2);
     }
     socket.emit('nextTurn', 1);
@@ -143,7 +143,6 @@ function Game({
           padding: 1,
           fontSize: `${fontSize}px`,
           minHeight: '100vh',
-          maxHeight: '100vh',
           height: '100%',
           width: '100%',
         }}
