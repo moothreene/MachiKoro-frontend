@@ -111,6 +111,7 @@ function PlayerState({
                 amount={value}
                 name={key}
                 isDisabled={false}
+                opaque = {false}
                 image={images[key]}
                 onClick={() => {}}
               />

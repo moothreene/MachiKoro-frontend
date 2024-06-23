@@ -10,6 +10,7 @@ function PropertyButton({
   name,
   image,
   isDisabled,
+  opaque,
   onClick,
 }: {
   placement: string;
@@ -17,6 +18,7 @@ function PropertyButton({
   name: string;
   image: string;
   isDisabled: boolean;
+  opaque: boolean;
   onClick: () => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -63,7 +65,7 @@ function PropertyButton({
           },
           justifyContent: 'space-between',
           fontSize: 'inherit',
-          opacity: isDisabled ? 0.6 : 1,
+          opacity: isDisabled || opaque ? 0.6 : 1,
           transition: 'opacity 0.2s linear',
         }}
       >
@@ -114,7 +116,7 @@ function PropertyButton({
         img={image}
         handleBuy={onClick}
         open={open}
-        disabled={isDisabled}
+        disabled={isDisabled || opaque}
         placement={placement}
       />
     </Grid>

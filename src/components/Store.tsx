@@ -1,10 +1,11 @@
 import { Box, Grid, Typography } from '@mui/material';
-import { Cards, GameData } from './Types/GameTypes';
+import { Cards, GameData, PlayerProp } from './Types/GameTypes';
 import PropertyButton from './PropertyButton';
 import images from './Images';
 import { TutorialContext } from './Game';
 import { useContext } from 'react';
 import CustomTooltip from './CustomTooltip';
+import { Properties } from '../data/Properties';
 
 function Store({
   gameState,
@@ -18,6 +19,7 @@ function Store({
   handleBuy: (key: keyof Cards) => void;
 }) {
   const tutorialStage = useContext(TutorialContext);
+  const storeData = Object.entries(gameState.store) as PlayerProp[];
 
   return (
     <Grid
@@ -47,7 +49,7 @@ function Store({
           }}
         ></Box>
       </CustomTooltip>
-      {Object.entries(gameState.store).map(([key, value]: any[]) => {
+      {storeData.map(([key, value]) => {
         return (
           <PropertyButton
             placement="store"
@@ -57,6 +59,11 @@ function Store({
             image={images[key]}
             isDisabled={
               !(stage === 2 && 2 - (gameState.currentMove % 2) === player)
+            }
+            opaque={
+              gameState.players[player].money < Properties[key].cost ||
+              (Properties[key].color === 'orange' &&
+                gameState.players[player].properties[key] === 1)
             }
             onClick={() => handleBuy(key)}
           />
