@@ -155,12 +155,18 @@ function App() {
           players: {
             1: {
               ...prev.players[1],
-              money: prev.players[1].money + prev.players[1].money_to_earn,
+              money: Math.max(
+                prev.players[1].money + prev.players[1].money_to_earn,
+                0
+              ),
               money_to_earn: 0,
             },
             2: {
               ...prev.players[2],
-              money: prev.players[2].money + prev.players[2].money_to_earn,
+              money: Math.max(
+                prev.players[2].money + prev.players[2].money_to_earn,
+                0
+              ),
               money_to_earn: 0,
             },
           },
