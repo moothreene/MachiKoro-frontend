@@ -35,7 +35,7 @@ function App() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  
+
   useEffect(() => {
     if (windowSize > 1600) {
       setFontSize(13);
@@ -43,13 +43,12 @@ function App() {
       setFontSize(11);
     } else if (windowSize > 1000) {
       setFontSize(9);
-    } else if (windowSize > 600){
+    } else if (windowSize > 600) {
       setFontSize(7);
     } else {
       setFontSize(5);
     }
   }, [windowSize]);
-
 
   function winnerCheck() {
     for (let i = 1; i < Object.keys(gameState.players).length + 1; i++) {
@@ -300,7 +299,13 @@ function App() {
     <ThemeProvider theme={default_theme}>
       {!ready && <Menu roomId={roomId} />}
       {isConnected && ready && (
-        <Game windowSize={windowSize} fontSize={fontSize} player={player} gameState={gameState} lastRoll={lastRoll} />
+        <Game
+          windowSize={windowSize}
+          fontSize={fontSize}
+          player={player}
+          gameState={gameState}
+          lastRoll={lastRoll}
+        />
       )}
     </ThemeProvider>
   );
