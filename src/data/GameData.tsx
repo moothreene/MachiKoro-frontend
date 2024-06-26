@@ -22,10 +22,12 @@ export const gameDataInitial: GameData = {
     shopping_mall: 2,
     amusement_park: 2,
     radio_tower: 2,
+    city_hall: 0
   },
   players: {
     1: {
       properties: {
+        city_hall: 1,
         cafe: 0,
         family_restaraunt: 0,
         wheat_field: 1,
@@ -51,6 +53,7 @@ export const gameDataInitial: GameData = {
     },
     2: {
       properties: {
+        city_hall: 1,
         cafe: 0,
         family_restaraunt: 0,
         wheat_field: 1,

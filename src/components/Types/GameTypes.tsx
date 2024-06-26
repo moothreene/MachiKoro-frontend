@@ -18,6 +18,7 @@ export type Cards = {
   shopping_mall: number
   amusement_park: number
   radio_tower: number
+  city_hall: number
 }
 
 

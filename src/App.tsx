@@ -156,7 +156,7 @@ function App() {
               ...prev.players[1],
               money: Math.max(
                 prev.players[1].money + prev.players[1].money_to_earn,
-                0
+                prev.currentMove % 2 === 1 ? 1 : 0
               ),
               money_to_earn: 0,
             },
@@ -164,7 +164,7 @@ function App() {
               ...prev.players[2],
               money: Math.max(
                 prev.players[2].money + prev.players[2].money_to_earn,
-                0
+                prev.currentMove % 2 === 1 ? 0 : 1
               ),
               money_to_earn: 0,
             },

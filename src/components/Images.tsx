@@ -19,6 +19,7 @@ import amusement_park from '../images/amusement_park.jpg';
 import radio_tower from '../images/radio_tower.jpg';
 import publisher from '../images/publisher.jpg';
 import tax_office from '../images/tax_office.jpg';
+import city_hall from '../images/city_hall.jpg';
 
 let images: {
   [key: string]: string;
@@ -46,6 +47,7 @@ images = {
   radio_tower,
   publisher,
   tax_office,
+  city_hall,
 };
 
 export default images;

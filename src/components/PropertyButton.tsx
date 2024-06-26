@@ -38,6 +38,10 @@ function PropertyButton({
     setOpen(false);
   }
 
+  if(placement === 'store' && name === 'city_hall'){
+    return null;
+  }
+
   return (
     <Grid
       item

@@ -152,6 +152,14 @@ export const Properties: { [key: string]: PropertyData } = {
     type: 'LANDMARK',
     effect: 'REROLL ONCE',
   },
+  city_hall: {
+    color: 'orange',
+    cost: 0,
+    income: 0,
+    dice: [0],
+    type: 'LANDMARK',
+    effect: 'MONEY SUPPORT',
+  }
 };
 
 export const PropertiesLocalized: { [key: string]: string } = {
@@ -176,4 +184,5 @@ export const PropertiesLocalized: { [key: string]: string } = {
   radio_tower: 'Radio Tower',
   publisher: 'Publisher',
   tax_office: 'Tax Office',
+  city_hall: 'City Hall',
 };
