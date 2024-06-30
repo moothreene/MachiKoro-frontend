@@ -6,7 +6,13 @@ import { ThemeProvider } from '@emotion/react';
 import { themeOptions } from './themes/ThemeOptions';
 import { createTheme, responsiveFontSizes } from '@mui/material';
 import WinLooseScreen from './components/WinLooseScreen';
-import { Buy, Cards, Player, Roll } from './components/Types/GameTypes';
+import {
+  Buy,
+  Cards,
+  GameData,
+  Player,
+  Roll,
+} from './components/Types/GameTypes';
 import Menu from './components/Menu';
 import Game from './components/Game';
 import './App.css';
