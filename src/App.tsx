@@ -24,7 +24,6 @@ function App() {
   const [player, setPlayer] = useState<Player>(1);
   const [roomId, setRoomId] = useState('');
   const [gameState, setGameState] = useState(gameDataInitial);
-  const [lastRoll, setLastRoll] = useState<number[]>([]);
   const [ready, setReady] = useState(false);
   const [winner, setWinner] = useState<Player | null>(null);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -73,7 +72,6 @@ function App() {
     setIsConnected(false);
     setGameState(gameDataInitial);
     setWinner(null);
-    setLastRoll([]);
     setReady(false);
     setPlayer(1);
     setRoomId('');
@@ -104,7 +102,6 @@ function App() {
     }
 
     function onRoll(msg: Roll) {
-      setLastRoll(msg.dice);
       const money_to_earn = calculateRoll(msg);
       setGameState((prev) => {
         return {
@@ -118,6 +115,7 @@ function App() {
               ...prev.players[2],
               money_to_earn: money_to_earn[2],
             },
+        lastRoll: msg.dice,
           },
         };
       });
@@ -310,7 +308,6 @@ function App() {
           fontSize={fontSize}
           player={player}
           gameState={gameState}
-          lastRoll={lastRoll}
         />
       )}
     </ThemeProvider>
