@@ -2,6 +2,8 @@ import { GameData } from '../components/Types/GameTypes';
 
 export const gameDataInitial: GameData = {
   currentMove: 1,
+  lastRoll: [],
+  stage: 0,
   store: {
     wheat_field: 6,
     ranch: 6,
@@ -22,7 +24,7 @@ export const gameDataInitial: GameData = {
     shopping_mall: 2,
     amusement_park: 2,
     radio_tower: 2,
-    city_hall: 0
+    city_hall: 0,
   },
   players: {
     1: {
