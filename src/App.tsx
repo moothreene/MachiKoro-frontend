@@ -156,7 +156,7 @@ function App() {
 
     function nextTurn(amount: number) {
       setGameState((prev) => {
-        return { ...prev, currentMove: prev.currentMove + amount };
+        return { ...prev, currentMove: prev.currentMove + amount, stage: 0};
       });
     }
 
