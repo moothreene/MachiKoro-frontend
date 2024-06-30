@@ -25,7 +25,9 @@ export type Cards = {
 
 export type GameData = {
   currentMove: number
+  lastRoll: number[]
   store: Cards
+  stage: number
   players:{
     [key: number]: {
       properties: Cards
