@@ -9,6 +9,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import { gameDataInitial } from '../data/GameData';
 
 function Menu({ roomId }: { roomId: string }) {
   const [id, setId] = useState<string>('');
@@ -51,7 +52,7 @@ function Menu({ roomId }: { roomId: string }) {
     disconnect();
     setHostInProcess(true);
     connect();
-    socket.emit('host');
+    socket.emit('host', gameDataInitial);
   }
 
   function join() {
