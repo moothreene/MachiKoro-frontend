@@ -18,12 +18,14 @@ function Game({
   player,
   gameState,
   lastRoll,
+  gameStateSetter,
 }: {
   windowSize: number;
   fontSize: number;
   player: Player;
   gameState: GameData;
   lastRoll: number[];
+  gameStateSetter: (gameState: GameData) => void;
 }) {
   const [stage, setStage] = useState(0);
   const [rerolled, setRerolled] = useState(false);
@@ -73,7 +75,7 @@ function Game({
   function roll(dice_count: number) {
     if (2 - (gameState.currentMove % 2) !== player)
       return alert('Not your turn!');
-    if (stage > 0) return alert('You have already rolled this turn!');
+    if (gameState.stage > 0) return alert('You have already rolled this turn!');
     let roll = [];
     for (let i = 0; i < dice_count; i++) {
       roll.push(Math.floor(Math.random() * 6 + 1));
@@ -84,27 +86,27 @@ function Game({
       player: player,
       dice: roll,
     });
-    setStage(1);
+    gameStateSetter({ ...gameState, stage: 1 });
   }
 
   function confirmRoll() {
-    socket.emit('confirmRoll');
-    setStage(2);
+    gameStateSetter({ ...gameState, stage: 2 });
     setRerolled(false);
+    socket.emit('confirmRoll');
   }
 
   function reroll() {
     if (2 - (gameState.currentMove % 2) !== player)
       return alert('Not your turn!');
-    if (stage === 0) return alert('You have to roll the dice first!');
-    setStage(0);
+    if (gameState.stage === 0) return alert('You have to roll the dice first!');
+    gameStateSetter({ ...gameState, stage: 0 });
     setRerolled(true);
   }
 
   function buy(property: keyof Cards) {
     if (2 - (gameState.currentMove % 2) !== player)
       return alert('Not your turn!');
-    if (stage === 0) return alert('You have to roll the dice first!');
+    if (gameState.stage === 0) return alert('You have to roll the dice first!');
     if (gameState.store[property] === 0)
       return alert('Property not available!');
     if (gameState.players[player].money < Properties[property].cost)
@@ -114,14 +116,14 @@ function Game({
       ['orange', 'purple'].includes(Properties[property].color)
     )
       return alert('Cannot buy more than one of this property!');
+    gameStateSetter({...gameState, stage: 3})
     socket.emit('buy', { player: player, property: property });
-    setStage(3);
   }
 
   function nextTurn() {
     if (2 - (gameState.currentMove % 2) !== player)
       return alert('Not your turn!');
-    if (stage < 2) return alert('You have to roll the dice first!');
+    if (gameState.stage < 2) return alert('You have to roll the dice first!');
     if (
       lastRoll.length > 1 &&
       lastRoll[0] === lastRoll[1] &&
@@ -229,7 +231,7 @@ function Game({
                 <Store
                   gameState={gameState}
                   player={player}
-                  stage={stage}
+                  stage={gameState.stage}
                   handleBuy={buy}
                 />
               </Grid>
@@ -244,7 +246,7 @@ function Game({
                 }}
               >
                 <SideButtons
-                  stage={stage}
+                  stage={gameState.stage}
                   currentMove={gameState.currentMove}
                   player={player}
                   playerProperties={gameState.players[player].properties}
