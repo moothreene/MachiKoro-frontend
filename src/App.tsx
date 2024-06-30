@@ -317,6 +317,7 @@ function App() {
           fontSize={fontSize}
           player={player}
           gameState={gameState}
+          gameStateSetter = {setGameState}
         />
       )}
     </ThemeProvider>
