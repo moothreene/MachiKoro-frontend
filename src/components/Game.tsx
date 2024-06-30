@@ -17,14 +17,12 @@ function Game({
   fontSize,
   player,
   gameState,
-  lastRoll,
   gameStateSetter,
 }: {
   windowSize: number;
   fontSize: number;
   player: Player;
   gameState: GameData;
-  lastRoll: number[];
   gameStateSetter: (gameState: GameData) => void;
 }) {
   const [stage, setStage] = useState(0);
@@ -125,8 +123,8 @@ function Game({
       return alert('Not your turn!');
     if (gameState.stage < 2) return alert('You have to roll the dice first!');
     if (
-      lastRoll.length > 1 &&
-      lastRoll[0] === lastRoll[1] &&
+      gameState.lastRoll.length > 1 &&
+      gameState.lastRoll[0] === gameState.lastRoll[1] &&
       gameState.players[player].properties['amusement_park'] > 0
     ) {
       return socket.emit('nextTurn', 2);
@@ -216,7 +214,7 @@ function Game({
                   alignItems: 'center',
                 }}
               >
-                <Dice dice={lastRoll} rolling={rolling} />
+                <Dice dice={gameState.lastRoll} rolling={rolling} />
               </Grid>
               <Grid
                 item
