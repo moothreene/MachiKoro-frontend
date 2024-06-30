@@ -91,9 +91,19 @@ function App() {
       setPlayer(1);
     }
 
-    function onJoined(msg: string) {
-      setRoomId(msg);
-      setPlayer(2);
+    function onJoined({
+      id,
+      gameData,
+      player,
+    }: {
+      id: string;
+      gameData: GameData;
+      player: Player;
+    }) {
+      console.log(id, gameData, player);
+      setRoomId(id);
+      setPlayer(player);
+      setGameState(gameData);
     }
 
     function onDisconnect() {
