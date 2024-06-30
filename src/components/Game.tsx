@@ -26,7 +26,7 @@ function Game({
   gameStateSetter: (gameState: GameData) => void;
 }) {
   const [stage, setStage] = useState(0);
-  const [rerolled, setRerolled] = useState(false);
+  const [rerolled, setRerolled] = useState(true);
   const [rolling, setRolling] = useState(false);
   const [tutorial, setTutorial] = useState(0);
 
