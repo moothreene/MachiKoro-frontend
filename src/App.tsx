@@ -232,8 +232,11 @@ function App() {
           if (currentPlayer === player) continue;
           let income = parseInt(Properties[name].income as string);
           if (playerProperties['shopping_mall'] > 0) income += 1;
-          money_to_earn[player] += income;
-          money_to_earn[currentPlayer] -= income;
+          let multiplier = 0;
+          multiplier += playerProperties[name];
+          console.log(multiplier); 
+          money_to_earn[player] += income * multiplier;
+          money_to_earn[currentPlayer] -= income * multiplier;
         }
         //#Check blue cards
         if (Properties[name].color === 'blue') {
