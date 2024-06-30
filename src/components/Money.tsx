@@ -90,7 +90,7 @@ function Money({
               fontFamily: 'Preahvihear',
             }}
           >
-            {amount}
+            {Math.abs(amount)}
           </p>
         </div>
       </div>

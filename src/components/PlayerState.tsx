@@ -89,7 +89,7 @@ function PlayerState({
                     sx={{ marginLeft: 1, marginRight: 1 }}
                     fontSize={fontSize * 1.3}
                   >
-                    +
+                    {money_to_earn > 0 ? '+' : '-'}
                   </Typography>
                   <Money
                     size={fontSize}
