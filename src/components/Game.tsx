@@ -25,14 +25,15 @@ function Game({
   gameState: GameData;
   gameStateSetter: (gameState: GameData) => void;
 }) {
-  const [stage, setStage] = useState(0);
   const [rerolled, setRerolled] = useState(true);
   const [rolling, setRolling] = useState(false);
   const [tutorial, setTutorial] = useState(0);
 
   useEffect(() => {
-    setStage(0);
-  }, [gameState.currentMove]);
+    if (2 - (gameState.currentMove % 2) === player) {
+      socket.emit('updateGame', gameState);
+    }
+  }, [gameState]);
 
   useEffect(() => {
     socket.on('roll', onRoll);
