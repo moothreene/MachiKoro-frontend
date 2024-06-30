@@ -113,22 +113,21 @@ function App() {
 
     function onRoll(msg: Roll) {
       const money_to_earn = calculateRoll(msg);
-      setGameState((prev) => {
-        return {
-          ...prev,
-          players: {
-            1: {
-              ...prev.players[1],
-              money_to_earn: money_to_earn[1],
-            },
-            2: {
-              ...prev.players[2],
-              money_to_earn: money_to_earn[2],
-            },
+      const gameStateNew = {
+        ...gameState,
         lastRoll: msg.dice,
+        players: {
+          1: {
+            ...gameState.players[1],
+            money_to_earn: money_to_earn[1],
           },
-        };
-      });
+          2: {
+            ...gameState.players[2],
+            money_to_earn: money_to_earn[2],
+          },
+        },
+      };
+      setGameState(gameStateNew);
     }
     function onBuy(msg: Buy) {
       setGameState((prev) => {
