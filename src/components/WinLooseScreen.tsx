@@ -23,7 +23,7 @@ function WinLooseScreen({ win, reset }: { win: boolean; reset: () => void }) {
           width={2000}
         />
       )}
-      <Button variant="contained" sx={{ marginTop: 10 }} onClick={reset}>
+      <Button variant="contained" sx={{ marginTop: 10 }} onClick={()=>{reset();window.localStorage.setItem("roomId",'');}}>
         Go to Menu
       </Button>
     </Container>

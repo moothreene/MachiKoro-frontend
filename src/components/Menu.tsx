@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { socket } from '../socket';
 import {
   Box,
@@ -15,8 +15,32 @@ function Menu({ roomId }: { roomId: string }) {
   const [id, setId] = useState<string>('');
   const [open, setOpen] = useState(false);
   const [roomDoesNotExist, setRoomDoesNotExist] = useState(false);
+  const [roomFull, setRoomFull] = useState(false);
   const [hostInProcess, setHostInProcess] = useState(false);
   const [tooltip, setTooltip] = useState(false);
+  const errorLabel = roomDoesNotExist ? 'Room does not exist' : roomFull ? 'Room is full' : '';
+  const [roomIdPersist, setRoomIdPersist] = useState('');
+
+  useEffect(() => {
+    setRoomIdPersist(window.localStorage.getItem("roomId")||"");
+  }, []);
+
+  useEffect(() => {
+    console.log(roomIdPersist)
+    if (roomIdPersist != '') {
+      console.log('saved')
+      disconnect();
+      connect();
+      socket.emit('join', roomIdPersist);
+    }
+  }, [roomIdPersist]);
+
+  useEffect(() => {
+    if (roomId != ''){
+      window.localStorage.setItem("roomId", roomId);
+      console.log('changed')
+    }
+  }, [roomId]);
 
   const handleTooltipClose = () => {
     setTooltip(false);
