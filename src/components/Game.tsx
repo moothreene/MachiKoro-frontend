@@ -79,8 +79,6 @@ function Game({
     for (let i = 0; i < dice_count; i++) {
       roll.push(Math.floor(Math.random() * 6 + 1));
     }
-    setRolling(true);
-    setTimeout(() => setRolling(false), 1000);
     socket.emit('roll', {
       player: player,
       dice: roll,
