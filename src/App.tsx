@@ -29,7 +29,6 @@ function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [fontSize, setFontSize] = useState(16);
 
-
   useEffect(() => {
     const handleResize = () => {
       setWindowSize(window.innerWidth);
@@ -247,9 +246,10 @@ function App() {
         if (Properties[name].color === 'green') {
           if (currentPlayer !== player) continue;
           let income = String(Properties[name].income).split(' ');
+          let addition = playerProperties['shopping_mall'] > 0 ? 1 : 0;
           if (income.length === 1) {
             money_to_earn[player] +=
-              parseInt(income[0]) * playerProperties[name];
+              (parseInt(income[0]) + +addition) * playerProperties[name];
             continue;
           }
           let multiplier = 0;
@@ -265,7 +265,9 @@ function App() {
             multiplier += playerProperties['mine'];
           }
           money_to_earn[player] +=
-            parseInt(income[0]) * multiplier * playerProperties[name];
+            (parseInt(income[0]) + addition) *
+            multiplier *
+            playerProperties[name];
         }
         //#Check purple cards
         if (Properties[name].color === 'purple') {
