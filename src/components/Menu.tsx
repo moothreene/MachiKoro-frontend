@@ -55,16 +55,22 @@ function Menu({ roomId }: { roomId: string }) {
       setRoomDoesNotExist(true);
     }
 
+    function onRoomFull() {
+      setRoomFull(true);
+    }
+
     function onHostError() {
       setHostInProcess(false);
     }
 
     socket.on('invalidRoom', onRoomDoesNotExist);
     socket.on('host_error', onHostError);
+    socket.on('roomFull', onRoomFull);
 
     return () => {
       socket.off('invalidRoom', onRoomDoesNotExist);
       socket.off('host_error', onHostError);
+      socket.off('roomFull', onRoomFull);
     };
   }, []);
 
@@ -130,7 +136,8 @@ function Menu({ roomId }: { roomId: string }) {
                 </Typography>
               </Button>
               <TextField
-                error={roomDoesNotExist}
+                error={roomDoesNotExist || roomFull}
+                label={errorLabel}
                 size="small"
                 fullWidth
                 type="text"
