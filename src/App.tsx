@@ -29,6 +29,7 @@ function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [fontSize, setFontSize] = useState(16);
 
+
   useEffect(() => {
     const handleResize = () => {
       setWindowSize(window.innerWidth);
@@ -100,7 +101,6 @@ function App() {
       gameData: GameData;
       player: Player;
     }) {
-      console.log(id, gameData, player);
       setRoomId(id);
       setPlayer(player);
       setGameState(gameData);
@@ -156,7 +156,7 @@ function App() {
 
     function nextTurn(amount: number) {
       setGameState((prev) => {
-        return { ...prev, currentMove: prev.currentMove + amount, stage: 0};
+        return { ...prev, currentMove: prev.currentMove + amount, stage: 0 };
       });
     }
 
@@ -234,7 +234,7 @@ function App() {
           if (playerProperties['shopping_mall'] > 0) income += 1;
           let multiplier = 0;
           multiplier += playerProperties[name];
-          console.log(multiplier); 
+          console.log(multiplier);
           money_to_earn[player] += income * multiplier;
           money_to_earn[currentPlayer] -= income * multiplier;
         }
@@ -320,7 +320,7 @@ function App() {
           fontSize={fontSize}
           player={player}
           gameState={gameState}
-          gameStateSetter = {setGameState}
+          gameStateSetter={setGameState}
         />
       )}
     </ThemeProvider>
