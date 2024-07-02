@@ -3,6 +3,7 @@ import { Cards, GameData, PlayerProp } from './Types/GameTypes';
 import PropertyButton from './PropertyButton';
 import images from './Images';
 import { TutorialContext } from './Game';
+import { SPTutorialContext } from './SinglePlayer';
 import { useContext } from 'react';
 import CustomTooltip from './CustomTooltip';
 import { Properties } from '../data/Properties';
@@ -19,6 +20,7 @@ function Store({
   handleBuy: (key: keyof Cards) => void;
 }) {
   const tutorialStage = useContext(TutorialContext);
+  const spTutorialStage = useContext(SPTutorialContext);
   const storeData = Object.entries(gameState.store) as PlayerProp[];
 
   return (
@@ -37,7 +39,7 @@ function Store({
         }
         placement="bottom"
         maxWidth="none"
-        open={tutorialStage === 3}
+        open={tutorialStage === 3 || spTutorialStage === 3}
       >
         <Box
           sx={{

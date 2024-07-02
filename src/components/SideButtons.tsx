@@ -5,6 +5,7 @@ import { MdNavigateNext } from 'react-icons/md';
 import { ImRedo } from 'react-icons/im';
 import { GiConfirmed } from 'react-icons/gi';
 import { TutorialContext } from './Game';
+import { SPTutorialContext } from './SinglePlayer';
 import { useContext } from 'react';
 import CustomTooltip from './CustomTooltip';
 
@@ -32,10 +33,11 @@ function SideButtons({
   handleNextTurn: () => void;
 }) {
   const tutorialStage = useContext(TutorialContext);
+  const spTutorialStage = useContext(SPTutorialContext);
 
   return (
     <CustomTooltip
-      open={tutorialStage === 3}
+      open={tutorialStage === 3 || spTutorialStage === 3}
       maxWidth="none"
       title={'Action Buttons'}
       placement={windowSize > 900 ? 'left' : 'top'}
@@ -49,7 +51,7 @@ function SideButtons({
       >
         <Grid item xs={2}>
           <CustomTooltip
-            open={tutorialStage === 4}
+            open={tutorialStage === 4 || spTutorialStage === 4}
             maxWidth={
               windowSize > 900
                 ? 'none'
@@ -70,7 +72,7 @@ function SideButtons({
           >
             <Button
               disabled={
-                !(tutorialStage > 0) &&
+                !(tutorialStage > 0 || spTutorialStage > 0) &&
                 !(stage === 0 && 2 - (currentMove % 2) === player)
               }
               sx={{
@@ -79,14 +81,14 @@ function SideButtons({
                 },
                 color: 'red',
                 zIndex:
-                  tutorialStage === 4
+                  tutorialStage === 4 || spTutorialStage === 4
                     ? 100
-                    : tutorialStage === 3
+                    : tutorialStage === 3 || spTutorialStage === 3
                     ? 100
                     : 'auto',
               }}
               onClick={
-                tutorialStage > 0
+                tutorialStage > 0 || spTutorialStage > 0
                   ? () => {}
                   : () => {
                       handleRoll(1);
@@ -99,7 +101,7 @@ function SideButtons({
         </Grid>
         <Grid item xs={2}>
           <CustomTooltip
-            open={tutorialStage === 4}
+            open={tutorialStage === 4 || spTutorialStage === 4}
             maxWidth={
               windowSize > 900
                 ? 'none'
@@ -120,7 +122,7 @@ function SideButtons({
           >
             <Button
               disabled={
-                !(tutorialStage > 0) &&
+                !(tutorialStage > 0 || spTutorialStage > 0) &&
                 (!(stage === 0 && 2 - (currentMove % 2) === player) ||
                   playerProperties['train_station'] === 0)
               }
@@ -130,14 +132,14 @@ function SideButtons({
                 },
                 color: 'red',
                 zIndex:
-                  tutorialStage === 4
+                  tutorialStage === 4 || spTutorialStage === 4
                     ? 100
-                    : tutorialStage === 3
+                    : tutorialStage === 3 || spTutorialStage === 3
                     ? 100
                     : 'auto',
               }}
               onClick={
-                tutorialStage > 0
+                tutorialStage > 0 || spTutorialStage > 0
                   ? () => {}
                   : () => {
                       handleRoll(2);
@@ -151,7 +153,7 @@ function SideButtons({
         </Grid>
         <Grid item xs={2}>
           <CustomTooltip
-            open={tutorialStage === 4}
+            open={tutorialStage === 4 || spTutorialStage === 4}
             maxWidth={
               windowSize > 900
                 ? 'none'
@@ -171,14 +173,21 @@ function SideButtons({
             placement={windowSize > 900 ? 'left' : 'top'}
           >
             <Button
-              onClick={tutorialStage > 0 ? () => {} : handleConfirmRoll}
-              disabled={!(tutorialStage > 0) && stage !== 1}
+              onClick={
+                tutorialStage > 0 || spTutorialStage > 0
+                  ? () => {}
+                  : handleConfirmRoll
+              }
+              disabled={
+                !(tutorialStage > 0 || spTutorialStage > 0) && !(stage === 1 &&
+                (2 - (currentMove % 2) === player))
+              }
               sx={{
                 color: 'white',
                 zIndex:
-                  tutorialStage === 4
+                  tutorialStage === 4 || spTutorialStage === 4
                     ? 100
-                    : tutorialStage === 3
+                    : tutorialStage === 3 || spTutorialStage === 3
                     ? 100
                     : 'auto',
               }}
@@ -189,7 +198,7 @@ function SideButtons({
         </Grid>
         <Grid item xs={2}>
           <CustomTooltip
-            open={tutorialStage === 4}
+            open={tutorialStage === 4 || spTutorialStage === 4}
             maxWidth={
               windowSize > 900
                 ? 'none'
@@ -209,9 +218,13 @@ function SideButtons({
             placement={windowSize > 900 ? 'left' : 'top'}
           >
             <Button
-              onClick={tutorialStage > 0 ? () => {} : handleReroll}
+              onClick={
+                tutorialStage > 0 || spTutorialStage > 0
+                  ? () => {}
+                  : handleReroll
+              }
               disabled={
-                !(tutorialStage > 0) &&
+                !(tutorialStage > 0 || spTutorialStage > 0) &&
                 (rerolled ||
                   stage !== 1 ||
                   2 - (currentMove % 2) !== player ||
@@ -220,9 +233,9 @@ function SideButtons({
               sx={{
                 color: 'white',
                 zIndex:
-                  tutorialStage === 4
+                  tutorialStage === 4 || spTutorialStage === 4
                     ? 100
-                    : tutorialStage === 3
+                    : tutorialStage === 3 || spTutorialStage === 3
                     ? 100
                     : 'auto',
               }}
@@ -233,7 +246,7 @@ function SideButtons({
         </Grid>
         <Grid item xs={2}>
           <CustomTooltip
-            open={tutorialStage === 4}
+            open={tutorialStage === 4 || spTutorialStage === 4}
             maxWidth={
               windowSize > 900
                 ? 'none'
@@ -254,16 +267,20 @@ function SideButtons({
           >
             <Button
               disabled={
-                !(tutorialStage > 0) &&
+                !(tutorialStage > 0 || spTutorialStage > 0) &&
                 (!(2 - (currentMove % 2) === player) || stage < 2)
               }
-              onClick={tutorialStage > 0 ? () => {} : handleNextTurn}
+              onClick={
+                tutorialStage > 0 || spTutorialStage > 0
+                  ? () => {}
+                  : handleNextTurn
+              }
               sx={{
                 color: 'white',
                 zIndex:
-                  tutorialStage === 4
+                  tutorialStage === 4 || spTutorialStage === 4
                     ? 100
-                    : tutorialStage === 3
+                    : tutorialStage === 4 || spTutorialStage === 4
                     ? 100
                     : 'auto',
               }}
