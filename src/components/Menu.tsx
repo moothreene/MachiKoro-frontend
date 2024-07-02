@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { socket } from '../socket';
 import {
   Box,
@@ -11,24 +11,32 @@ import {
 } from '@mui/material';
 import { gameDataInitial } from '../data/GameData';
 
-function Menu({ roomId }: { roomId: string }) {
+function Menu({
+  roomId,
+  setSinglePlayer,
+}: {
+  roomId: string;
+  setSinglePlayer: (singlePlayer: boolean) => void;
+}) {
   const [id, setId] = useState<string>('');
   const [open, setOpen] = useState(false);
   const [roomDoesNotExist, setRoomDoesNotExist] = useState(false);
   const [roomFull, setRoomFull] = useState(false);
   const [hostInProcess, setHostInProcess] = useState(false);
   const [tooltip, setTooltip] = useState(false);
-  const errorLabel = roomDoesNotExist ? 'Room does not exist' : roomFull ? 'Room is full' : '';
+  const errorLabel = roomDoesNotExist
+    ? 'Room does not exist'
+    : roomFull
+    ? 'Room is full'
+    : '';
   const [roomIdPersist, setRoomIdPersist] = useState('');
 
   useEffect(() => {
-    setRoomIdPersist(window.localStorage.getItem("roomId")||"");
+    setRoomIdPersist(window.localStorage.getItem('roomId') || '');
   }, []);
 
   useEffect(() => {
-    console.log(roomIdPersist)
     if (roomIdPersist != '') {
-      console.log('saved')
       disconnect();
       connect();
       socket.emit('join', roomIdPersist);
@@ -36,9 +44,8 @@ function Menu({ roomId }: { roomId: string }) {
   }, [roomIdPersist]);
 
   useEffect(() => {
-    if (roomId != ''){
-      window.localStorage.setItem("roomId", roomId);
-      console.log('changed')
+    if (roomId != '') {
+      window.localStorage.setItem('roomId', roomId);
     }
   }, [roomId]);
 
@@ -99,7 +106,7 @@ function Menu({ roomId }: { roomId: string }) {
   return (
     <Box
       width={'fit-content'}
-      m={'150px auto'}
+      m={'100px auto'}
       sx={{ userSelect: 'none' }}
       className="game-menu"
     >
@@ -109,6 +116,18 @@ function Menu({ roomId }: { roomId: string }) {
       <Box width={'50%'} m={'auto'}>
         {!roomId && (
           <>
+            <Grid item xs={12} m={1} marginBottom={3}>
+              <Button
+                variant="contained"
+                fullWidth
+                disabled={false}
+                onClick={()=>setSinglePlayer(true)}
+              >
+                <Typography variant="h6" fontFamily={'Preahvihear'}>
+                  Single Player
+                </Typography>
+              </Button>
+            </Grid>
             <Grid item xs={12} m={1} marginBottom={3}>
               <Button
                 variant="contained"
