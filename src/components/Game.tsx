@@ -83,11 +83,9 @@ function Game({
       player: player,
       dice: roll,
     });
-    gameStateSetter({ ...gameState, stage: 1 });
   }
 
   function confirmRoll() {
-    gameStateSetter({ ...gameState, stage: 2 });
     setRerolled(false);
     socket.emit('confirmRoll');
   }
@@ -113,7 +111,6 @@ function Game({
       ['orange', 'purple'].includes(Properties[property].color)
     )
       return alert('Cannot buy more than one of this property!');
-    gameStateSetter({...gameState, stage: 3})
     socket.emit('buy', { player: player, property: property });
   }
 
