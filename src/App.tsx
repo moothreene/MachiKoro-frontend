@@ -16,6 +16,7 @@ import {
 import Menu from './components/Menu';
 import Game from './components/Game';
 import './App.css';
+import SinglePlayer from './components/SinglePlayer';
 
 const default_theme = responsiveFontSizes(createTheme(themeOptions));
 
@@ -28,6 +29,8 @@ function App() {
   const [winner, setWinner] = useState<Player | null>(null);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [fontSize, setFontSize] = useState(16);
+  const [singlePlayer, setSinglePlayer] = useState(false);
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -315,7 +318,18 @@ function App() {
 
   return (
     <ThemeProvider theme={default_theme}>
-      {!ready && <Menu roomId={roomId} />}
+      {!ready && !singlePlayer && (
+        <Menu roomId={roomId} setSinglePlayer={setSinglePlayer} />
+      )}
+      {singlePlayer && (
+        <SinglePlayer
+          windowSize={windowSize}
+          fontSize={fontSize}
+          player={player}
+          gameState={gameState}
+          gameStateSetter={setGameState}
+        />
+      )}
       {isConnected && ready && (
         <Game
           windowSize={windowSize}
