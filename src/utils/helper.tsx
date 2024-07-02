@@ -103,6 +103,39 @@ export const calculateRoll = (roll: Roll, gameState: GameData) => {
   }
   return money_to_earn;
 };
+
+export const spRoll = (
+  dice_count: number,
+  player: Player,
+  gameState: GameData,
+  gameStateSetter: (gameState: GameData) => void
+) => {
+  if (2 - (gameState.currentMove % 2) !== player)
+    return alert('Not your turn!');
+  if (gameState.stage > 0) return alert('You have already rolled this turn!');
+  let roll = [];
+  for (let i = 0; i < dice_count; i++) {
+    roll.push(Math.floor(Math.random() * 6 + 1));
+  }
+  const money_to_earn = calculateRoll({ dice: roll, player }, gameState);
+  const gameStateNew = {
+    ...gameState,
+    stage: 1,
+    lastRoll: roll,
+    players: {
+      1: {
+        ...gameState.players[1],
+        money_to_earn: money_to_earn[1],
+      },
+      2: {
+        ...gameState.players[2],
+        money_to_earn: money_to_earn[2],
+      },
+    },
+  };
+  gameStateSetter(gameStateNew);
+};
+
 export const ConfirmRollHelper = (
   gameStateSetter: (value: React.SetStateAction<GameData>) => void
 ) => {
