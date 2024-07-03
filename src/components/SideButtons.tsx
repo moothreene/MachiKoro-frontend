@@ -179,8 +179,8 @@ function SideButtons({
                   : handleConfirmRoll
               }
               disabled={
-                !(tutorialStage > 0 || spTutorialStage > 0) && !(stage === 1 &&
-                (2 - (currentMove % 2) === player))
+                !(tutorialStage > 0 || spTutorialStage > 0) &&
+                !(stage === 1 && 2 - (currentMove % 2) === player)
               }
               sx={{
                 color: 'white',

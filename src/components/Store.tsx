@@ -67,7 +67,9 @@ function Store({
               (Properties[key].color === 'orange' &&
                 gameState.players[player].properties[key] === 1)
             }
-            onClick={() => handleBuy(key)}
+            onClick={() => {
+              handleBuy(key);
+            }}
           />
         );
       })}

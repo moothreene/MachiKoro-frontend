@@ -29,13 +29,13 @@ function Tutorial({
           position: 'absolute',
           top: 0,
           right: 0,
-          display: (tutorialStage > 0 || spTutorialStage > 0) ? 'none' : 'block',
+          display: tutorialStage > 0 || spTutorialStage > 0 ? 'none' : 'block',
         }}
       >
         <Typography fontFamily={'Preahvihear'}>How to Play?</Typography>
       </Button>
       <Backdrop
-        open={(tutorialStage > 0 || spTutorialStage > 0)}
+        open={tutorialStage > 0 || spTutorialStage > 0}
         sx={{
           color: '#fff',
           zIndex: '100',
