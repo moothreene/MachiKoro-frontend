@@ -28,6 +28,7 @@ function Game({
   const [rerolled, setRerolled] = useState(true);
   const [rolling, setRolling] = useState(false);
   const [tutorial, setTutorial] = useState(0);
+  const [highlighted, setHighlighted] = useState<string | null>(null);
 
   useEffect(() => {
     if (2 - (gameState.currentMove % 2) === player) {
@@ -112,6 +113,7 @@ function Game({
     )
       return alert('Cannot buy more than one of this property!');
     socket.emit('buy', { player: player, property: property });
+    setHighlighted(property);
   }
 
   function nextTurn() {
@@ -227,6 +229,7 @@ function Game({
                   player={player}
                   stage={gameState.stage}
                   handleBuy={buy}
+                  highlighted={highlighted}
                 />
               </Grid>
               <Grid
