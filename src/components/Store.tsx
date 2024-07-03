@@ -4,7 +4,7 @@ import PropertyButton from './PropertyButton';
 import images from './Images';
 import { TutorialContext } from './Game';
 import { SPTutorialContext } from './SinglePlayer';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CustomTooltip from './CustomTooltip';
 import { Properties } from '../data/Properties';
 
@@ -13,11 +13,13 @@ function Store({
   stage,
   player,
   handleBuy,
+  highlighted,
 }: {
   gameState: GameData;
   stage: number;
   player: number;
   handleBuy: (key: keyof Cards) => void;
+  highlighted?: string | null;
 }) {
   const tutorialStage = useContext(TutorialContext);
   const spTutorialStage = useContext(SPTutorialContext);
@@ -62,6 +64,7 @@ function Store({
             isDisabled={
               !(stage === 2 && 2 - (gameState.currentMove % 2) === player)
             }
+            highlighted={highlighted === key}
             opaque={
               gameState.players[player].money < Properties[key].cost ||
               (Properties[key].color === 'orange' &&
