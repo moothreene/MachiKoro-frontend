@@ -171,7 +171,7 @@ function App() {
   if (winner) {
     return (
       <ThemeProvider theme={default_theme}>
-        <WinLooseScreen win={winner === player} reset={resetGame} />
+        <WinLooseScreen win={winner === player} reset={resetGame} setSingle={setSinglePlayer} />
       </ThemeProvider>
     );
   }
