@@ -40,14 +40,14 @@ function PropertyButton({
     setOpen(false);
   }
 
-  if (placement === 'store' && name === 'city_hall') {
+  if(placement === 'store' && name === 'city_hall'){
     return null;
   }
 
   return (
     <Grid
       item
-      xs={3}
+      xs={4}
       md={2}
       className={`property-button ${placement}`}
       position={'relative'}

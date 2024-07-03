@@ -53,9 +53,9 @@ function App() {
     } else if (windowSize > 1000) {
       setFontSize(9);
     } else if (windowSize > 600) {
-      setFontSize(7);
+      setFontSize(8);
     } else {
-      setFontSize(5);
+      setFontSize(7);
     }
   }, [windowSize]);
 

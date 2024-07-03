@@ -80,9 +80,7 @@ function PlayerState({
               <Money
                 size={fontSize}
                 amount={money}
-                zIndex={
-                  tutorialStage === 3 || spTutorialStage === 3 ? 100 : 'auto'
-                }
+                zIndex={tutorialStage === 3 || spTutorialStage === 3 ? 100 : 'auto'}
               />
               {money_to_earn !== 0 && (
                 <>
@@ -105,7 +103,7 @@ function PlayerState({
             </Stack>
           </CustomTooltip>
         </legend>
-        <Grid container columns={16} spacing={1} sx={{ margin: 'auto' }}>
+        <Grid container columns={17} spacing={1} sx={{ margin: 'auto' }}>
           {propertiesSorted.map(([key, value]) => {
             if (value === 0) return <></>;
             return (
@@ -115,7 +113,7 @@ function PlayerState({
                 amount={value}
                 name={key}
                 isDisabled={false}
-                opaque={false}
+                opaque = {false}
                 image={images[key]}
                 onClick={() => {}}
               />
