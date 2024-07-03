@@ -121,7 +121,7 @@ function Menu({
                 variant="contained"
                 fullWidth
                 disabled={false}
-                onClick={()=>setSinglePlayer(true)}
+                onClick={() => setSinglePlayer(true)}
               >
                 <Typography variant="h6" fontFamily={'Preahvihear'}>
                   Single Player
