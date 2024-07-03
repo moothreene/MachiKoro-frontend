@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import { Cards, GameData, Player } from './Types/GameTypes';
 import { Box, Container, Grid } from '@mui/material';
 import { Properties } from '../data/Properties';
@@ -7,7 +7,12 @@ import Store from './Store';
 import SideButtons from './SideButtons';
 import Dice from './Dice';
 import Tutorial from './Tutorial';
-import { ConfirmRollHelper, onBuyHelper, onNextTurnHelper, spRoll } from '../utils/helper';
+import {
+  ConfirmRollHelper,
+  onBuyHelper,
+  onNextTurnHelper,
+  spRoll,
+} from '../utils/helper';
 import { AITurn } from '../AI/AILogic';
 
 export const SPTutorialContext = createContext(0);
@@ -28,6 +33,11 @@ function SinglePlayer({
   const [rerolled, setRerolled] = useState(true);
   const [rolling, setRolling] = useState(false);
   const [tutorial, setTutorial] = useState(0);
+  const [highlighted, setHighlighted] = useState<string | null>(null);
+  const [bought, setBought] = useState<boolean>(false);
+
+  const gameStateRef = useRef(gameState);
+  gameStateRef.current = gameState;
 
   const handleTutorialClose = () => {
     setTutorial(0);
@@ -53,20 +63,26 @@ function SinglePlayer({
     }
   };
 
-  useEffect(()=>{
-    if(2 - (gameState.currentMove % 2) !== player){
-      AITurn(gameState, gameStateSetter, player === 2 ? 1 : 2);
+  useEffect(() => {
+    if (2 - (gameState.currentMove % 2) !== player) {
+      AITurn(
+        gameStateRef,
+        gameStateSetter,
+        player === 2 ? 1 : 2,
+        setHighlighted
+      );
     }
-  }, [gameState.currentMove])
+  }, [gameState.currentMove]);
 
-  useEffect(()=>{
-    setRolling(true);
-    setTimeout(()=>setRolling(false),1000);
-  }, [gameState.lastRoll])
-  //TODO: implement rolling animation
+  useEffect(() => {
+    if (gameState.lastRoll.length > 0) {
+      setRolling(true);
+      setTimeout(() => setRolling(false), 1000);
+    }
+  }, [gameState.lastRoll]);
+
   function roll(num: number) {
     spRoll(num, player, gameState, gameStateSetter);
-    console.log(gameState);
   }
 
   function confirmRoll() {
@@ -96,6 +112,8 @@ function SinglePlayer({
     )
       return alert('Cannot buy more than one of this property!');
     onBuyHelper({ player: player, property: property }, gameStateSetter);
+    setHighlighted(property);
+    setBought(true);
   }
 
   function nextTurn() {
@@ -110,6 +128,10 @@ function SinglePlayer({
       return onNextTurnHelper(2, gameStateSetter);
     }
     onNextTurnHelper(1, gameStateSetter);
+    if (bought === false) {
+      setHighlighted(null);
+    }
+    setBought(false);
   }
 
   return (
@@ -211,6 +233,7 @@ function SinglePlayer({
                   player={player}
                   stage={gameState.stage}
                   handleBuy={buy}
+                  highlighted={highlighted}
                 />
               </Grid>
               <Grid
