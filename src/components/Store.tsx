@@ -3,7 +3,8 @@ import { Cards, GameData, PlayerProp } from './Types/GameTypes';
 import PropertyButton from './PropertyButton';
 import images from './Images';
 import { TutorialContext } from './Game';
-import { useContext } from 'react';
+import { SPTutorialContext } from './SinglePlayer';
+import { useContext, useEffect, useState } from 'react';
 import CustomTooltip from './CustomTooltip';
 import { Properties } from '../data/Properties';
 
@@ -12,13 +13,16 @@ function Store({
   stage,
   player,
   handleBuy,
+  highlighted,
 }: {
   gameState: GameData;
   stage: number;
   player: number;
   handleBuy: (key: keyof Cards) => void;
+  highlighted?: string | null;
 }) {
   const tutorialStage = useContext(TutorialContext);
+  const spTutorialStage = useContext(SPTutorialContext);
   const storeData = Object.entries(gameState.store) as PlayerProp[];
 
   return (
@@ -37,7 +41,7 @@ function Store({
         }
         placement="bottom"
         maxWidth="none"
-        open={tutorialStage === 3}
+        open={tutorialStage === 3 || spTutorialStage === 3}
       >
         <Box
           sx={{
@@ -60,12 +64,15 @@ function Store({
             isDisabled={
               !(stage === 2 && 2 - (gameState.currentMove % 2) === player)
             }
+            highlighted={highlighted === key}
             opaque={
               gameState.players[player].money < Properties[key].cost ||
               (Properties[key].color === 'orange' &&
                 gameState.players[player].properties[key] === 1)
             }
-            onClick={() => handleBuy(key)}
+            onClick={() => {
+              handleBuy(key);
+            }}
           />
         );
       })}

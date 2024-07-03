@@ -1,6 +1,7 @@
 import { Backdrop, Button, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { TutorialContext } from './Game';
+import { SPTutorialContext } from './SinglePlayer';
 import TutorialColors from './TutorialColors';
 import TutorialProperty from './TutorialProperty';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -19,6 +20,7 @@ function Tutorial({
   setPrev: () => void;
 }) {
   const tutorialStage = useContext(TutorialContext);
+  const spTutorialStage = useContext(SPTutorialContext);
   return (
     <>
       <Button
@@ -27,13 +29,13 @@ function Tutorial({
           position: 'absolute',
           top: 0,
           right: 0,
-          display: tutorialStage > 0 ? 'none' : 'block',
+          display: tutorialStage > 0 || spTutorialStage > 0 ? 'none' : 'block',
         }}
       >
         <Typography fontFamily={'Preahvihear'}>How to Play?</Typography>
       </Button>
       <Backdrop
-        open={tutorialStage > 0}
+        open={tutorialStage > 0 || spTutorialStage > 0}
         sx={{
           color: '#fff',
           zIndex: '100',
@@ -80,7 +82,7 @@ function Tutorial({
         >
           <ArrowForwardIosIcon />
         </Button>
-        {tutorialStage === 1 && (
+        {(tutorialStage === 1 || spTutorialStage === 1) && (
           <Typography
             fontFamily={'Preahvihear'}
             maxWidth={'60%'}
@@ -91,7 +93,7 @@ function Tutorial({
             continue.
           </Typography>
         )}
-        {tutorialStage === 2 && (
+        {(tutorialStage === 2 || spTutorialStage === 2) && (
           <Typography
             fontFamily={'Preahvihear'}
             maxWidth={'60%'}
@@ -101,9 +103,9 @@ function Tutorial({
             properties, the store and action buttons
           </Typography>
         )}
-        {tutorialStage === 5 && <TutorialProperty />}
-        {tutorialStage === 6 && <TutorialColors />}
-        {tutorialStage === 7 && <TutorialWin />}
+        {(tutorialStage === 5 || spTutorialStage === 5) && <TutorialProperty />}
+        {(tutorialStage === 6 || spTutorialStage === 6) && <TutorialColors />}
+        {(tutorialStage === 7 || spTutorialStage === 7) && <TutorialWin />}
       </Backdrop>
     </>
   );

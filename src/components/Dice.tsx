@@ -9,6 +9,7 @@ import {
   FaSquare,
 } from 'react-icons/fa6';
 import { TutorialContext } from './Game';
+import { SPTutorialContext } from './SinglePlayer';
 import { useContext } from 'react';
 import CustomTooltip from './CustomTooltip';
 
@@ -20,10 +21,11 @@ function Dice({
   rolling?: boolean;
 }) {
   const tutorialStage = useContext(TutorialContext);
+  const spTutorialStage = useContext(SPTutorialContext);
 
   return (
     <CustomTooltip
-      open={tutorialStage === 4}
+      open={tutorialStage === 4 || spTutorialStage === 4}
       maxWidth="none"
       title={
         <Typography sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}>

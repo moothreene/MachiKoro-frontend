@@ -1,18 +1,23 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import { Cards, GameData, Player } from './Types/GameTypes';
-import { socket } from '../socket';
 import { Box, Container, Grid } from '@mui/material';
-
 import { Properties } from '../data/Properties';
 import PlayerState from './PlayerState';
 import Store from './Store';
 import SideButtons from './SideButtons';
 import Dice from './Dice';
 import Tutorial from './Tutorial';
+import {
+  ConfirmRollHelper,
+  onBuyHelper,
+  onNextTurnHelper,
+  spRoll,
+} from '../utils/helper';
+import { AITurn } from '../AI/AILogic';
 
-export const TutorialContext = createContext(0);
+export const SPTutorialContext = createContext(0);
 
-function Game({
+function SinglePlayer({
   windowSize,
   fontSize,
   player,
@@ -23,25 +28,16 @@ function Game({
   fontSize: number;
   player: Player;
   gameState: GameData;
-  gameStateSetter: (gameState: GameData) => void;
+  gameStateSetter: (value: React.SetStateAction<GameData>) => void;
 }) {
   const [rerolled, setRerolled] = useState(true);
   const [rolling, setRolling] = useState(false);
   const [tutorial, setTutorial] = useState(0);
   const [highlighted, setHighlighted] = useState<string | null>(null);
+  const [bought, setBought] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (2 - (gameState.currentMove % 2) === player) {
-      socket.emit('updateGame', gameState);
-    }
-  }, [gameState]);
-
-  useEffect(() => {
-    socket.on('roll', onRoll);
-    return () => {
-      socket.off('roll', onRoll);
-    };
-  }, []);
+  const gameStateRef = useRef(gameState);
+  gameStateRef.current = gameState;
 
   const handleTutorialClose = () => {
     setTutorial(0);
@@ -67,28 +63,31 @@ function Game({
     }
   };
 
-  function onRoll() {
-    setRolling(true);
-    setTimeout(() => setRolling(false), 1000);
-  }
-
-  function roll(dice_count: number) {
-    if (2 - (gameState.currentMove % 2) !== player)
-      return alert('Not your turn!');
-    if (gameState.stage > 0) return alert('You have already rolled this turn!');
-    let roll = [];
-    for (let i = 0; i < dice_count; i++) {
-      roll.push(Math.floor(Math.random() * 6 + 1));
+  useEffect(() => {
+    if (2 - (gameState.currentMove % 2) !== player) {
+      AITurn(
+        gameStateRef,
+        gameStateSetter,
+        player === 2 ? 1 : 2,
+        setHighlighted
+      );
     }
-    socket.emit('roll', {
-      player: player,
-      dice: roll,
-    });
+  }, [gameState.currentMove]);
+
+  useEffect(() => {
+    if (gameState.lastRoll.length > 0) {
+      setRolling(true);
+      setTimeout(() => setRolling(false), 1000);
+    }
+  }, [gameState.lastRoll]);
+
+  function roll(num: number) {
+    spRoll(num, player, gameState, gameStateSetter);
   }
 
   function confirmRoll() {
     setRerolled(false);
-    socket.emit('confirmRoll');
+    ConfirmRollHelper(gameStateSetter);
   }
 
   function reroll() {
@@ -112,8 +111,9 @@ function Game({
       ['orange', 'purple'].includes(Properties[property].color)
     )
       return alert('Cannot buy more than one of this property!');
-    socket.emit('buy', { player: player, property: property });
+    onBuyHelper({ player: player, property: property }, gameStateSetter);
     setHighlighted(property);
+    setBought(true);
   }
 
   function nextTurn() {
@@ -125,13 +125,17 @@ function Game({
       gameState.lastRoll[0] === gameState.lastRoll[1] &&
       gameState.players[player].properties['amusement_park'] > 0
     ) {
-      return socket.emit('nextTurn', 2);
+      return onNextTurnHelper(2, gameStateSetter);
     }
-    socket.emit('nextTurn', 1);
+    onNextTurnHelper(1, gameStateSetter);
+    if (bought === false) {
+      setHighlighted(null);
+    }
+    setBought(false);
   }
 
   return (
-    <TutorialContext.Provider value={tutorial}>
+    <SPTutorialContext.Provider value={tutorial}>
       <Tutorial
         setOpen={handleTutorialOpen}
         setClose={handleTutorialClose}
@@ -151,10 +155,10 @@ function Game({
           sx={{
             position: 'fixed',
             width: '100vw',
-            height: '50vh',
+            height: '30vh',
             top: 0,
             left: 0,
-            background:
+            background://'linear-gradient(0deg, rgba(253,187,45,.2) 0, rgba(253,187,45,.2) 20%, rgba(253,187,45,.4) 20%, rgba(253,187,45,.4) 40%, rgba(253,187,45,.6) 40%, rgba(253,187,45,.6) 60%, rgba(253,187,45,.8) 60%, rgba(253,187,45,.8) 80%, rgba(253,187,45,1) 80%, rgba(253,187,45,1) 100%)',
               'linear-gradient(0deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
             opacity: 2 - (gameState.currentMove % 2) !== player ? 1 : 0,
             transition: 'opacity .5s linear',
@@ -166,10 +170,10 @@ function Game({
           sx={{
             position: 'fixed',
             width: '100vw',
-            height: '50vh',
+            height: '30vh',
             bottom: 0,
             left: 0,
-            background:
+            background://'linear-gradient(180deg, rgba(253,187,45,.2) 0, rgba(253,187,45,.2) 20%, rgba(253,187,45,.4) 20%, rgba(253,187,45,.4) 40%, rgba(253,187,45,.6) 40%, rgba(253,187,45,.6) 60%, rgba(253,187,45,.8) 60%, rgba(253,187,45,.8) 80%, rgba(253,187,45,1) 80%, rgba(253,187,45,1) 100%)',
               'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
             opacity: 2 - (gameState.currentMove % 2) !== player ? 0 : 1,
             transition: 'opacity .5s linear',
@@ -269,8 +273,8 @@ function Game({
           </Grid>
         </Grid>
       </Container>
-    </TutorialContext.Provider>
+    </SPTutorialContext.Provider>
   );
 }
 
-export default Game;
+export default SinglePlayer;

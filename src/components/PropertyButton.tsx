@@ -10,6 +10,7 @@ function PropertyButton({
   name,
   image,
   isDisabled,
+  highlighted,
   opaque,
   onClick,
 }: {
@@ -18,6 +19,7 @@ function PropertyButton({
   name: string;
   image: string;
   isDisabled: boolean;
+  highlighted?: boolean;
   opaque: boolean;
   onClick: () => void;
 }) {
@@ -45,7 +47,7 @@ function PropertyButton({
   return (
     <Grid
       item
-      xs={3}
+      xs={4}
       md={2}
       className={`property-button ${placement}`}
       position={'relative'}
@@ -71,6 +73,7 @@ function PropertyButton({
           fontSize: 'inherit',
           opacity: isDisabled || opaque ? 0.6 : 1,
           transition: 'opacity 0.2s linear',
+          boxShadow: highlighted ? '0 0 10px 5px gold' : 'none',
         }}
       >
         <Typography

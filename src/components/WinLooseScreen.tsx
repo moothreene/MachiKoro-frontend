@@ -1,7 +1,7 @@
 import { Button, Container, Typography } from '@mui/material';
 import ConfettiExplosion from 'react-confetti-explosion';
 
-function WinLooseScreen({ win, reset }: { win: boolean; reset: () => void }) {
+function WinLooseScreen({ win, reset, setSingle }: { win: boolean; reset: () => void, setSingle: (value: React.SetStateAction<boolean>) => void}) {
   return (
     <Container
       sx={{
@@ -23,7 +23,7 @@ function WinLooseScreen({ win, reset }: { win: boolean; reset: () => void }) {
           width={2000}
         />
       )}
-      <Button variant="contained" sx={{ marginTop: 10 }} onClick={()=>{reset();window.localStorage.setItem("roomId",'');}}>
+      <Button variant="contained" sx={{ marginTop: 10 }} onClick={()=>{reset();window.localStorage.setItem("roomId",''); setSingle(false)}}>
         Go to Menu
       </Button>
     </Container>
