@@ -31,7 +31,7 @@ function TutorialProperty() {
             fontSize={'inherit'}
             sx={{ padding: 0, margin: 0 }}
           >
-            Property Name
+            Asset Name
           </Typography>
         }
         maxWidth="none"
@@ -62,7 +62,7 @@ function TutorialProperty() {
               fontSize={'inherit'}
               sx={{ padding: 0, margin: 0 }}
             >
-              Property cost
+              Asset cost
             </Typography>
           }
           maxWidth="80px"
@@ -89,7 +89,7 @@ function TutorialProperty() {
               fontSize={'inherit'}
               sx={{ padding: 0, margin: 0 }}
             >
-              Amount of properties
+              Amount of assets
             </Typography>
           }
           maxWidth="none"
@@ -115,7 +115,7 @@ function TutorialProperty() {
               fontSize={'inherit'}
               sx={{ padding: 0, margin: 0 }}
             >
-              Dice that activates the property
+              Dice that activates the asset
             </Typography>
           }
           maxWidth="80px"

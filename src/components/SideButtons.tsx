@@ -51,7 +51,13 @@ function SideButtons({
       >
         <Grid item xs={2}>
           <CustomTooltip
-            open={tutorialStage === 4 || spTutorialStage === 4}
+            open={
+              tutorialStage === 4 ||
+              spTutorialStage === 4 ||
+              (stage === 0 &&
+                2 - (currentMove % 2) === player &&
+                (tutorialStage === 0 && spTutorialStage === 0))
+            }
             maxWidth={
               windowSize > 900
                 ? 'none'
@@ -65,7 +71,9 @@ function SideButtons({
               <Typography
                 sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
               >
-                On your turn you roll a dice
+                {tutorialStage === 4 || spTutorialStage === 4
+                  ? 'On your turn, roll the dice'
+                  : 'Roll the dice'}
               </Typography>
             }
             placement={windowSize > 900 ? 'left' : 'top'}
@@ -101,7 +109,14 @@ function SideButtons({
         </Grid>
         <Grid item xs={2}>
           <CustomTooltip
-            open={tutorialStage === 4 || spTutorialStage === 4}
+            open={
+              tutorialStage === 4 ||
+              spTutorialStage === 4 ||
+              (stage === 0 &&
+                2 - (currentMove % 2) === player &&
+                playerProperties['train_station'] === 1 &&
+                (tutorialStage === 0 && spTutorialStage === 0))
+            }
             maxWidth={
               windowSize > 900
                 ? 'none'
@@ -115,7 +130,9 @@ function SideButtons({
               <Typography
                 sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
               >
-                Or later even two dices, if you have a train station
+                {tutorialStage === 4 || spTutorialStage === 4
+                  ? 'Or later even two dices, if you have a train station'
+                  : 'Or two'}
               </Typography>
             }
             placement={windowSize > 900 ? 'left' : 'top'}
@@ -153,7 +170,13 @@ function SideButtons({
         </Grid>
         <Grid item xs={2}>
           <CustomTooltip
-            open={tutorialStage === 4 || spTutorialStage === 4}
+            open={
+              tutorialStage === 4 ||
+              spTutorialStage === 4 ||
+              (stage === 1 &&
+                2 - (currentMove % 2) === player &&
+                (tutorialStage === 0 && spTutorialStage === 0))
+            }
             maxWidth={
               windowSize > 900
                 ? 'none'
@@ -167,7 +190,9 @@ function SideButtons({
               <Typography
                 sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
               >
-                Then - confirm your roll
+                {tutorialStage === 4 || spTutorialStage === 4
+                  ? 'Then - confirm your roll'
+                  : 'Confirm your roll'}
               </Typography>
             }
             placement={windowSize > 900 ? 'left' : 'top'}
@@ -198,7 +223,14 @@ function SideButtons({
         </Grid>
         <Grid item xs={2}>
           <CustomTooltip
-            open={tutorialStage === 4 || spTutorialStage === 4}
+            open={
+              tutorialStage === 4 ||
+              spTutorialStage === 4 ||
+              (stage === 1 &&
+                2 - (currentMove % 2) === player &&
+                playerProperties['radio_tower'] === 1 &&
+                (tutorialStage === 0 && spTutorialStage === 0))
+            }
             maxWidth={
               windowSize > 900
                 ? 'none'
@@ -212,7 +244,9 @@ function SideButtons({
               <Typography
                 sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
               >
-                Later in the game you'd be able to reroll
+                {tutorialStage === 4 || spTutorialStage === 4
+                  ? "Later in the game you'd be able to reroll"
+                  : 'Or reroll if you want'}
               </Typography>
             }
             placement={windowSize > 900 ? 'left' : 'top'}
@@ -246,7 +280,13 @@ function SideButtons({
         </Grid>
         <Grid item xs={2}>
           <CustomTooltip
-            open={tutorialStage === 4 || spTutorialStage === 4}
+            open={
+              tutorialStage === 4 ||
+              spTutorialStage === 4 ||
+              (2 - (currentMove % 2) === player &&
+                stage === 2 &&
+                (tutorialStage === 0 && spTutorialStage === 0))
+            }
             maxWidth={
               windowSize > 900
                 ? 'none'
@@ -260,7 +300,9 @@ function SideButtons({
               <Typography
                 sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
               >
-                End turn
+                {tutorialStage === 4 || spTutorialStage === 4
+                  ? 'End turn'
+                  : "Don't want to buy? Skip!"}
               </Typography>
             }
             placement={windowSize > 900 ? 'left' : 'top'}
@@ -280,7 +322,7 @@ function SideButtons({
                 zIndex:
                   tutorialStage === 4 || spTutorialStage === 4
                     ? 100
-                    : tutorialStage === 4 || spTutorialStage === 4
+                    : tutorialStage === 3 || spTutorialStage === 3
                     ? 100
                     : 'auto',
               }}
