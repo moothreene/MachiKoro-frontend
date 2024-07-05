@@ -111,7 +111,15 @@ function SinglePlayer({
       ['orange', 'purple'].includes(Properties[property].color)
     )
       return alert('Cannot buy more than one of this property!');
-    onBuyHelper({ player: player, property: property }, gameStateSetter);
+    let turns = 1;
+    if (
+      gameState.lastRoll.length > 1 &&
+      gameState.lastRoll[0] === gameState.lastRoll[1] &&
+      gameState.players[player].properties['amusement_park'] > 0
+    ) {
+      turns = 2;
+    }
+    onBuyHelper({ player: player, property: property, turns:turns }, gameStateSetter);
     setHighlighted(property);
     setBought(true);
   }

@@ -172,7 +172,8 @@ export const onBuyHelper = (
   gameStateSetter((prev) => {
     return {
       ...prev,
-      stage: 3,
+      currentMove: prev.currentMove + msg.turns,
+      stage: 0,
       store: {
         ...prev.store,
         [msg.property]: prev.store[msg.property] - 1,
