@@ -201,6 +201,7 @@ function Game({
               properties={gameState.players[(player % 2) + 1].properties}
               money={gameState.players[(player % 2) + 1].money}
               money_to_earn={gameState.players[(player % 2) + 1].money_to_earn}
+              active={2 - (gameState.currentMove % 2) !== player}
             />
           </Grid>
           <Grid item xs={6} sx={{ margin: '10px 0' }}>
@@ -273,6 +274,7 @@ function Game({
               properties={gameState.players[player].properties}
               money={gameState.players[player].money}
               money_to_earn={gameState.players[player].money_to_earn}
+              active={2 - (gameState.currentMove % 2) === player}
             />
           </Grid>
         </Grid>

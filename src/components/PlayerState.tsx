@@ -15,12 +15,14 @@ function PlayerState({
   fontSize,
   money,
   money_to_earn,
+  active,
 }: {
   position: string;
   properties: Cards;
   fontSize: number;
   money: number;
   money_to_earn: number;
+  active: boolean;
 }) {
   const tutorialStage = useContext(TutorialContext);
   const spTutorialStage = useContext(SPTutorialContext);
@@ -102,6 +104,19 @@ function PlayerState({
               )}
             </Stack>
           </CustomTooltip>
+          <Typography
+            color={'#006077'}
+            sx={{
+              fontFamily: 'Preahvihear',
+              position: 'absolute',
+              width:'90vw',
+              textAlign:'center',
+              top:'2%',
+              display: active && position === 'top'? 'block' : 'none',
+            }}
+          >
+            {position === 'top' ? "ENEMY TURN" : ""}
+          </Typography>
         </legend>
         <Grid container columns={17} spacing={1} sx={{ margin: 'auto' }}>
           {propertiesSorted.map(([key, value]) => {
