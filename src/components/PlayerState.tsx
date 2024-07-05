@@ -82,7 +82,9 @@ function PlayerState({
               <Money
                 size={fontSize}
                 amount={money}
-                zIndex={tutorialStage === 3 || spTutorialStage === 3 ? 100 : 'auto'}
+                zIndex={
+                  tutorialStage === 3 || spTutorialStage === 3 ? 100 : 'auto'
+                }
               />
               {money_to_earn !== 0 && (
                 <>
@@ -128,7 +130,7 @@ function PlayerState({
                 amount={value}
                 name={key}
                 isDisabled={false}
-                opaque = {false}
+                opaque={false}
                 image={images[key]}
                 onClick={() => {}}
               />
