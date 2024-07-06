@@ -121,7 +121,7 @@ function Menu({
         </Typography>
       </Box>
 
-      <Box width={'50%'} m={'auto'}>
+      <Box width={'55%'} m={'auto'}>
         {!roomId && (
           <>
             <Grid item xs={12} m={1} marginBottom={3}>
