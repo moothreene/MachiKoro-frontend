@@ -60,7 +60,9 @@ function PropertyButton({
         }}
         disabled={amount === 0}
         sx={{
-          padding: 0.5,
+          padding: 0.2,
+          paddingBottom: 0.5,
+          paddingTop: 0.5,
           backgroundColor: color,
           display: 'flex',
           flexDirection: 'column',
@@ -73,7 +75,7 @@ function PropertyButton({
           fontSize: 'inherit',
           opacity: isDisabled || opaque ? 0.6 : 1,
           transition: 'opacity 0.2s linear',
-          boxShadow: highlighted ? '0 0 10px 5px gold' : 'none',
+          boxShadow: highlighted ? '0 0 4px 4px gold' : 'none',
         }}
       >
         <Typography
