@@ -111,7 +111,15 @@ function SinglePlayer({
       ['orange', 'purple'].includes(Properties[property].color)
     )
       return alert('Cannot buy more than one of this property!');
-    onBuyHelper({ player: player, property: property }, gameStateSetter);
+    let turns = 1;
+    if (
+      gameState.lastRoll.length > 1 &&
+      gameState.lastRoll[0] === gameState.lastRoll[1] &&
+      gameState.players[player].properties['amusement_park'] > 0
+    ) {
+      turns = 2;
+    }
+    onBuyHelper({ player: player, property: property, turns:turns }, gameStateSetter);
     setHighlighted(property);
     setBought(true);
   }
@@ -158,8 +166,8 @@ function SinglePlayer({
             height: '30vh',
             top: 0,
             left: 0,
-            background://'linear-gradient(0deg, rgba(253,187,45,.2) 0, rgba(253,187,45,.2) 20%, rgba(253,187,45,.4) 20%, rgba(253,187,45,.4) 40%, rgba(253,187,45,.6) 40%, rgba(253,187,45,.6) 60%, rgba(253,187,45,.8) 60%, rgba(253,187,45,.8) 80%, rgba(253,187,45,1) 80%, rgba(253,187,45,1) 100%)',
-              'linear-gradient(0deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
+            background:'',//'linear-gradient(0deg, rgba(253,187,45,.2) 0, rgba(253,187,45,.2) 20%, rgba(253,187,45,.4) 20%, rgba(253,187,45,.4) 40%, rgba(253,187,45,.6) 40%, rgba(253,187,45,.6) 60%, rgba(253,187,45,.8) 60%, rgba(253,187,45,.8) 80%, rgba(253,187,45,1) 80%, rgba(253,187,45,1) 100%)',
+              //'linear-gradient(0deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
             opacity: 2 - (gameState.currentMove % 2) !== player ? 1 : 0,
             transition: 'opacity .5s linear',
             zIndex: -1,
@@ -173,8 +181,8 @@ function SinglePlayer({
             height: '30vh',
             bottom: 0,
             left: 0,
-            background://'linear-gradient(180deg, rgba(253,187,45,.2) 0, rgba(253,187,45,.2) 20%, rgba(253,187,45,.4) 20%, rgba(253,187,45,.4) 40%, rgba(253,187,45,.6) 40%, rgba(253,187,45,.6) 60%, rgba(253,187,45,.8) 60%, rgba(253,187,45,.8) 80%, rgba(253,187,45,1) 80%, rgba(253,187,45,1) 100%)',
-              'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
+            background:'',//'linear-gradient(180deg, rgba(253,187,45,.2) 0, rgba(253,187,45,.2) 20%, rgba(253,187,45,.4) 20%, rgba(253,187,45,.4) 40%, rgba(253,187,45,.6) 40%, rgba(253,187,45,.6) 60%, rgba(253,187,45,.8) 60%, rgba(253,187,45,.8) 80%, rgba(253,187,45,1) 80%, rgba(253,187,45,1) 100%)',
+              //'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
             opacity: 2 - (gameState.currentMove % 2) !== player ? 0 : 1,
             transition: 'opacity .5s linear',
             zIndex: -1,
@@ -197,6 +205,7 @@ function SinglePlayer({
               properties={gameState.players[(player % 2) + 1].properties}
               money={gameState.players[(player % 2) + 1].money}
               money_to_earn={gameState.players[(player % 2) + 1].money_to_earn}
+              active={2 - (gameState.currentMove % 2) !== player}
             />
           </Grid>
           <Grid item xs={6} sx={{ margin: '10px 0' }}>
@@ -269,6 +278,7 @@ function SinglePlayer({
               properties={gameState.players[player].properties}
               money={gameState.players[player].money}
               money_to_earn={gameState.players[player].money_to_earn}
+              active={2 - (gameState.currentMove % 2) === player}
             />
           </Grid>
         </Grid>

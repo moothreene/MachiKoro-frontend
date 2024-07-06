@@ -31,7 +31,7 @@ function Store({
       spacing={0.5}
       columns={12}
       borderRadius={5}
-      sx={{ width: '100%', padding: 1 }}
+      sx={{ width: '100%', padding: 1, position: 'relative' }}
     >
       <CustomTooltip
         title={
@@ -50,6 +50,26 @@ function Store({
             position: 'absolute',
             top: 'inherit',
             left: '50%',
+          }}
+        ></Box>
+      </CustomTooltip>
+      <CustomTooltip
+        title={
+          <Typography sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}>
+            Now you can buy assets from the store
+          </Typography>
+        }
+        arrow={false}
+        placement="top"
+        maxWidth="none"
+        open={gameState.stage === 2 && 2 - (gameState.currentMove % 2) === player && tutorialStage === 0 && spTutorialStage === 0}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            position: 'absolute',
+            left: '50%',
+            top:'25px',
           }}
         ></Box>
       </CustomTooltip>

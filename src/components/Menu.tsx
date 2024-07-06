@@ -110,10 +110,18 @@ function Menu({
       sx={{ userSelect: 'none' }}
       className="game-menu"
     >
-      <Typography variant="h1" color={'white'} align="center" marginBottom={3}>
-        Machi Koro
-      </Typography>
-      <Box width={'50%'} m={'auto'}>
+      <Box sx={{ position: 'relative' }}>
+        <Typography
+          variant="h1"
+          color={'white'}
+          align="center"
+          marginBottom={3}
+        >
+          Machi Koro
+        </Typography>
+      </Box>
+
+      <Box width={'55%'} m={'auto'}>
         {!roomId && (
           <>
             <Grid item xs={12} m={1} marginBottom={3}>

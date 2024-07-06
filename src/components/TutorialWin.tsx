@@ -46,7 +46,7 @@ function TutorialWin() {
         <Typography display="inline" fontFamily={'Preahvihear'} color="orange">
           Orange
         </Typography>{' '}
-        Properties to Win!
+        Assets to Win!
       </Typography>
       <Typography fontFamily={'Preahvihear'}>Good Luck!</Typography>
     </Box>

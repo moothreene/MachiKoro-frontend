@@ -49,6 +49,7 @@ export type Player = 1 | 2;
 export type Buy = {
   player: Player;
   property: keyof Cards;
+  turns: number;
 };
 
 export type Roll = {

@@ -53,7 +53,7 @@ function Tutorial({
             top: '40%',
             color: 'white',
             zIndex: 200,
-            width: '30px',
+            width: '40px',
             minWidth: '30px',
             height: '70px',
           }}
@@ -71,7 +71,7 @@ function Tutorial({
             top: '40%',
             color: 'white',
             zIndex: 200,
-            width: '30px',
+            width: '40px',
             minWidth: '30px',
             height: '70px',
           }}
@@ -99,8 +99,8 @@ function Tutorial({
             maxWidth={'60%'}
             align="center"
           >
-            Gameboard is divided into 4 areas - Your properties, your opponent's
-            properties, the store and action buttons
+            Gameboard is divided into 4 areas - Your assets, your opponent's
+            assets, the store and action buttons
           </Typography>
         )}
         {(tutorialStage === 5 || spTutorialStage === 5) && <TutorialProperty />}

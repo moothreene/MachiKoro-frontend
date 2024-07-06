@@ -42,13 +42,22 @@ export const AITurn = async (
     strategy = evalStrategy(current, AIPlayer, strategy);
     const prop = getAIBestProp(current, AIPlayer, 'one_die');
     if (prop) {
-      onBuyHelper({ player: AIPlayer, property: prop }, gameStateSetter);
+      let turns = 1;
+      if (
+        current.lastRoll.length > 1 &&
+        current.lastRoll[0] === current.lastRoll[1] &&
+        current.players[AIPlayer].properties['amusement_park'] > 0
+      ) {
+        turns = 2;
+      }
+      onBuyHelper({ player: AIPlayer, property: prop, turns:turns }, gameStateSetter);
       setHighlighted(prop);
     }
   }
 
   function stageThree(current: GameData | null) {
     if (!current) return;
+    if (current.currentMove % 2 !== AIPlayer) return;
     if (
       current.lastRoll.length > 1 &&
       current.lastRoll[0] === current.lastRoll[1] &&

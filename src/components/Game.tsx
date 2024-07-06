@@ -112,7 +112,15 @@ function Game({
       ['orange', 'purple'].includes(Properties[property].color)
     )
       return alert('Cannot buy more than one of this property!');
-    socket.emit('buy', { player: player, property: property });
+    let turns = 1;
+    if (
+      gameState.lastRoll.length > 1 &&
+      gameState.lastRoll[0] === gameState.lastRoll[1] &&
+      gameState.players[player].properties['amusement_park'] > 0
+    ) {
+      turns = 2;
+    }
+    socket.emit('buy', { player: player, property: property, turns: turns});
     setHighlighted(property);
   }
 
@@ -193,6 +201,7 @@ function Game({
               properties={gameState.players[(player % 2) + 1].properties}
               money={gameState.players[(player % 2) + 1].money}
               money_to_earn={gameState.players[(player % 2) + 1].money_to_earn}
+              active={2 - (gameState.currentMove % 2) !== player}
             />
           </Grid>
           <Grid item xs={6} sx={{ margin: '10px 0' }}>
@@ -265,6 +274,7 @@ function Game({
               properties={gameState.players[player].properties}
               money={gameState.players[player].money}
               money_to_earn={gameState.players[player].money_to_earn}
+              active={2 - (gameState.currentMove % 2) === player}
             />
           </Grid>
         </Grid>

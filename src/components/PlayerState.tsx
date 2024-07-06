@@ -15,12 +15,14 @@ function PlayerState({
   fontSize,
   money,
   money_to_earn,
+  active,
 }: {
   position: string;
   properties: Cards;
   fontSize: number;
   money: number;
   money_to_earn: number;
+  active: boolean;
 }) {
   const tutorialStage = useContext(TutorialContext);
   const spTutorialStage = useContext(SPTutorialContext);
@@ -80,7 +82,9 @@ function PlayerState({
               <Money
                 size={fontSize}
                 amount={money}
-                zIndex={tutorialStage === 3 || spTutorialStage === 3 ? 100 : 'auto'}
+                zIndex={
+                  tutorialStage === 3 || spTutorialStage === 3 ? 100 : 'auto'
+                }
               />
               {money_to_earn !== 0 && (
                 <>
@@ -102,8 +106,26 @@ function PlayerState({
               )}
             </Stack>
           </CustomTooltip>
+          <Typography
+            color={'#006077'}
+            sx={{
+              fontFamily: 'Preahvihear',
+              position: 'absolute',
+              width: '90vw',
+              textAlign: 'center',
+              top: '2%',
+              display: active && position === 'top' ? 'block' : 'none',
+            }}
+          >
+            {position === 'top' ? 'ENEMY TURN' : ''}
+          </Typography>
         </legend>
-        <Grid container columns={17} spacing={1} sx={{ margin: 'auto' }}>
+        <Grid
+          container
+          columns={16}
+          spacing={fontSize <= 8 ? 0.2 : 1}
+          sx={{ margin: 'auto 0', width:'100%' }}
+        >
           {propertiesSorted.map(([key, value]) => {
             if (value === 0) return <></>;
             return (
@@ -113,7 +135,7 @@ function PlayerState({
                 amount={value}
                 name={key}
                 isDisabled={false}
-                opaque = {false}
+                opaque={false}
                 image={images[key]}
                 onClick={() => {}}
               />
