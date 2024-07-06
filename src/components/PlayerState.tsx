@@ -111,16 +111,21 @@ function PlayerState({
             sx={{
               fontFamily: 'Preahvihear',
               position: 'absolute',
-              width:'90vw',
-              textAlign:'center',
-              top:'2%',
-              display: active && position === 'top'? 'block' : 'none',
+              width: '90vw',
+              textAlign: 'center',
+              top: '2%',
+              display: active && position === 'top' ? 'block' : 'none',
             }}
           >
-            {position === 'top' ? "ENEMY TURN" : ""}
+            {position === 'top' ? 'ENEMY TURN' : ''}
           </Typography>
         </legend>
-        <Grid container columns={17} spacing={1} sx={{ margin: 'auto' }}>
+        <Grid
+          container
+          columns={16}
+          spacing={fontSize <= 8 ? 0.2 : 1}
+          sx={{ margin: 'auto 0', width:'100%' }}
+        >
           {propertiesSorted.map(([key, value]) => {
             if (value === 0) return <></>;
             return (
