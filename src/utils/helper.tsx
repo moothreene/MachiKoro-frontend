@@ -108,7 +108,7 @@ export const spRoll = (
   dice_count: number,
   player: Player,
   gameState: GameData,
-  gameStateSetter: (gameState: GameData) => void
+  gameStateSetter: (value: React.SetStateAction<GameData>) => void
 ) => {
   if (2 - (gameState.currentMove % 2) !== player)
     return alert('Not your turn!');
