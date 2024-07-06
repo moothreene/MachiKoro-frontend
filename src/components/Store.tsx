@@ -59,6 +59,7 @@ function Store({
             Now you can buy assets from the store
           </Typography>
         }
+        arrow={false}
         placement="top"
         maxWidth="none"
         open={gameState.stage === 2 && 2 - (gameState.currentMove % 2) === player && tutorialStage === 0 && spTutorialStage === 0}
@@ -68,6 +69,7 @@ function Store({
             display: 'flex',
             position: 'absolute',
             left: '50%',
+            top:'25px',
           }}
         ></Box>
       </CustomTooltip>
