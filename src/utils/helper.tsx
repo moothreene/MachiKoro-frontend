@@ -32,7 +32,6 @@ export const calculateRoll = (roll: Roll, gameState: GameData) => {
         if (playerProperties['shopping_mall'] > 0) income += 1;
         let multiplier = 0;
         multiplier += playerProperties[name];
-        console.log(multiplier);
         money_to_earn[player] += income * multiplier;
         money_to_earn[currentPlayer] -= income * multiplier;
       }

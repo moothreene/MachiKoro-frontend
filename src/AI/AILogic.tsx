@@ -39,9 +39,9 @@ export const AITurn = async (
 
   function stageTwo(current: GameData | null) {
     if (!current) return;
-    strategy = evalStrategy(current, AIPlayer, strategy);
+    //strategy = evalStrategy(current, AIPlayer, strategy);
     const prop = getAIBestProp(current, AIPlayer, 'one_die');
-    if (prop) {
+    if (prop !== null) {
       let turns = 1;
       if (
         current.lastRoll.length > 1 &&
@@ -52,12 +52,14 @@ export const AITurn = async (
       }
       onBuyHelper({ player: AIPlayer, property: prop, turns:turns }, gameStateSetter);
       setHighlighted(prop);
+    }else{
+      setHighlighted('none');
     }
   }
 
   function stageThree(current: GameData | null) {
     if (!current) return;
-    if (current.currentMove % 2 !== AIPlayer) return;
+    if (2 - (current.currentMove % 2) !== AIPlayer) return;
     if (
       current.lastRoll.length > 1 &&
       current.lastRoll[0] === current.lastRoll[1] &&
@@ -72,7 +74,7 @@ export const AITurn = async (
   setTimeout(() => stageZero(gameState.current), 1000);
   setTimeout(() => stageOne(), 2000);
   setTimeout(() => stageTwo(gameState.current), 3000);
-  setTimeout(() => stageThree(gameState.current), 4000);
+  setTimeout(() => stageThree(gameState.current), 3100);
 };
 
 function getAIBestRoll(gameState: GameData, targetPlayer: Player) {
