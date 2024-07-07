@@ -17,5 +17,8 @@ export const themeOptions: ThemeOptions = {
     h1: {
       fontFamily: 'Luckiest Guy',
     },
+    h2: {
+      fontFamily: 'Luckiest Guy',
+    }
   },
 };
