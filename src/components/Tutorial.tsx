@@ -6,6 +6,7 @@ import TutorialColors from './TutorialColors';
 import TutorialProperty from './TutorialProperty';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { FaCircleQuestion } from "react-icons/fa6";
 import TutorialWin from './TutorialWin';
 
 function Tutorial({
@@ -32,7 +33,7 @@ function Tutorial({
           display: tutorialStage > 0 || spTutorialStage > 0 ? 'none' : 'block',
         }}
       >
-        <Typography fontFamily={'Preahvihear'}>How to Play?</Typography>
+        <Typography fontFamily={'Preahvihear'}><FaCircleQuestion size={25}/></Typography>
       </Button>
       <Backdrop
         open={tutorialStage > 0 || spTutorialStage > 0}
