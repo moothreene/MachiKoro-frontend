@@ -41,6 +41,7 @@ function Dice({
           justifyContent: 'center',
           height: '80%',
           transition: 'transform 0.5s',
+          paddingBottom: 5,
         }}
       >
         {dice.length === 0 && (
