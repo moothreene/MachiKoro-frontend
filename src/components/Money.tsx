@@ -85,6 +85,7 @@ function Money({
         >
           <p
             style={{
+              WebkitUserSelect: 'none',
               fontSize: size * 1.5,
               color: 'white',
               fontFamily: 'Preahvihear',
