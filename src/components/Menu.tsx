@@ -302,7 +302,7 @@ function Menu({
           padding: '5px',
         }}
       >
-        <Link href="https://github.com/moothreene">
+        <Link href="https://github.com/moothreene/MachiKoro-frontend">
           <IconContext.Provider value={{ color: 'white' }}>
             <FaGithub size={50} />
           </IconContext.Provider>
