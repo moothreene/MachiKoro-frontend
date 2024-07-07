@@ -6,6 +6,7 @@ import {
   ClickAwayListener,
   Grid,
   Link,
+  Slide,
   TextField,
   Tooltip,
   Typography,
@@ -119,12 +120,29 @@ function Menu({
             variant="h1"
             color={'white'}
             align="center"
-            marginBottom={3}
+            marginBottom={0}
             sx={{ WebkitTextStroke: '2px black', textShadow: '3px 3px 0 #000' }}
           >
             Machi Koro
           </Typography>
         </Box>
+        <Slide direction="down" in={true} mountOnEnter unmountOnExit timeout={500}>
+          <Box sx={{ position: 'relative', width:'70%' }}>
+            <Typography
+              variant="h2"
+              color={'white'}
+              align="right"
+              marginBottom={3}
+              sx={{
+                WebkitTextStroke: '1px black',
+                textShadow: '2px 2px 0 #000',
+                transform:'rotate(-10deg)',
+              }}
+            >
+              Tel Aviv
+            </Typography>
+          </Box>
+        </Slide>
 
         <Box width={'55%'} m={'auto'}>
           {!roomId && (
@@ -284,7 +302,7 @@ function Menu({
           padding: '5px',
         }}
       >
-        <Link href='https://github.com/moothreene'>
+        <Link href="https://github.com/moothreene/MachiKoro-frontend">
           <IconContext.Provider value={{ color: 'white' }}>
             <FaGithub size={50} />
           </IconContext.Provider>
