@@ -29,6 +29,7 @@ function PropertyPopup({
             : placement === 'player_top'
             ? 'translate(0, -4em)'
             : 'translate(0%, -100%)',
+        borderRadius: '5%',
       }}
     >
       <CardMedia
