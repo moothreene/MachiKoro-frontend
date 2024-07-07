@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from '@mui/material';
 import CasinoIcon from '@mui/icons-material/Casino';
 import { Cards } from './Types/GameTypes';
-import { MdNavigateNext } from 'react-icons/md';
+import { FaHourglass } from "react-icons/fa6";
 import { ImRedo } from 'react-icons/im';
 import { GiConfirmed } from 'react-icons/gi';
 import { TutorialContext } from './Game';
@@ -291,10 +291,10 @@ function SideButtons({
               windowSize > 900
                 ? 'none'
                 : windowSize > 600
-                ? '70px'
+                ? '90px'
                 : windowSize > 400
-                ? '60px'
-                : '50px'
+                ? '80px'
+                : '70px'
             }
             title={
               <Typography
@@ -327,7 +327,7 @@ function SideButtons({
                     : 'auto',
               }}
             >
-              <MdNavigateNext size={30} />
+              <FaHourglass size={25} />
             </Button>
           </CustomTooltip>
         </Grid>
