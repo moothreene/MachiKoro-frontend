@@ -5,6 +5,7 @@ import {
   Button,
   ClickAwayListener,
   Grid,
+  Grow,
   Link,
   Slide,
   TextField,
@@ -126,23 +127,23 @@ function Menu({
             Machi Koro
           </Typography>
         </Box>
-        <Slide direction="down" in={true} mountOnEnter unmountOnExit timeout={500}>
-          <Box sx={{ position: 'relative', width:'70%' }}>
+        <Grow in={true} mountOnEnter unmountOnExit timeout={1000}>
+          <Box sx={{ position: 'relative', width:'75%', margin:'auto' }}>
             <Typography
               variant="h2"
               color={'white'}
-              align="right"
+              align="center"
               marginBottom={3}
               sx={{
-                WebkitTextStroke: '1px black',
+                WebkitTextStroke: '2px black',
                 textShadow: '2px 2px 0 #000',
-                transform:'rotate(-10deg)',
+                transform:'rotate(-7deg)',
               }}
             >
-              Tel Aviv
+              TEL AVIV
             </Typography>
           </Box>
-        </Slide>
+        </Grow>
 
         <Box width={'55%'} m={'auto'}>
           {!roomId && (
