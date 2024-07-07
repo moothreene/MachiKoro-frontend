@@ -208,12 +208,12 @@ function SinglePlayer({
               active={2 - (gameState.currentMove % 2) !== player}
             />
           </Grid>
-          <Grid item xs={6} sx={{ margin: '10px 0' }}>
+          <Grid item xs={6}>
             <Grid
               container
               columns={21}
               spacing={windowSize > 900 ? 0 : 2}
-              sx={{ justifyContent: 'space-between', height: '100%' }}
+              sx={{ height: '100%' }}
             >
               <Grid
                 item
