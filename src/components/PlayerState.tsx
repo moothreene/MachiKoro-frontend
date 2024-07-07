@@ -113,7 +113,7 @@ function PlayerState({
               position: 'absolute',
               width: '90vw',
               textAlign: 'center',
-              top: '2%',
+              top: '6px',
               display: active && position === 'top' ? 'block' : 'none',
             }}
           >
