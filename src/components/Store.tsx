@@ -62,7 +62,12 @@ function Store({
         arrow={false}
         placement="top"
         maxWidth="none"
-        open={gameState.stage === 2 && 2 - (gameState.currentMove % 2) === player && tutorialStage === 0 && spTutorialStage === 0}
+        open={
+          gameState.stage === 2 &&
+          2 - (gameState.currentMove % 2) === player &&
+          tutorialStage === 0 &&
+          spTutorialStage === 0
+        }
       >
         <Box
           sx={{
