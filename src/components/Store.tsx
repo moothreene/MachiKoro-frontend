@@ -4,7 +4,7 @@ import PropertyButton from './PropertyButton';
 import images from './Images';
 import { TutorialContext } from './Game';
 import { SPTutorialContext } from './SinglePlayer';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import CustomTooltip from './CustomTooltip';
 import { Properties } from '../data/Properties';
 
@@ -71,10 +71,8 @@ function Store({
       >
         <Box
           sx={{
-            display: 'flex',
             position: 'absolute',
             left: '50%',
-            top:'25px',
           }}
         ></Box>
       </CustomTooltip>

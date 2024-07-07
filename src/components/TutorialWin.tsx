@@ -42,7 +42,7 @@ function TutorialWin() {
         </Typography>
       </Typography>
       <Typography fontFamily={'Preahvihear'}>
-        Get All 4{' '}
+        Get All 5{' '}
         <Typography display="inline" fontFamily={'Preahvihear'} color="orange">
           Orange
         </Typography>{' '}
