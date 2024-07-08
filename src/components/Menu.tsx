@@ -242,6 +242,10 @@ function Menu({
                   fontFamily={'Preahvihear'}
                   fontWeight={400}
                   color={'white'}
+                  sx = {{
+                    WebkitTextStroke: '1px black',
+                    textShadow: '1px 1px 0 #000',
+                  }}
                 >
                   Room ID:
                 </Typography>
@@ -268,6 +272,10 @@ function Menu({
                         handleTooltipOpen();
                         navigator.clipboard.writeText(roomId);
                         setTimeout(handleTooltipClose, 1000);
+                      }}
+                      sx = {{
+                        WebkitTextStroke: '2px black',
+                        textShadow: '2px 2px 0 #000'
                       }}
                     >
                       {roomId}
