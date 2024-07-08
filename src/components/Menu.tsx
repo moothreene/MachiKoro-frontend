@@ -238,7 +238,7 @@ function Menu({
                   display={'inline'}
                   variant="h5"
                   align="center"
-                  m={1}
+                  m={.5}
                   fontFamily={'Preahvihear'}
                   fontWeight={400}
                   color={'white'}
