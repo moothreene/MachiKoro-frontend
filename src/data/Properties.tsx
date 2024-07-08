@@ -178,7 +178,7 @@ export const PropertiesLocalized: { [key: string]: string } = {
   stadium: 'Stadium',
   tv_station: 'TV Station',
   business_center: 'Business Center',
-  train_station: 'Train Station',
+  train_station: 'Central Station',
   shopping_mall: 'Shopping Mall',
   amusement_park: 'Amusement Park',
   radio_tower: 'Radio Tower',
