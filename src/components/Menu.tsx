@@ -238,7 +238,7 @@ function Menu({
                   display={'inline'}
                   variant="h5"
                   align="center"
-                  m={.5}
+                  m={0}
                   fontFamily={'Preahvihear'}
                   fontWeight={400}
                   color={'white'}
@@ -268,6 +268,7 @@ function Menu({
                       fontFamily={'Preahvihear'}
                       fontWeight={600}
                       color={'white'}
+                      m={0}
                       onClick={() => {
                         handleTooltipOpen();
                         navigator.clipboard.writeText(roomId);
