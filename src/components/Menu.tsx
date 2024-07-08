@@ -152,7 +152,7 @@ function Menu({
                 <Button
                   variant="contained"
                   fullWidth
-                  disabled={false}
+                  disabled={hostInProcess}
                   onClick={() => setSinglePlayer(true)}
                 >
                   <Typography variant="h6" fontFamily={'Preahvihear'}>
