@@ -1,4 +1,4 @@
-import { Backdrop, Button, Typography } from '@mui/material';
+import { Backdrop, Box, Button, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { TutorialContext } from './Game';
 import { SPTutorialContext } from './SinglePlayer';
@@ -6,7 +6,7 @@ import TutorialColors from './TutorialColors';
 import TutorialProperty from './TutorialProperty';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { FaCircleQuestion } from "react-icons/fa6";
+import { FaCircleQuestion } from 'react-icons/fa6';
 import TutorialWin from './TutorialWin';
 
 function Tutorial({
@@ -24,17 +24,19 @@ function Tutorial({
   const spTutorialStage = useContext(SPTutorialContext);
   return (
     <>
-      <Button
-        onClick={setOpen}
+      <Box
         sx={{
           position: 'absolute',
-          top: 0,
-          right: 0,
           display: tutorialStage > 0 || spTutorialStage > 0 ? 'none' : 'block',
+          padding: 0,
+          top:0,
+          right:0,
         }}
       >
-        <Typography fontFamily={'Preahvihear'}><FaCircleQuestion size={25}/></Typography>
-      </Button>
+        <Button onClick={setOpen} sx={{height:'64px', borderRadius:'50%'}}>
+          <FaCircleQuestion size={25} />
+        </Button>
+      </Box>
       <Backdrop
         open={tutorialStage > 0 || spTutorialStage > 0}
         sx={{
