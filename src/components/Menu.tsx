@@ -274,8 +274,8 @@ function Menu({
                         setTimeout(handleTooltipClose, 1000);
                       }}
                       sx = {{
-                        WebkitTextStroke: '2px black',
-                        textShadow: '2px 2px 0 #000'
+                        WebkitTextStroke: '1px black',
+                        textShadow: '1px 1px 0 #000'
                       }}
                     >
                       {roomId}
