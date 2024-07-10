@@ -7,14 +7,13 @@ import {
   Grid,
   Grow,
   Link,
-  Slide,
   TextField,
   Tooltip,
   Typography,
 } from '@mui/material';
 import { gameDataInitial } from '../data/GameData';
 import { FaGithub } from 'react-icons/fa6';
-import { IconBase, IconContext } from 'react-icons';
+import { IconContext } from 'react-icons';
 
 function Menu({
   roomId,
@@ -41,7 +40,7 @@ function Menu({
   }, []);
 
   useEffect(() => {
-    if (roomIdPersist != '') {
+    if (roomIdPersist !== '') {
       disconnect();
       connect();
       socket.emit('join', roomIdPersist);
@@ -49,7 +48,7 @@ function Menu({
   }, [roomIdPersist]);
 
   useEffect(() => {
-    if (roomId != '') {
+    if (roomId !== '') {
       window.localStorage.setItem('roomId', roomId);
     }
   }, [roomId]);

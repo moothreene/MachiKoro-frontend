@@ -12,8 +12,7 @@ html:has(.game-menu) {
 }
 
 .Die-shaking {
-  animation-name: wobble;
-  animation-duration: 1s;
+  animation: wobble 1s ease;
 }
 
 /* Setting Animation effect to the  

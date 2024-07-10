@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { socket } from './socket';
 import { gameDataInitial } from './data/GameData';
-import { Properties } from './data/Properties';
 import { ThemeProvider } from '@emotion/react';
 import { themeOptions } from './themes/ThemeOptions';
 import { createTheme, responsiveFontSizes } from '@mui/material';
 import WinLooseScreen from './components/WinLooseScreen';
 import {
   Buy,
-  Cards,
   GameData,
   Player,
   Roll,
