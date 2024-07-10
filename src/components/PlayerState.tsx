@@ -45,7 +45,7 @@ function PlayerState({
     <CustomTooltip
       title={
         <Typography sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}>
-          {position === 'top' ? "Enemy's side" : 'Your side'}
+          {position === 'top' ? "Opponent's side" : 'Your side'}
         </Typography>
       }
       open={tutorialStage === 3 || spTutorialStage === 3}
@@ -68,7 +68,7 @@ function PlayerState({
               <Typography
                 sx={{ fontFamily: 'Preahvihear', fontSize: 'inherit' }}
               >
-                {position === 'bottom' ? 'Your' : 'Enemy'} money
+                {position === 'bottom' ? 'Your' : 'Opponent'} money
               </Typography>
             }
             placement={'right'}
@@ -117,7 +117,7 @@ function PlayerState({
               display: active && position === 'top' ? 'block' : 'none',
             }}
           >
-            {position === 'top' ? 'ENEMY TURN' : ''}
+            {position === 'top' ? 'OPPONENT TURN' : ''}
           </Typography>
         </legend>
         <Grid
