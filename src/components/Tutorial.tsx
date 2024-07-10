@@ -29,12 +29,12 @@ function Tutorial({
           position: 'absolute',
           display: tutorialStage > 0 || spTutorialStage > 0 ? 'none' : 'block',
           padding: 0,
-          top:0,
-          right:0,
+          top:5,
+          right:5,
         }}
       >
-        <Button onClick={setOpen} sx={{height:'64px', borderRadius:'50%'}}>
-          <FaCircleQuestion size={25} />
+        <Button onClick={setOpen} sx={{height:'fit-content', borderRadius:'50%'}}>
+          <FaCircleQuestion size={20}/>
         </Button>
       </Box>
       <Backdrop

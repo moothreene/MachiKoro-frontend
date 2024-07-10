@@ -1,6 +1,13 @@
 import { ThemeOptions } from '@mui/material/styles';
 
 export const themeOptions: ThemeOptions = {
+  components: {
+    MuiButton: { 
+      styleOverrides: { 
+        root: { minWidth: 0 } 
+      } 
+    }
+  },
   palette: {
     mode: 'light',
     primary: {
