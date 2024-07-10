@@ -144,7 +144,7 @@ function Menu({
           </Box>
         </Grow>
 
-        <Box width={'55%'} m={'auto'}>
+        <Box width={'65%'} m={'auto'}>
           {!roomId && (
             <>
               <Grid item xs={12} m={1} marginBottom={3}>
@@ -237,10 +237,14 @@ function Menu({
                   display={'inline'}
                   variant="h5"
                   align="center"
-                  m={1}
+                  m={0}
                   fontFamily={'Preahvihear'}
                   fontWeight={400}
                   color={'white'}
+                  sx = {{
+                    WebkitTextStroke: '1px black',
+                    textShadow: '1px 1px 0 #000',
+                  }}
                 >
                   Room ID:
                 </Typography>
@@ -263,10 +267,15 @@ function Menu({
                       fontFamily={'Preahvihear'}
                       fontWeight={600}
                       color={'white'}
+                      m={0}
                       onClick={() => {
                         handleTooltipOpen();
                         navigator.clipboard.writeText(roomId);
                         setTimeout(handleTooltipClose, 1000);
+                      }}
+                      sx = {{
+                        WebkitTextStroke: '1px black',
+                        textShadow: '1px 1px 0 #000'
                       }}
                     >
                       {roomId}

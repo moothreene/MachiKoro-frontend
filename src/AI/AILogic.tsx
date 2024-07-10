@@ -71,7 +71,7 @@ export const AITurn = async (
   }
 
   if (gameState.current?.stage !== 0) return;
-  setTimeout(() => stageZero(gameState.current), 1000);
+  setTimeout(() => stageZero(gameState.current), 500);
   setTimeout(() => stageOne(), 2000);
   setTimeout(() => stageTwo(gameState.current), 3000);
   setTimeout(() => stageThree(gameState.current), 3100);
