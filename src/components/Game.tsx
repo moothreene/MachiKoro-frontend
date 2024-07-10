@@ -26,7 +26,6 @@ function Game({
   gameStateSetter: (gameState: GameData) => void;
 }) {
   const [rerolled, setRerolled] = useState(true);
-  const [rolling, setRolling] = useState(false);
   const [tutorial, setTutorial] = useState(0);
   const [highlighted, setHighlighted] = useState<string | null>(null);
 
@@ -35,13 +34,6 @@ function Game({
       socket.emit('updateGame', gameState);
     }
   }, [gameState]);
-
-  useEffect(() => {
-    socket.on('roll', onRoll);
-    return () => {
-      socket.off('roll', onRoll);
-    };
-  }, []);
 
   const handleTutorialClose = () => {
     setTutorial(0);
@@ -66,11 +58,6 @@ function Game({
       setTutorial(0);
     }
   };
-
-  function onRoll() {
-    setRolling(true);
-    setTimeout(() => setRolling(false), 1000);
-  }
 
   function roll(dice_count: number) {
     if (2 - (gameState.currentMove % 2) !== player)
@@ -162,8 +149,8 @@ function Game({
             height: '50vh',
             top: 0,
             left: 0,
-            background:
-              'linear-gradient(0deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
+            background:'none',
+              //'linear-gradient(0deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
             opacity: 2 - (gameState.currentMove % 2) !== player ? 1 : 0,
             transition: 'opacity .5s linear',
             zIndex: -1,
@@ -177,8 +164,8 @@ function Game({
             height: '50vh',
             bottom: 0,
             left: 0,
-            background:
-              'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
+            background:'none',
+              //'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(253,187,45,1) 100%)',
             opacity: 2 - (gameState.currentMove % 2) !== player ? 0 : 1,
             transition: 'opacity .5s linear',
             zIndex: -1,
@@ -221,7 +208,7 @@ function Game({
                   alignItems: 'center',
                 }}
               >
-                <Dice dice={gameState.lastRoll} rolling={rolling} />
+                <Dice dice={gameState.lastRoll}/>
               </Grid>
               <Grid
                 item

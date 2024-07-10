@@ -10,18 +10,26 @@ import {
 } from 'react-icons/fa6';
 import { TutorialContext } from './Game';
 import { SPTutorialContext } from './SinglePlayer';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CustomTooltip from './CustomTooltip';
 
 function Dice({
   dice,
-  rolling = false,
 }: {
   dice: number[];
-  rolling?: boolean;
 }) {
   const tutorialStage = useContext(TutorialContext);
   const spTutorialStage = useContext(SPTutorialContext);
+  const [rolling, setRolling] = useState(false);
+
+  useEffect(() => {
+    if (dice.length > 0) {
+      setRolling(true);
+      setTimeout(() => {
+        setRolling(false);
+      }, 500);
+    }
+  }, [dice]);
 
   return (
     <CustomTooltip

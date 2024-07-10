@@ -31,7 +31,6 @@ function SinglePlayer({
   gameStateSetter: (value: React.SetStateAction<GameData>) => void;
 }) {
   const [rerolled, setRerolled] = useState(true);
-  const [rolling, setRolling] = useState(false);
   const [tutorial, setTutorial] = useState(0);
   const [highlighted, setHighlighted] = useState<string | null>(null);
   const [bought, setBought] = useState<boolean>(false);
@@ -73,13 +72,6 @@ function SinglePlayer({
       );
     }
   }, [gameState.currentMove]);
-
-  useEffect(() => {
-    if (gameState.lastRoll.length > 0) {
-      setRolling(true);
-      setTimeout(() => setRolling(false), 1000);
-    }
-  }, [gameState.lastRoll]);
 
   function roll(num: number) {
     spRoll(num, player, gameState, gameStateSetter);
@@ -228,7 +220,7 @@ function SinglePlayer({
                   alignItems: 'center',
                 }}
               >
-                <Dice dice={gameState.lastRoll} rolling={rolling} />
+                <Dice dice={gameState.lastRoll}/>
               </Grid>
               <Grid
                 item
