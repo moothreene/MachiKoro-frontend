@@ -127,11 +127,11 @@ function PlayerState({
           sx={{ margin: 'auto 0', width:'100%' }}
         >
           {propertiesSorted.map(([key, value]) => {
-            if (value === 0) return <></>;
+            if (value === 0) return ;
             return (
               <PropertyButton
                 placement={`player_${position}`}
-                key={`player_prop${key}`}
+                key={`${position}_player_prop_${key}`}
                 amount={value}
                 name={key}
                 isDisabled={false}

@@ -13,11 +13,7 @@ import { SPTutorialContext } from './SinglePlayer';
 import { useContext, useEffect, useState } from 'react';
 import CustomTooltip from './CustomTooltip';
 
-function Dice({
-  dice,
-}: {
-  dice: number[];
-}) {
+function Dice({ dice }: { dice: number[] }) {
   const tutorialStage = useContext(TutorialContext);
   const spTutorialStage = useContext(SPTutorialContext);
   const [rolling, setRolling] = useState(false);
@@ -60,6 +56,7 @@ function Dice({
             case 1:
               return (
                 <FaDiceOne
+                  key={`dice_${side}`}
                   size={30}
                   className={`Die${rolling ? '-shaking' : ''}`}
                 />
@@ -67,6 +64,7 @@ function Dice({
             case 2:
               return (
                 <FaDiceTwo
+                  key={`dice_${side}`}
                   size={30}
                   className={`Die${rolling ? '-shaking' : ''}`}
                 />
@@ -74,6 +72,7 @@ function Dice({
             case 3:
               return (
                 <FaDiceThree
+                  key={`dice_${side}`}
                   size={30}
                   className={`Die${rolling ? '-shaking' : ''}`}
                 />
@@ -81,6 +80,7 @@ function Dice({
             case 4:
               return (
                 <FaDiceFour
+                  key={`dice_${side}`}
                   size={30}
                   className={`Die${rolling ? '-shaking' : ''}`}
                 />
@@ -88,6 +88,7 @@ function Dice({
             case 5:
               return (
                 <FaDiceFive
+                  key={`dice_${side}`}
                   size={30}
                   className={`Die${rolling ? '-shaking' : ''}`}
                 />
@@ -95,6 +96,7 @@ function Dice({
             case 6:
               return (
                 <FaDiceSix
+                  key={`dice_${side}`}
                   size={30}
                   className={`Die${rolling ? '-shaking' : ''}`}
                 />
@@ -102,6 +104,7 @@ function Dice({
             default:
               return (
                 <FaSquare
+                  key={`dice_${side}`}
                   size={50}
                   className={`Die${rolling ? '-shaking' : ''}`}
                 />
