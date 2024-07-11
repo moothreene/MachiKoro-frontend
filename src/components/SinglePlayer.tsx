@@ -15,6 +15,9 @@ import {
 } from '../utils/helper';
 import { AITurn } from '../AI/AILogic';
 
+import mixpanelInstance from 'mixpanel-browser';
+mixpanelInstance.init('afb42e118f4421fce4bb353510ac0577', {debug: true, track_pageview: true, persistence: 'localStorage'});
+
 export const SPTutorialContext = createContext(0);
 
 function SinglePlayer({
@@ -73,8 +76,20 @@ function SinglePlayer({
     }
   }, [gameState.currentMove]);
 
+  const playerId = mixpanelInstance.get_distinct_id();
+  useEffect(() => {
+    console.log(playerId);
+    mixpanelInstance.people.set(playerId, {
+      playerId: playerId,
+    });
+  },[]);
+
   function roll(num: number) {
     spRoll(num, player, gameState, gameStateSetter);
+    mixpanelInstance.track('Roll', {
+      distinct_id: playerId,
+      roll: num,
+    });
   }
 
   function confirmRoll() {
@@ -117,6 +132,10 @@ function SinglePlayer({
     );
     setHighlighted(property);
     setBought(true);
+    mixpanelInstance.track('Buy', {
+      distinct_id: playerId,
+      property: property,
+    });
   }
 
   function nextTurn() {
