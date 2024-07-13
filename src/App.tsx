@@ -16,7 +16,9 @@ import Game from './components/Game';
 import './App.css';
 import { ConfirmRollHelper, calculateRoll, onBuyHelper, onNextTurnHelper } from './utils/helper';
 import SinglePlayer from './components/SinglePlayer';
+import mixpanelInstance from './utils/mixpanel';
 
+const playerId = mixpanelInstance.get_distinct_id();
 const default_theme = responsiveFontSizes(createTheme(themeOptions));
 
 function App() {
@@ -44,6 +46,13 @@ function App() {
   }, []);
 
   useEffect(() => {
+    mixpanelInstance.track('Start', {
+      distinct_id: playerId,
+      player: player,
+    });
+  },[]);
+
+  useEffect(() => {
     if (windowSize > 1600) {
       setFontSize(13);
     } else if (windowSize > 1300) {
@@ -66,6 +75,11 @@ function App() {
         gameState.players[i].properties['train_station'] === 1
       ) {
         setWinner(i as Player);
+        mixpanelInstance.track('WIN', {
+          distinct_id: playerId,
+          player: i,
+          state: gameState,
+        });
       }
     }
   }

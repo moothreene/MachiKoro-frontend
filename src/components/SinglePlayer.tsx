@@ -14,9 +14,7 @@ import {
   spRoll,
 } from '../utils/helper';
 import { AITurn } from '../AI/AILogic';
-
-import mixpanelInstance from 'mixpanel-browser';
-mixpanelInstance.init('afb42e118f4421fce4bb353510ac0577', {debug: true, track_pageview: true, persistence: 'localStorage'});
+import mixpanelInstance from '../utils/mixpanel';
 
 export const SPTutorialContext = createContext(0);
 
@@ -135,6 +133,8 @@ function SinglePlayer({
     mixpanelInstance.track('Buy', {
       distinct_id: playerId,
       property: property,
+      state: gameState,
+      money: gameState.players[player].money,
     });
   }
 
